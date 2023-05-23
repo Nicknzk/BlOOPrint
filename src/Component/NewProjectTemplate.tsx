@@ -12,6 +12,15 @@ export interface Box {
   dependencies: string[];
 }
 
+//for the archer
+const rootStyle = { display: "flex", justifyContent: "center" }; //supposedly they use this as the center
+const roleStyle = {
+  margin: "200px 0",
+  display: "flex",
+  justifyContent: "space-between",
+};
+const boxStyle = { padding: "10px", border: "1px solid black" };
+
 export default function NewProjectTemplate() {
   const [boxes, setBoxes] = useState<Box[]>([]); //array of boxes
   const [newBoxName, setNewBoxName] = useState(""); //variable to allow names to be added
@@ -151,6 +160,41 @@ export default function NewProjectTemplate() {
             <button onClick={() => handleDeleteBox(box.id)}>Delete</button>
           </div>
         ))}
+
+        <div style={{ height: "500px", margin: "50px" }}>
+          <ArcherContainer>
+            {boxes.map((box) =>
+              box.dependencies.map((dependency) => (
+                <div key={dependency}>
+                  <div style={roleStyle}>
+                    <ArcherElement
+                      id={box.name}
+                      relations={[
+                        {
+                          targetId: dependency,
+                          targetAnchor: "top",
+                          sourceAnchor: "bottom",
+                          style: { strokeDasharray: "5,5" },
+                        },
+                      ]}
+                    >
+                      <div style={boxStyle}>{box.name}</div>
+                    </ArcherElement>
+                  </div>
+                </div>
+              ))
+            )}
+          </ArcherContainer>
+        </div>
+        <div>
+          <DragDrop />
+        </div>
+      </div>
+    </>
+  );
+}
+
+/*
         <ArcherContainer>
           {boxes.map((box) =>
             box.dependencies.map((dependency) => (
@@ -165,11 +209,4 @@ export default function NewProjectTemplate() {
             ))
           )}
         </ArcherContainer>
-
-        <div>
-          <DragDrop />
-        </div>
-      </div>
-    </>
-  );
-}
+*/
