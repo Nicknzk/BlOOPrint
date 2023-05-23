@@ -5,6 +5,7 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { blue } from "@mui/material/colors";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const theme = createTheme({
   palette: {
@@ -15,7 +16,7 @@ const theme = createTheme({
   typography: {
     //cant be fixed
     myVariant: {
-      fontSize: "2rem",
+      fontSize: "4rem",
       color: "#424242",
     },
   },

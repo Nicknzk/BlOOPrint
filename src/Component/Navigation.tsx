@@ -1,19 +1,28 @@
-import { AppBar, Typography } from "@mui/material";
+import { AppBar, Toolbar, Typography } from "@mui/material";
 import { ReactNode } from "react";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 
 export default function Navigation() {
   return (
-    <AppBar position="relative" color="transparent">
-      <Typography variant="myVariant">Navigation Bar</Typography>
-      <nav>
-        <Link to="/">HomePage</Link>
-        <ul>
-          <CustomLink to="/LogInSignIn">Sign In</CustomLink>
-          <CustomLink to="/LogInSignUp">Sign Up</CustomLink>
-        </ul>
-      </nav>
-    </AppBar>
+    <>
+      <div>
+        <AppBar position="relative" color="secondary">
+          <Toolbar variant="dense">
+            <Typography variant="myVariant">Navigation Bar</Typography>
+            <nav>
+              <ul>
+                <li>
+                  <Link to="/">LoginPage</Link>
+                </li>
+                <CustomLink to="/HomePage">HomePage</CustomLink>
+                <CustomLink to="/SignIn">Sign In</CustomLink>
+                <CustomLink to="/SignUp">Sign Up</CustomLink>
+              </ul>
+            </nav>
+          </Toolbar>
+        </AppBar>
+      </div>
+    </>
   );
 }
 

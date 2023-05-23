@@ -1,0 +1,30 @@
+.Icon {
+    width: 55%;
+    display: block;
+    position: inherit;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.homePageNewProject {
+    float: left;
+
+}
+
+.newProjectPicture {
+    width: 10%;
+    display: block;
+    margin-left: 150px;
+    margin-top: 50px;
+    border: 5px solid #555;
+}
+
+.projectPicture {
+    width: 30%;
+
+}
+
+.hi {
+    width: 10%;
+    margin-left: auto;
+}
