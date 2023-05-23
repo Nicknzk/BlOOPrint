@@ -19,8 +19,10 @@
     "firebase": "^9.22.0",
     "nanoid": "^4.0.2",
     "react": "^18.2.0",
+    "react-archer": "^4.2.3",
     "react-bootstrap": "^2.7.4",
     "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
     "react-router-dom": "^6.11.2",
     "reactflow": "^11.7.2",
     "zustand": "^4.3.8"

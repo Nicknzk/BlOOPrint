@@ -1,6 +1,6 @@
 //import { Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import { Form, Button, Card } from "react-bootstrap";
+import { Form, Card } from "react-bootstrap";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import auth from "../../firebase";
@@ -11,7 +11,7 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const signIn = (e) => {
+  const signIn = (e: any) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
