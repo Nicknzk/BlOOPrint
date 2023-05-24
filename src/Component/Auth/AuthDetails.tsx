@@ -1,6 +1,8 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
 import auth from "../../firebase";
+import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 export default function AuthDetails() {
   const [authUser, setAuthUser] = useState(null);
@@ -28,11 +30,19 @@ export default function AuthDetails() {
   };
 
   return (
+    //if user is logged in... else remain as Sign Out
     <div>
       {authUser ? (
         <>
           <p>{`Signed In as ${authUser.email}`}</p>
-          <button onClick={userSignOut}>Sign Out</button>
+          <nav>
+            <Link className="auth-page-button" to={"/HomePage"}>
+              HomePage
+            </Link>
+          </nav>
+          <Button onClick={userSignOut} className="auth-page-button">
+            Sign Out
+          </Button>
         </>
       ) : (
         <p>Signed Out</p>

@@ -8,7 +8,6 @@
 
 .homePageNewProject {
     float: left;
-
 }
 
 .newProjectPicture {
@@ -32,6 +31,17 @@
 
 .log-in-box {
   padding: 10px;
+  
+}
+
+.auth-page-button {
+  background-color: #2962ff;
+  color: white;
+  font-size: 20px;
+  padding: 10px 60px;
+  border-radius: 5px;
+  margin: 10px 0px;
+  cursor: pointer;
 }
 
 .navigation-list {

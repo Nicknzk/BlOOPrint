@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import "../App.css"; // Import the CSS file for custom styles
 import { ArcherContainer, ArcherElement } from "react-archer";
 import DragDrop from "./DragDrop";
+import { Padding } from "@mui/icons-material";
 
 export interface Box {
   id: number;

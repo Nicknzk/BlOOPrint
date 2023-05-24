@@ -23,42 +23,44 @@ export default function SignIn() {
 
   return (
     <>
-      <div className="sign-in-container log-in-box">
-        <Card>
-          <Card.Body>
-            <h2 className="text-center mb-4">Log In to your Account</h2>
-            <Form onSubmit={signIn}>
-              <Form.Group className="text-center">
-                <Form.Label>Email: </Form.Label>
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                ></input>
-              </Form.Group>
-              <Form.Group className="text-center">
-                <Form.Label>Password: </Form.Label>
-                <input
-                  type="password"
-                  placeholder="Enter your password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                ></input>
-              </Form.Group>
-              <Button type="submit" className="w-100">
-                Log In
-              </Button>
-            </Form>
-          </Card.Body>
-        </Card>
-        <AuthDetails />
-      </div>
-      <div className="w-100 text-center mt-2">
-        Don't have an account?
-        <nav>
-          <Link to={"/SignUp"}>Sign Up</Link>
-        </nav>
+      <div className="log-in-box">
+        <div className="sign-in-container">
+          <Card>
+            <Card.Body>
+              <h2 className="text-center mb-4">Log In to your Account</h2>
+              <Form onSubmit={signIn}>
+                <Form.Group className="text-center">
+                  <Form.Label>Email: </Form.Label>
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  ></input>
+                </Form.Group>
+                <Form.Group className="text-center">
+                  <Form.Label>Password: </Form.Label>
+                  <input
+                    type="password"
+                    placeholder="Enter your password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  ></input>
+                </Form.Group>
+                <Button type="submit" className="w-100">
+                  Log In
+                </Button>
+              </Form>
+            </Card.Body>
+          </Card>
+          <AuthDetails />
+        </div>
+        <div className="w-100 text-center mt-2">
+          Don't have an account?
+          <nav>
+            <Link to={"/SignUp"}>Sign Up</Link>
+          </nav>
+        </div>
       </div>
     </>
   );
