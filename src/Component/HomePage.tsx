@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 export default function HomePage() {
   return (
     <>
+      <p className="HomePage-welcome">BLOOPrint Homepage</p>
       <div className="homePageNewProject">
         <Typography variant="h2">Create new project</Typography>
         <a href="src/Component/NewProjectTemplate.tsx">

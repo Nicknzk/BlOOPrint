@@ -10,12 +10,35 @@
     float: left;
 }
 
+.HomePage-welcome {
+  margin-top: 3svh;
+  font-size: 5vh;
+  padding: 10px;
+  display: block;
+  border: #90caf9;
+  border-radius: 50px;
+  border-style:solid;
+  background-color: #90caf9;
+}
+
 .newProjectPicture {
     width: 10%;
     display: block;
     margin-left: 150px;
     margin-top: 50px;
     border: 5px solid #555;
+}
+
+.landing-page {
+  margin-top: 1svh;
+  font-size: 7vh;
+  color: #fff;
+  padding: 15px;
+  display: block;
+  border: #90caf9;
+  border-radius: 50px;
+  border-style:solid;
+  background-color: #90caf9;
 }
 
 .projectPicture {
