@@ -8,9 +8,17 @@ export default function Navigation() {
       <div>
         <AppBar position="relative" color="secondary">
           <Toolbar variant="dense">
-            <Typography variant="myVariant">Navigation Bar</Typography>
+            <Typography
+              variant="h1"
+              sx={{
+                fontSize: "4rem",
+                color: "#424242",
+              }}
+            >
+              Navigation Bar
+            </Typography>
             <nav>
-              <ul>
+              <ul className="navigation-list">
                 <li>
                   <Link to="/">LoginPage</Link>
                 </li>

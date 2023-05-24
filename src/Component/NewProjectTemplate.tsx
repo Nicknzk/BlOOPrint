@@ -193,20 +193,3 @@ export default function NewProjectTemplate() {
     </>
   );
 }
-
-/*
-        <ArcherContainer>
-          {boxes.map((box) =>
-            box.dependencies.map((dependency) => (
-              <div key={dependency}>
-                <ArcherElement id={box.name}>
-                  <div></div>
-                </ArcherElement>
-                <ArcherElement id={dependency}>
-                  <div></div>
-                </ArcherElement>
-              </div>
-            ))
-          )}
-        </ArcherContainer>
-*/

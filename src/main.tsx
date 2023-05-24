@@ -3,21 +3,13 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
-import { ThemeProvider, createTheme } from "@mui/material";
-import { blue } from "@mui/material/colors";
+import { ThemeProvider, createTheme, colors } from "@mui/material";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const theme = createTheme({
   palette: {
     secondary: {
-      main: blue[300],
-    },
-  },
-  typography: {
-    //cant be fixed
-    myVariant: {
-      fontSize: "4rem",
-      color: "#424242",
+      main: "#64b5f6",
     },
   },
 });

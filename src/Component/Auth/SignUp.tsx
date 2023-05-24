@@ -1,7 +1,6 @@
 import { Form, Button, Card } from "react-bootstrap";
 //import { Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import Icon from "../Icon.tsx";
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import auth from "../../firebase";
@@ -22,7 +21,7 @@ export default function SignUp() {
   };
 
   return (
-    <div className="sign-in-container">
+    <div className="sign-in-container log-in-box">
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Create Account</h2>
@@ -57,7 +56,6 @@ export default function SignUp() {
           <Link to={"/SignIn"}>Sign In</Link>
         </nav>
       </div>
-      <Icon />
     </div>
   );
 }

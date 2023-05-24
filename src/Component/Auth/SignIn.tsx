@@ -1,11 +1,10 @@
 //import { Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import { Form, Card } from "react-bootstrap";
+import { Form, Card, Button } from "react-bootstrap";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import auth from "../../firebase";
 import AuthDetails from "./AuthDetails";
-import Icon from "../Icon";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -24,7 +23,7 @@ export default function SignIn() {
 
   return (
     <>
-      <div className="sign-in-container">
+      <div className="sign-in-container log-in-box">
         <Card>
           <Card.Body>
             <h2 className="text-center mb-4">Log In to your Account</h2>
@@ -47,7 +46,9 @@ export default function SignIn() {
                   onChange={(e) => setPassword(e.target.value)}
                 ></input>
               </Form.Group>
-              <button type="submit">Log In</button>
+              <Button type="submit" className="w-100">
+                Log In
+              </Button>
             </Form>
           </Card.Body>
         </Card>
@@ -59,7 +60,6 @@ export default function SignIn() {
           <Link to={"/SignUp"}>Sign Up</Link>
         </nav>
       </div>
-      <Icon />
     </>
   );
 }
