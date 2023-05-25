@@ -1,6 +1,7 @@
 import Icon from "./Icon.tsx";
+import "../CSS-Folder/LandingPage.css";
 
-export default function LogInIntroduction() {
+export default function LandingPage() {
   return (
     <>
       <div>

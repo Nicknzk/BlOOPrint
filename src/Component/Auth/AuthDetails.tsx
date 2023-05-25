@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import auth from "../../firebase";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import "../../CSS-Folder/Auth.css";
 
 export default function AuthDetails() {
   const [authUser, setAuthUser] = useState(null);

@@ -1,6 +1,7 @@
 import { AppBar, Toolbar, Typography } from "@mui/material";
 import { ReactNode } from "react";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
+import "../CSS-Folder/Navigation.css";
 
 export default function Navigation() {
   return (

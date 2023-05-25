@@ -1,4 +1,5 @@
 import { Typography } from "@mui/material";
+import "../CSS-Folder/HomePage.css";
 
 export default function ProjectTemplate() {
   return (

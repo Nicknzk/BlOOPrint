@@ -1,6 +1,6 @@
-import "./App.css";
+import "./CSS-Folder/App.css";
 import HomePage from "./Component/HomePage";
-import LogInIntroduction from "./Component/LogInIntroduction";
+import LandingPage from "./Component/LandingPage";
 import SignIn from "./Component/Auth/SignIn";
 import SignUp from "./Component/Auth/SignUp";
 import Navigation from "./Component/Navigation";
@@ -16,7 +16,7 @@ export default function App() {
         <Navigation />
         <div>
           <Routes>
-            <Route path="/" element={<LogInIntroduction />} />
+            <Route path="/" element={<LandingPage />} />
             <Route
               path="/SignIn"
               element={
