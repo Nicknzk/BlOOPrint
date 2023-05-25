@@ -11,7 +11,7 @@ export default function HomePage() {
         <nav>
           <Link to={"/NewProjectTemplate"}>
             <img
-              src="src/Component/Images/button-plus-icon-vector.webp"
+              src="src/Component/Images/button-plus-icon-vector-better.png"
               alt="Picture for new project"
               className="newProjectPicture"
             />
