@@ -5,22 +5,28 @@ import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import "../../CSS-Folder/Auth.css";
 
-export default function AuthDetails() {
+interface AuthDetailsProps {
+  onAuthStatusChange?: (choice: boolean) => void;
+}
+
+export default function AuthDetails({ onAuthStatusChange }: AuthDetailsProps) {
   const [authUser, setAuthUser] = useState(null);
 
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
       if (user) {
         setAuthUser(user);
+        onAuthStatusChange?.(true);
       } else {
         setAuthUser(null);
+        onAuthStatusChange?.(false);
       }
     });
 
     return () => {
       listen();
     };
-  }, []);
+  }, [onAuthStatusChange]);
 
   const userSignOut = () => {
     signOut(auth)
@@ -38,7 +44,7 @@ export default function AuthDetails() {
           <p>{`Signed In as ${authUser.email}`}</p>
           <nav>
             <Link className="auth-page-button" to={"/HomePage"}>
-              HomePage
+              Go To HomePage
             </Link>
           </nav>
           <Button onClick={userSignOut} className="auth-page-button">

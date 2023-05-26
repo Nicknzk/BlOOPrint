@@ -1,5 +1,5 @@
 /*Navigation*/
-.navigation-list {
+.navigation-landing-page {
     list-style-type: none;
     margin: 0 150px;
     padding: 0;
@@ -7,11 +7,11 @@
     background-color: #90caf9;
   }
   
-  .navigation-list li {
+  .navigation-landing-page li {
     float: left;
   
   }
-  .navigation-list li a {
+  .navigation-landing-page li a {
     display: block;
     color: white;
     text-align: center;
@@ -20,6 +20,32 @@
     margin: 0px 10px;
   }
   
-  .navigation-list li a:hover {
+  .navigation-landing-page li a:hover {
+    background-color: #1565c0;
+  }
+
+  /*navigation-home-page*/
+  .navigation-home-page {
+    list-style-type: none;
+    margin: 0 150px;
+    padding: 0;
+    overflow: hidden;
+    background-color: #90caf9;
+  }
+  
+  .navigation-home-page li {
+    float: left;
+  
+  }
+  .navigation-home-page li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+    margin: 0px 0px;
+  }
+  
+  .navigation-home-page li a:hover {
     background-color: #1565c0;
   }

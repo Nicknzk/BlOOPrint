@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import "../CSS-Folder/Navigation.css";
 
-export default function Navigation() {
+export default function NavigationHomePage() {
   return (
     <>
       <div>
@@ -19,13 +19,14 @@ export default function Navigation() {
               Navigation Bar
             </Typography>
             <nav>
-              <ul className="navigation-list">
+              <ul className="navigation-home-page">
                 <li>
                   <Link to="/">LoginPage</Link>
                 </li>
-                <CustomLink to="/HomePage">HomePage</CustomLink>
-                <CustomLink to="/SignIn">Sign In</CustomLink>
-                <CustomLink to="/SignUp">Sign Up</CustomLink>
+                <CustomLink to="/ProjectTemplate">Project Template</CustomLink>
+                <CustomLink to="/NewProjectTemplate">
+                  New Project Template
+                </CustomLink>
               </ul>
             </nav>
           </Toolbar>
