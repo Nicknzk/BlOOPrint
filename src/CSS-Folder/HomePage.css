@@ -18,3 +18,8 @@
 .projectPicture {
     width: 30%;
 }
+
+/*ProjectTemplate.tsx*/
+.project-picture {
+    width: 50%;
+}

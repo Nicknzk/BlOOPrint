@@ -21,7 +21,7 @@ export default function NavigationHomePage() {
             <nav>
               <ul className="navigation-home-page">
                 <li>
-                  <Link to="/">LoginPage</Link>
+                  <Link to="/">HomePage</Link>
                 </li>
                 <CustomLink to="/ProjectTemplate">Project Template</CustomLink>
                 <CustomLink to="/NewProjectTemplate">
