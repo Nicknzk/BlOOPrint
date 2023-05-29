@@ -5,7 +5,7 @@ import SignUp from "./Auth/SignUp";
 import { Route, Routes, Navigate } from "react-router-dom";
 import NewProjectTemplate from "./NewProjectTemplate";
 import ProjectTemplate from "./ProjectTemplate";
-import { Home } from "@mui/icons-material";
+//import { Home } from "@mui/icons-material";
 
 export default function PageRouting({ isAuthenticated }: any) {
   return (

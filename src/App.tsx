@@ -8,7 +8,7 @@ import PageRouting from "./Component/PageRouting";
 
 export default function App() {
   const [authUser, setAuthUser] = useState(false);
-  const [showAuthDetails, setShowAuthDetails] = useState(true);
+  const [showAuthDetails] = useState(true);  //can add back 'setShowAuthDetails' later on but i removed it due to the error
 
   const handleAuthStatusChange = (trueOrFalse: any) => {
     setAuthUser(trueOrFalse);

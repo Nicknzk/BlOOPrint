@@ -4,7 +4,7 @@ import { Form, Card, Button } from "react-bootstrap";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import auth from "../../firebase";
-import AuthDetails from "./AuthDetails";
+//import AuthDetails from "./AuthDetails";
 import "../../CSS-Folder/Auth.css";
 
 export default function SignIn() {
