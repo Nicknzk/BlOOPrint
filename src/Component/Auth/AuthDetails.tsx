@@ -1,4 +1,4 @@
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut, User } from "firebase/auth";
 import { useEffect, useState } from "react";
 import auth from "../../firebase";
 import { Link } from "react-router-dom";
@@ -10,7 +10,7 @@ interface AuthDetailsProps {
 }
 
 export default function AuthDetails({ onAuthStatusChange }: AuthDetailsProps) {
-  const [authUser, setAuthUser] = useState(null);
+  const [authUser, setAuthUser] = useState<User | null>(null);
 
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {

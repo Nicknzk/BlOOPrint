@@ -4,7 +4,7 @@ import { Typography } from "@mui/material";
 import React, { useState } from "react";
 import { ArcherContainer, ArcherElement } from "react-archer";
 import DragDrop from "./DragDrop";
-import { Padding } from "@mui/icons-material";
+//import { Padding } from "@mui/icons-material";
 
 export interface Box {
   id: number;
@@ -13,7 +13,7 @@ export interface Box {
 }
 
 //for the archer
-const rootStyle = { display: "flex", justifyContent: "center" }; //supposedly they use this as the center
+//const rootStyle = { display: "flex", justifyContent: "center" }; //supposedly they use this as the center
 const roleStyle = {
   margin: "200px 0",
   display: "flex",
