@@ -2,7 +2,7 @@
 
 import { Typography } from "@mui/material";
 import React, { useState } from "react";
-import { ArcherContainer, ArcherElement } from "react-archer";
+//import { ArcherContainer, ArcherElement } from "react-archer";
 import DragDrop from "./DragDrop";
 //import { Padding } from "@mui/icons-material";
 
@@ -11,21 +11,25 @@ export interface Box {
   name: string;
   dependencies: string[];
 }
+//React Flow
+import FlowMindMap from "./FlowMindMap";
 
 //for the archer
 //const rootStyle = { display: "flex", justifyContent: "center" }; //supposedly they use this as the center
+
+/*
 const roleStyle = {
   margin: "200px 0",
   display: "flex",
   justifyContent: "space-between",
 };
 const boxStyle = { padding: "10px", border: "1px solid black" };
+*/
 
 export default function NewProjectTemplate() {
   const [boxes, setBoxes] = useState<Box[]>([]); //array of boxes
   const [newBoxName, setNewBoxName] = useState(""); //variable to allow names to be added
   const [newDependency, setNewDependency] = useState(""); //variable to allow new dependencies to be added
-
   const handleNewBoxNameChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -160,8 +164,20 @@ export default function NewProjectTemplate() {
             <button onClick={() => handleDeleteBox(box.id)}>Delete</button>
           </div>
         ))}
-
         <div style={{ height: "500px", margin: "50px" }}>
+          <FlowMindMap
+            boxes={boxes} //im not sure why there is even any typing issue even tho both are box[]
+          />
+        </div>
+        <div>
+          <DragDrop />
+        </div>
+      </div>
+    </>
+  );
+}
+
+/*
           <ArcherContainer>
             {boxes.map((box) =>
               box.dependencies.map((dependency) => (
@@ -185,11 +201,4 @@ export default function NewProjectTemplate() {
               ))
             )}
           </ArcherContainer>
-        </div>
-        <div>
-          <DragDrop />
-        </div>
-      </div>
-    </>
-  );
-}
+*/
