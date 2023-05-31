@@ -1,0 +1,25 @@
+/*HomePage*/
+.HomePage-welcome {
+    margin-top: 3svh;
+    font-size: 5.5vh;
+    padding: 10px;
+    display: block;
+    border: #90caf9;
+    border-radius: 50px;
+    border-style:solid;
+    background-color: #90caf9;
+    color: #fff;
+  }
+
+.newProjectPicture {
+    width: 20%;
+}
+
+.projectPicture {
+    width: 30%;
+}
+
+/*ProjectTemplate.tsx*/
+.project-picture {
+    width: 50%;
+}

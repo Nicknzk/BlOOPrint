@@ -1,7 +1,7 @@
 //location of samuel app.tsx
 
 import { Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 //import { ArcherContainer, ArcherElement } from "react-archer";
 import DragDrop from "./DragDrop";
 //import { Padding } from "@mui/icons-material";
@@ -30,6 +30,8 @@ export default function NewProjectTemplate() {
   const [boxes, setBoxes] = useState<Box[]>([]); //array of boxes
   const [newBoxName, setNewBoxName] = useState(""); //variable to allow names to be added
   const [newDependency, setNewDependency] = useState(""); //variable to allow new dependencies to be added
+  const [entityCount, setEntityCount] = useState(0);
+
   const handleNewBoxNameChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -45,6 +47,7 @@ export default function NewProjectTemplate() {
       };
       setBoxes([...boxes, newBox]); //box is added to the array of boxes
       setNewBoxName(""); //empty out the newBoxName variable
+      setEntityCount(entityCount + 1);
     }
   };
 
@@ -104,6 +107,10 @@ export default function NewProjectTemplate() {
     });
     setBoxes(updatedBoxes); //empty out...
   };
+
+  useEffect(() => {
+    setEntityCount(boxes.length);
+  }, [boxes]);
 
   return (
     <>
@@ -165,9 +172,7 @@ export default function NewProjectTemplate() {
           </div>
         ))}
         <div style={{ height: "500px", margin: "50px" }}>
-          <FlowMindMap
-            boxes={boxes} //im not sure why there is even any typing issue even tho both are box[]
-          />
+          <FlowMindMap key={entityCount} boxes={boxes} />
         </div>
         <div>
           <DragDrop />
