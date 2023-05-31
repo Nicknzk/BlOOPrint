@@ -5,6 +5,7 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import auth from "../../firebase";
 import "../../CSS-Folder/Auth.css";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 //import AuthDetails from "./AuthDetails";
 
 export default function SignUp() {
@@ -14,8 +15,20 @@ export default function SignUp() {
   const signUp = (event: any) => {
     event.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         console.log(userCredential);
+        const fileContent = `Username: ${email}`;
+
+        const fileName = `${email}_personalfile.txt`;
+        const file = new File([fileContent], fileName, { type: "text/plain" });
+        const storage = getStorage();
+        const storageRef = ref(
+          storage,
+          `Uploads/${email}/${fileName}`
+        );
+        await uploadBytes(storageRef, file);
+
+        console.log("File uploaded successfully!");
       })
       .catch((error) => {
         console.log(error);
