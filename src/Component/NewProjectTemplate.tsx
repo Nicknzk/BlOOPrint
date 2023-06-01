@@ -30,7 +30,7 @@ export default function NewProjectTemplate() {
   const [boxes, setBoxes] = useState<Box[]>([]); //array of boxes
   const [newBoxName, setNewBoxName] = useState(""); //variable to allow names to be added
   const [newDependency, setNewDependency] = useState(""); //variable to allow new dependencies to be added
-  const [entityCount, setEntityCount] = useState(0);
+  const [reRenderCount, setReRenderCount] = useState(0);
 
   const handleNewBoxNameChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -47,7 +47,7 @@ export default function NewProjectTemplate() {
       };
       setBoxes([...boxes, newBox]); //box is added to the array of boxes
       setNewBoxName(""); //empty out the newBoxName variable
-      setEntityCount(entityCount + 1);
+      setReRenderCount((prevCount) => prevCount + 1);
     }
   };
 
@@ -108,8 +108,12 @@ export default function NewProjectTemplate() {
     setBoxes(updatedBoxes); //empty out...
   };
 
+  const handleIncrementReRenderCount = () => {
+    setReRenderCount((prevCount) => prevCount + 1);
+  };
+
   useEffect(() => {
-    setEntityCount(boxes.length);
+    setReRenderCount((prevCount) => prevCount + 1);
   }, [boxes]);
 
   return (
@@ -171,8 +175,16 @@ export default function NewProjectTemplate() {
             <button onClick={() => handleDeleteBox(box.id)}>Delete</button>
           </div>
         ))}
+        <button
+          className="contained"
+          onClick={handleIncrementReRenderCount}
+          style={{ color: "cyan", backgroundColor: "blue" }}
+          //this is incase it doesnt rerender
+        >
+          Increment ReRender Count
+        </button>
         <div style={{ height: "500px", margin: "50px" }}>
-          <FlowMindMap key={entityCount} boxes={boxes} />
+          <FlowMindMap key={reRenderCount} boxes={boxes} />
         </div>
         <div>
           <DragDrop />
