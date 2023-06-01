@@ -20,8 +20,8 @@ export default function FlowMindMap({ boxes }: { boxes: Box[] }) {
     const col = index % 3; // Calculate the column index
 
     const position = {
-      x: col * 200, // Adjust the x position based on the column index and desired spacing
-      y: row * 100, // Adjust the y position based on the row index and desired spacing
+      x: col * 200 + 100, // Adjust the x position based on the column index and desired spacing
+      y: row * 100 + 100, // Adjust the y position based on the row index and desired spacing
     };
 
     return {
