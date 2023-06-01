@@ -6,6 +6,7 @@ import ReactFlow, {
   useNodesState,
   useEdgesState,
   addEdge,
+  Panel,
 } from "reactflow";
 
 import "reactflow/dist/style.css";
@@ -16,7 +17,10 @@ import { Box } from "./NewProjectTemplate";
 export default function FlowMindMap({ boxes }: { boxes: Box[] }) {
   const initialNodes = boxes.map((box, index) => ({
     id: box.name.toString(),
-    position: { x: 0, y: index * 100 },
+    position: {
+      x: Math.random() * window.innerWidth - 100,
+      y: Math.random() * window.innerHeight,
+    },
     data: { label: box.name },
   }));
 
@@ -37,7 +41,7 @@ export default function FlowMindMap({ boxes }: { boxes: Box[] }) {
   );
 
   return (
-    <div style={{ width: "100vw", height: "100vh" }}>
+    <div style={{ width: "70vw", height: "70vh" }}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
