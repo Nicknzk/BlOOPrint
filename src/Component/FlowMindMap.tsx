@@ -28,8 +28,6 @@ export default function FlowMindMap({ boxes }: { boxes: Box[] }) {
     }))
   );
 
-  console.log(initialEdges);
-
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
