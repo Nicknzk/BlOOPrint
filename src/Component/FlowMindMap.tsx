@@ -15,14 +15,21 @@ import { Box } from "./NewProjectTemplate";
 //const initialEdges = [];
 
 export default function FlowMindMap({ boxes }: { boxes: Box[] }) {
-  const initialNodes = boxes.map((box, index) => ({
-    id: box.name.toString(),
-    position: {
-      x: Math.random() * window.innerWidth - 100,
-      y: Math.random() * window.innerHeight,
-    },
-    data: { label: box.name },
-  }));
+  const initialNodes = boxes.map((box, index) => {
+    const row = Math.floor(index / 3); // Calculate the row index
+    const col = index % 3; // Calculate the column index
+
+    const position = {
+      x: col * 200, // Adjust the x position based on the column index and desired spacing
+      y: row * 100, // Adjust the y position based on the row index and desired spacing
+    };
+
+    return {
+      id: box.name.toString(),
+      position: position,
+      data: { label: box.name },
+    };
+  });
 
   const initialEdges = boxes.flatMap((box) =>
     box.dependencies.map((dependency) => ({
