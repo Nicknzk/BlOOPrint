@@ -1,11 +1,10 @@
-import HomePage from "./HomePage";
-import LandingPage from "./LandingPage";
-import SignIn from "./Auth/SignIn";
-import SignUp from "./Auth/SignUp";
+import HomePage from "../Layout/HomePage";
+import LandingPage from "../Layout/LandingPage";
+import SignIn from "../Auth/SignIn";
+import SignUp from "../Auth/SignUp";
 import { Route, Routes, Navigate } from "react-router-dom";
-import NewProjectTemplate from "./NewProjectTemplate";
-import ProjectTemplate from "./ProjectTemplate";
-//import { Home } from "@mui/icons-material";
+import NewProjectTemplate from "../NewProjectTemplate";
+import ProjectTemplate from "../ProjectTemplate";
 
 export default function PageRouting({ isAuthenticated }: any) {
   return (

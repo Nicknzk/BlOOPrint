@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import "../CSS-Folder/HomePage.css";
+import "../../CSS-Folder/HomePage.css";
 
 export default function HomePage() {
   return (
