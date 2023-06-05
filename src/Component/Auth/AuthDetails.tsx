@@ -11,14 +11,21 @@ interface AuthDetailsProps {
 
 export default function AuthDetails({ onAuthStatusChange }: AuthDetailsProps) {
   const [authUser, setAuthUser] = useState<User | null>(null);
+  const [verifiedUser, setVerifiedUser] = useState<User | null>(null);
 
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
-      if (user) {
+      if (user && user.emailVerified) {
         setAuthUser(user);
+        setVerifiedUser(user);
         onAuthStatusChange?.(true);
+      } else if (user) {
+        setAuthUser(user);
+        setVerifiedUser(null);
+        onAuthStatusChange?.(false);
       } else {
         setAuthUser(null);
+        setVerifiedUser(null);
         onAuthStatusChange?.(false);
       }
     });
@@ -40,20 +47,28 @@ export default function AuthDetails({ onAuthStatusChange }: AuthDetailsProps) {
     //if user is logged in... else remain as Sign Out
     <div>
       {authUser ? (
-        <>
-          <p>{`Signed In as ${authUser.email}`}</p>
-          <nav>
-            <Link className="auth-page-button" to={"/HomePage"}>
-              Go To HomePage
-            </Link>
-          </nav>
-          <Button onClick={userSignOut} className="auth-page-button">
-            Sign Out
-          </Button>
-        </>
+        verifiedUser ? (
+          <>
+            <p>{`Signed In as ${authUser.email}`}</p>
+            <nav>
+              <Link className="auth-page-button" to={"/HomePage"}>
+                Go To HomePage
+              </Link>
+            </nav>
+            <Button onClick={userSignOut} className="auth-page-button">
+              Sign Out
+            </Button>
+          </>
+        ) : (
+          <div className="email-verification-message">
+            <p style={{ fontSize: 20 }}>Email Verification is not complete.</p>
+            <p>Do check spam / junk folder</p>
+          </div>
+        )
       ) : (
-        <p>Signed Out</p>
+        <p style={{ fontSize: 20 }}>Log In to access BLOOPrint</p>
       )}
     </div>
   );
 }
+// {test1 ? (test2 ? (true result) : (do verification )) : (false result })

@@ -2,7 +2,10 @@ import { Form, Button, Card } from "react-bootstrap";
 //import { Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 import auth from "../../firebase";
 import "../../CSS-Folder/Auth.css";
 //import AuthDetails from "./AuthDetails";
@@ -16,6 +19,13 @@ export default function SignUp() {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log(userCredential);
+        sendEmailVerification(userCredential.user)
+          .then(() => {
+            console.log("Verification email sent.");
+          })
+          .catch((error) => {
+            console.log("Error sending verification email:", error);
+          });
       })
       .catch((error) => {
         console.log(error);
