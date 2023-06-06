@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 import ReactFlow, {
   MiniMap,
   Controls,
@@ -6,7 +6,6 @@ import ReactFlow, {
   useNodesState,
   useEdgesState,
   addEdge,
-  Panel,
 } from "reactflow";
 
 import "reactflow/dist/style.css";
@@ -46,6 +45,8 @@ export default function FlowMindMap({ boxes }: { boxes: Box[] }) {
     (params: any) => setEdges((eds) => addEdge(params, eds)),
     [setEdges]
   );
+
+  setNodes;
 
   return (
     <div style={{ width: "70vw", height: "70vh" }}>
