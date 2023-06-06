@@ -16,7 +16,7 @@
 }
 
 body {
-  background-image: url(src/Component/Images/blue.jpeg);
+  background-image: url(../Component/Images/blue.jpeg);
   background-size: 100% 100%;
 }
 
