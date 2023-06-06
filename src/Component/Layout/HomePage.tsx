@@ -1,6 +1,7 @@
 import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import "../../CSS-Folder/HomePage.css";
+import MindMap from "../Images/MindMap.webp";
 
 export default function HomePage() {
   return (
@@ -23,7 +24,7 @@ export default function HomePage() {
       <nav>
         <Link to={"/ProjectTemplate"}>
           <img
-            src="src/Component/Images/MindMap.webp"
+            src={MindMap}
             alt="Picture for previously made project"
             className="projectPicture"
           />
