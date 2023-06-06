@@ -13,6 +13,7 @@ export interface Box {
 }
 //React Flow
 import FlowMindMap from "./FlowMindMap";
+import ReactCSV from "./ReactCSV";
 
 //for the archer
 //const rootStyle = { display: "flex", justifyContent: "center" }; //supposedly they use this as the center
@@ -190,6 +191,7 @@ export default function NewProjectTemplate() {
           <DragDrop />
         </div>
       </div>
+      <ReactCSV key={reRenderCount} boxes={boxes} />
     </>
   );
 }

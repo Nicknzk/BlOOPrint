@@ -46,7 +46,7 @@ export default function FlowMindMap({ boxes }: { boxes: Box[] }) {
     [setEdges]
   );
 
-  setNodes;
+  setNodes; //does nothing but prevent error of not using setNodes
 
   return (
     <div style={{ width: "70vw", height: "70vh" }}>
