@@ -1,7 +1,8 @@
 //requires react-dropzone
 
 import React, { useState } from "react";
-import "./DragDrop.css";
+import "../CSS-Folder/DragDrop.css";
+
 import { useDropzone } from "react-dropzone";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 
@@ -12,7 +13,7 @@ const DragDrop: React.FC = () => {
   const handleDrop = async (acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
     const storageRef = ref(storage, "Uploads/");
-    
+
     try {
       await uploadBytes(storageRef, file);
       console.log("file uploaded");
@@ -24,14 +25,10 @@ const DragDrop: React.FC = () => {
       };
 
       reader.readAsText(file);
-    }
-    catch (error) {
+    } catch (error) {
       console.error("error uploading", error);
     }
-    };
-      
-    
-  
+  };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: handleDrop,

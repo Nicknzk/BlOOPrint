@@ -1,14 +1,13 @@
 import "./CSS-Folder/App.css";
-
-import Icon from "./Component/Icon";
+import Icon from "./Component/Layout/Icon";
 import { useState } from "react";
 import AuthDetails from "./Component/Auth/AuthDetails";
-import NavigationBarChoser from "./Component/NavigationBarChoser";
-import PageRouting from "./Component/PageRouting";
+import PageRouting from "./Component/NavigationFolder/PageRouting";
+import NavigationBarChoser from "./Component/NavigationFolder/NavigationBarChoser";
 
 export default function App() {
   const [authUser, setAuthUser] = useState(false);
-  const [showAuthDetails] = useState(true);  //can add back 'setShowAuthDetails' later on but i removed it due to the error
+  const [showAuthDetails] = useState(true); //can add back 'setShowAuthDetails' later on but i removed it due to the error
 
   const handleAuthStatusChange = (trueOrFalse: any) => {
     setAuthUser(trueOrFalse);

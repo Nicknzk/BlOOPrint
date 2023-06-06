@@ -1,9 +1,9 @@
 import { AppBar, Toolbar, Typography } from "@mui/material";
 import { ReactNode } from "react";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
-import "../CSS-Folder/Navigation.css";
+import "../../CSS-Folder/Navigation.css";
 
-export default function NavigationLandingPage() {
+export default function NavigationHomePage() {
   return (
     <>
       <div>
@@ -19,12 +19,14 @@ export default function NavigationLandingPage() {
               Navigation Bar
             </Typography>
             <nav>
-              <ul className="navigation-landing-page">
+              <ul className="navigation-home-page">
                 <li>
-                  <Link to="/">LoginPage</Link>
+                  <Link to="/">HomePage</Link>
                 </li>
-                <CustomLink to="/SignIn">Sign In</CustomLink>
-                <CustomLink to="/SignUp">Sign Up</CustomLink>
+                <CustomLink to="/ProjectTemplate">Project Template</CustomLink>
+                <CustomLink to="/NewProjectTemplate">
+                  New Project Template
+                </CustomLink>
               </ul>
             </nav>
           </Toolbar>

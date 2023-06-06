@@ -1,8 +1,8 @@
 //location of samuel app.tsx
 
 import { Typography } from "@mui/material";
-import React, { useState } from "react";
-import { ArcherContainer, ArcherElement } from "react-archer";
+import React, { useEffect, useState } from "react";
+//import { ArcherContainer, ArcherElement } from "react-archer";
 import DragDrop from "./DragDrop";
 //import { Padding } from "@mui/icons-material";
 
@@ -11,20 +11,26 @@ export interface Box {
   name: string;
   dependencies: string[];
 }
+//React Flow
+import FlowMindMap from "./FlowMindMap";
 
 //for the archer
 //const rootStyle = { display: "flex", justifyContent: "center" }; //supposedly they use this as the center
+
+/*
 const roleStyle = {
   margin: "200px 0",
   display: "flex",
   justifyContent: "space-between",
 };
 const boxStyle = { padding: "10px", border: "1px solid black" };
+*/
 
 export default function NewProjectTemplate() {
   const [boxes, setBoxes] = useState<Box[]>([]); //array of boxes
   const [newBoxName, setNewBoxName] = useState(""); //variable to allow names to be added
   const [newDependency, setNewDependency] = useState(""); //variable to allow new dependencies to be added
+  const [reRenderCount, setReRenderCount] = useState(0);
 
   const handleNewBoxNameChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -41,6 +47,7 @@ export default function NewProjectTemplate() {
       };
       setBoxes([...boxes, newBox]); //box is added to the array of boxes
       setNewBoxName(""); //empty out the newBoxName variable
+      setReRenderCount((prevCount) => prevCount + 1);
     }
   };
 
@@ -101,6 +108,14 @@ export default function NewProjectTemplate() {
     setBoxes(updatedBoxes); //empty out...
   };
 
+  const handleIncrementReRenderCount = () => {
+    setReRenderCount((prevCount) => prevCount + 1);
+  };
+
+  useEffect(() => {
+    setReRenderCount((prevCount) => prevCount + 1);
+  }, [boxes]);
+
   return (
     <>
       <Typography variant="h2">New Project Page</Typography>
@@ -160,8 +175,26 @@ export default function NewProjectTemplate() {
             <button onClick={() => handleDeleteBox(box.id)}>Delete</button>
           </div>
         ))}
-
+        <button
+          className="contained"
+          onClick={handleIncrementReRenderCount}
+          style={{ color: "cyan", backgroundColor: "blue" }}
+          //this is incase it doesnt rerender
+        >
+          Increment ReRender Count
+        </button>
         <div style={{ height: "500px", margin: "50px" }}>
+          <FlowMindMap key={reRenderCount} boxes={boxes} />
+        </div>
+        <div>
+          <DragDrop />
+        </div>
+      </div>
+    </>
+  );
+}
+
+/*
           <ArcherContainer>
             {boxes.map((box) =>
               box.dependencies.map((dependency) => (
@@ -185,11 +218,5 @@ export default function NewProjectTemplate() {
               ))
             )}
           </ArcherContainer>
-        </div>
-        <div>
-          <DragDrop />
-        </div>
-      </div>
-    </>
-  );
-}
+          //
+*/

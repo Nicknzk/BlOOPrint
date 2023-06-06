@@ -1,5 +1,5 @@
 import Icon from "./Icon.tsx";
-import "../CSS-Folder/LandingPage.css";
+import "../../CSS-Folder/LandingPage.css";
 
 export default function LandingPage() {
   return (
