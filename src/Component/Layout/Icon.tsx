@@ -1,14 +1,9 @@
-//import logo from "../Images/Logo.png";
-import "../../CSS-Folder/App.css";
+import logo from "../Images/Logo.png";
 
 export default function Icon() {
   return (
     <>
-      <img
-        src="src/Component/Images/Logo.png"
-        alt="Logo of BLOOPrint"
-        className="Icon"
-      />
+      <img src={logo} alt="Logo of BLOOPrint" className="Icon" />
     </>
   );
 }
