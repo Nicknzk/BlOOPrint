@@ -56,8 +56,8 @@ const DragDrop: React.FC = () => {
       </div>
       {fileContent && (
         <div className="file-content">
-          <h3>File Content:</h3>
-          <pre>{fileContent}</pre>
+          <h3>File Uploaded!</h3>
+         
         </div>
       )}
     </div>

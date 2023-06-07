@@ -10,13 +10,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@babel/core": "^7.22.1",
+    "@babel/preset-env": "^7.22.4",
+    "@babel/preset-react": "^7.22.3",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.1",
+    "babel-loader": "^9.1.2",
     "bootstrap": "^5.2.3",
     "classcat": "^5.0.4",
-    "firebase": "^9.22.0",
+    "esprima": "^4.0.1",
+    "firebase": "^9.22.1",
+    "lsp-ws-connection": "^0.7.1",
     "nanoid": "^4.0.2",
     "react": "^18.2.0",
     "react-archer": "^4.2.3",
@@ -25,6 +31,7 @@
     "react-dropzone": "^14.2.3",
     "react-router-dom": "^6.11.2",
     "reactflow": "^11.7.2",
+    "vscode-languageserver": "^8.1.0",
     "zustand": "^4.3.8"
   },
   "devDependencies": {
