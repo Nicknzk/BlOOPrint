@@ -1,4 +1,19 @@
 import React from 'react';
+import * as acorn from 'acorn-loose';
+
+
+interface ClassInfo {
+  methods: string[];
+  attributes: string[];
+  dependencies: string[];
+}
+
+interface ClassData {
+  className: string;
+  methods: string[];
+  attributes: string[];
+  dependencies: string[];
+}
 
 const Parser = () => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -9,7 +24,7 @@ const Parser = () => {
       reader.onload = (e) => {
         const sourceCode = e.target?.result;
         const extractedInfo = extractInfo(sourceCode as string);
-        console.log('Extracted Info:', extractedInfo);
+        console.log('file read', extractedInfo);
       };
       reader.onerror = (e) => {
         console.error('File reading error:', e.target?.error);
@@ -19,24 +34,135 @@ const Parser = () => {
   };
 
   const extractInfo = (sourceCode: string) => {
-    // Add your parsing logic here
-    // This is just a sample implementation to extract class, variable, method, and attribute information
-    const classes = sourceCode.match(/class\s+(\w+)/g) || [];
-    const variables = sourceCode.match(/(?<=(var|let|const)\s+)(\w+)/g) || [];
-    const methods = sourceCode.match(/(?<=(function)\s+)(\w+)/g) || [];
-    const attributes = sourceCode.match(/(?<=this\.)(\w+)/g) || [];
+    const code = sourceCode;
+    const ast = acorn.parse(code);
 
-    return {
-      classes,
-      variables,
-      methods,
-      attributes,
-    };
+    const classes: { [className: string]: ClassInfo } = {};
+
+    traverseAST(ast, {
+      enter(node: any, parent: any) {
+        if (node.type === 'ClassDeclaration') {
+          const className = (node.id as any).name;
+          const methods: string[] = [];
+          const attributes: string[] = [];
+          const dependencies: string[] = [];
+
+          node.body.body.forEach((classMember: any) => {
+            if (classMember.type === 'MethodDefinition') {
+              const methodName = (classMember.key as any).name;
+              methods.push(methodName);
+            } else if (classMember.type === 'PropertyDefinition') {
+              const attributeName = (classMember.key as any).name;
+              attributes.push(attributeName);
+            }
+          });
+
+          if (parent && parent.type === 'Program') {
+            dependencies.push(...findDependencies(parent));
+          }
+
+          classes[className] = { methods, attributes, dependencies };
+        }
+      },
+    });
+
+    const classData: ClassData[] = Object.entries(classes).map(([className, classInfo]) => ({
+      className,
+      methods: classInfo.methods,
+      attributes: classInfo.attributes,
+      dependencies: classInfo.dependencies,
+    }));
+
+    console.log(classData);
+
+    const compressedOutput = compressOutput(classData);
+    console.log(compressedOutput);
+
+    return compressedOutput;
+  };
+
+  const findDependencies = (node: any) => {
+    const dependencies: string[] = [];
+
+    traverseAST(node, {
+      enter(node: any) {
+        if (node.type === 'ImportDeclaration') {
+          const moduleName = node.source.value;
+          dependencies.push(moduleName);
+        }
+      },
+    });
+
+    return dependencies;
+  };
+
+  const traverseAST = (node: any, visitor: any) => {
+    const { enter, leave } = visitor;
+
+    function traverse(node: any, parent: any) {
+      if (enter) {
+        enter(node, parent);
+      }
+
+      for (const key in node) {
+        if (Object.prototype.hasOwnProperty.call(node, key)) {
+          const child = node[key];
+          if (typeof child === 'object' && child !== null) {
+            if (Array.isArray(child)) {
+              child.forEach((n) => {
+                traverse(n, node);
+              });
+            } else {
+              traverse(child, node);
+            }
+          }
+        }
+      }
+
+      if (leave) {
+        leave(node, parent);
+      }
+    }
+
+    traverse(node, null);
+  };
+
+  const compressOutput = (classes: ClassData[]) => {
+    const compressedOutput: { [className: string]: ClassInfo } = {};
+
+    for (const classData of classes) {
+      const { className, methods, attributes, dependencies } = classData;
+
+      const compressedInfo: ClassInfo = {
+        methods: methods.filter(isUserDefinedMethod),
+        attributes: attributes.filter(isUserDefinedAttribute),
+        dependencies: dependencies.filter(isUserDefinedDependency),
+      };
+
+      compressedOutput[className] = compressedInfo;
+    }
+
+    return compressedOutput;
+  };
+
+  const isUserDefinedMethod = (methodName: string) => {
+    // Filter condition for user-defined methods
+    return methodName !== 'constructor' && !methodName.startsWith('_');
+  };
+
+  const isUserDefinedAttribute = (attributeName: string) => {
+    // Filter condition for user-defined attributes
+    return !attributeName.startsWith('_');
+  };
+
+  const isUserDefinedDependency = (dependencyName: string) => {
+    // Filter condition for user-defined dependencies
+    return !dependencyName.startsWith('react');
   };
 
   return (
     <div>
-      <input type="file"  onChange={handleFileChange} />
+      <input type="file" onChange={handleFileChange} />
     </div>
   );
 };
