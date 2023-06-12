@@ -5,15 +5,10 @@ import React, { useEffect, useState } from "react";
 //import { ArcherContainer, ArcherElement } from "react-archer";
 import DragDrop from "./DragDrop";
 //import { Padding } from "@mui/icons-material";
-
-export interface Box {
-  id: number;
-  name: string;
-  dependencies: string[];
-}
 //React Flow
 import FlowMindMap from "./FlowMindMap";
-import ReactCSV from "./ReactCSV";
+import ReactCSVDownloader from "./ReactCSVDownloader";
+import Papa from "papaparse";
 
 //for the archer
 //const rootStyle = { display: "flex", justifyContent: "center" }; //supposedly they use this as the center
@@ -26,12 +21,56 @@ const roleStyle = {
 };
 const boxStyle = { padding: "10px", border: "1px solid black" };
 */
+export interface Box {
+  id: number;
+  name: string;
+  dependencies: string[];
+}
+
+interface CSVRow {
+  id: number;
+  name: string;
+  dependencies: string;
+}
+
+/*
+uploadedBoxes: Box[] = []
+if (uploadedBoxes.length > 0) {
+    //if argument has something, it will update the system
+    setBoxes([...boxes, ...uploadedBoxes]);
+  }
+*/
 
 export default function NewProjectTemplate() {
   const [boxes, setBoxes] = useState<Box[]>([]); //array of boxes
   const [newBoxName, setNewBoxName] = useState(""); //variable to allow names to be added
   const [newDependency, setNewDependency] = useState(""); //variable to allow new dependencies to be added
   const [reRenderCount, setReRenderCount] = useState(0);
+
+  const [data, setData] = useState<Box[]>([]); //parsing
+
+  const handleFileUpload = (e: any) => {
+    const file = e.target.files[0];
+    Papa.parse(file, {
+      header: true,
+      complete: (results: Papa.ParseResult<CSVRow>) => {
+        const parsedData = results.data.map((row) => {
+          const dependencies = row.dependencies.split(","); // Split dependencies by commas
+          return {
+            id: row.id,
+            name: row.name,
+            dependencies: dependencies,
+          };
+        });
+        setData(parsedData);
+      },
+    });
+  };
+
+  const handleSetData = () => {
+    setBoxes([...boxes, ...data]);
+    setData([]);
+  };
 
   const handleNewBoxNameChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -191,7 +230,10 @@ export default function NewProjectTemplate() {
           <DragDrop />
         </div>
       </div>
-      <ReactCSV key={reRenderCount} boxes={boxes} />
+      <ReactCSVDownloader key={reRenderCount} boxes={boxes} />
+      <input type="file" accept=".csv" onChange={handleFileUpload} />
+      {console.log(data.length ? data : null)}
+      {data.length ? handleSetData() : null}
     </>
   );
 }
