@@ -3,7 +3,7 @@ import { Box } from "./NewProjectTemplate";
 import { useState } from "react";
 import "../CSS-Folder/ReactCSV.css";
 
-export default function ReactCSV({ boxes }: { boxes: Box[] }) {
+export default function ReactCSVDownloader({ boxes }: { boxes: Box[] }) {
   const arrayBoxes = boxes.map((box) => [box.id, box.name, box.dependencies]);
   const data = [["id", "name", "dependencies"], ...arrayBoxes];
   const [boxName, setBoxName] = useState("");
