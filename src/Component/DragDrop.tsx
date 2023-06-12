@@ -1,9 +1,7 @@
-//requires react-dropzone
-
 import React, { useState } from "react";
 import "../CSS-Folder/DragDrop.css";
 
-import { useDropzone } from "react-dropzone";
+import { useDropzone } from "react-dropzone"; //requires react-dropzone
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 const DragDrop: React.FC = () => {

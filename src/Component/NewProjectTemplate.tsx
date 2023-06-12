@@ -1,26 +1,10 @@
-//location of samuel app.tsx
-
 import { Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-//import { ArcherContainer, ArcherElement } from "react-archer";
 import DragDrop from "./DragDrop";
-//import { Padding } from "@mui/icons-material";
-//React Flow
 import FlowMindMap from "./FlowMindMap";
 import ReactCSVDownloader from "./ReactCSVDownloader";
 import Papa from "papaparse";
 
-//for the archer
-//const rootStyle = { display: "flex", justifyContent: "center" }; //supposedly they use this as the center
-
-/*
-const roleStyle = {
-  margin: "200px 0",
-  display: "flex",
-  justifyContent: "space-between",
-};
-const boxStyle = { padding: "10px", border: "1px solid black" };
-*/
 export interface Box {
   id: number;
   name: string;
@@ -32,14 +16,6 @@ interface CSVRow {
   name: string;
   dependencies: string;
 }
-
-/*
-uploadedBoxes: Box[] = []
-if (uploadedBoxes.length > 0) {
-    //if argument has something, it will update the system
-    setBoxes([...boxes, ...uploadedBoxes]);
-  }
-*/
 
 export default function NewProjectTemplate() {
   const [boxes, setBoxes] = useState<Box[]>([]); //array of boxes
@@ -237,30 +213,3 @@ export default function NewProjectTemplate() {
     </>
   );
 }
-
-/*
-          <ArcherContainer>
-            {boxes.map((box) =>
-              box.dependencies.map((dependency) => (
-                <div key={dependency}>
-                  <div style={roleStyle}>
-                    <ArcherElement
-                      id={box.name}
-                      relations={[
-                        {
-                          targetId: dependency,
-                          targetAnchor: "top",
-                          sourceAnchor: "bottom",
-                          style: { strokeDasharray: "5,5" },
-                        },
-                      ]}
-                    >
-                      <div style={boxStyle}>{box.name}</div>
-                    </ArcherElement>
-                  </div>
-                </div>
-              ))
-            )}
-          </ArcherContainer>
-          //
-*/

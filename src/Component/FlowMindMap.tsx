@@ -11,8 +11,6 @@ import ReactFlow, {
 import "reactflow/dist/style.css";
 import { Box } from "./NewProjectTemplate";
 
-//const initialEdges = [];
-
 export default function FlowMindMap({ boxes }: { boxes: Box[] }) {
   const initialNodes = boxes.map((box, index) => {
     const row = Math.floor(index / 3); // Calculate the row index
@@ -64,23 +62,3 @@ export default function FlowMindMap({ boxes }: { boxes: Box[] }) {
     </div>
   );
 }
-
-/*const initialNodes = [
-  { id: "1", position: { x: 0, y: 0 }, data: { label: "1" } },
-  { id: "2", position: { x: 0, y: 100 }, data: { label: "2" } },
-  { id: "3", position: { x: 300, y: 0 }, data: { label: "3" } },
-  { id: "4", position: { x: 300, y: 100 }, data: { label: "4" } },
-  { id: "5", position: { x: 600, y: 0 }, data: { label: "5" } },
-  { id: "6", position: { x: 600, y: 100 }, data: { label: "6" } },
-  { id: "7", position: { x: 0, y: 200 }, data: { label: "7" } },
-  { id: "8", position: { x: 600, y: 200 }, data: { label: "8" } },
-];*/
-
-/*const initialEdges = [
-  { id: "e1-2", source: "1", target: "2" },
-  { id: "e1-2", source: "3", target: "8" },
-  { id: "e1-2", source: "5", target: "8" },
-  { id: "e1-2", source: "5", target: "2" },
-  { id: "e1-2", source: "3", target: "4" },
-  { id: "e1-2", source: "7", target: "1" },
-];*/

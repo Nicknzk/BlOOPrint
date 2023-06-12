@@ -22,26 +22,3 @@ export default function ReactCSVUploader() {
     </>
   );
 }
-//<div>{data.length ? data : null}</div>
-/*
-{data.length ? (
-        <table className="table">
-          <thead>
-            <tr>
-              <th>id</th>
-              <th>name</th>
-              <th>dependencies</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((row, index) => (
-              <tr key={index}>
-                <td>{row.id}</td>
-                <td>{row.name}</td>
-                <td>{row.dependencies}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : null}
-*/

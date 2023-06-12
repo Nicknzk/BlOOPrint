@@ -44,9 +44,8 @@ export default function AuthDetails({ onAuthStatusChange }: AuthDetailsProps) {
   };
 
   return (
-    //if user is logged in... else remain as Sign Out
     <div>
-      {authUser ? (
+      {authUser ? ( //if user is logged in... else remain as Sign Out
         verifiedUser ? (
           <>
             <p>{`Signed In as ${authUser.email}`}</p>
@@ -71,4 +70,3 @@ export default function AuthDetails({ onAuthStatusChange }: AuthDetailsProps) {
     </div>
   );
 }
-// {test1 ? (test2 ? (true result) : (do verification )) : (false result })
