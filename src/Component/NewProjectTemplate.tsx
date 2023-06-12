@@ -42,7 +42,7 @@ export default function NewProjectTemplate() {
   const handleAddBox = () => {
     if (newBoxName.trim() !== "") {
       const newBox: Box = {
-        id: Date.now(), //unique number generated from the system time
+        id: Date.now() * Math.floor(Math.random() * 1000000), //unique number generated from the system time
         name: newBoxName,
         dependencies: [], //box is initialised without dependancies first
       };
