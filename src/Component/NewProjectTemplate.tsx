@@ -139,6 +139,10 @@ export default function NewProjectTemplate() {
     setReRenderCount((prevCount) => prevCount + 1);
   };
 
+  const handleClearAll = () => {
+    setBoxes([]);
+  };
+
   useEffect(() => {
     setReRenderCount((prevCount) => prevCount + 1);
   }, [boxes]);
@@ -209,6 +213,13 @@ export default function NewProjectTemplate() {
           //this is incase it doesnt rerender
         >
           Increment ReRender Count
+        </button>
+        <button
+          className="contained"
+          onClick={handleClearAll}
+          style={{ color: "cyan", backgroundColor: "blue" }}
+        >
+          Clear All
         </button>
         <div style={{ height: "500px", margin: "50px" }}>
           <FlowMindMap key={reRenderCount} boxes={boxes} />
