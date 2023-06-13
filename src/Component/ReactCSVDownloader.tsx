@@ -43,13 +43,3 @@ export default function ReactCSVDownloader({ boxes }: { boxes: Box[] }) {
     </>
   );
 }
-
-//first row is title
-//second row is values
-/*
-  const data = [
-    ["Athletic Ability", "Name"],
-    ["incredible", "Lebron"],
-    ["Not so", "Steve Nash"],
-  ];
-  */

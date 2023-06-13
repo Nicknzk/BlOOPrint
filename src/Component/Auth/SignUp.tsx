@@ -15,7 +15,7 @@ export default function SignUp() {
   let messages: string[] = [];
 
   function passTest() {
-    setAlertShow("");
+    setAlertShow(""); //password format
     if (password.length < 8) {
       messages.push("Password must be minimum 8 characters");
     }
