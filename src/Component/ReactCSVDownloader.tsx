@@ -13,10 +13,14 @@ export default function ReactCSVDownloader({ boxes }: { boxes: Box[] }) {
     setBoxName(event.target.value);
   };
 
-  const handleSubmit = (event: any) => {
-    if (!event.target.value) {
+  const handleSubmit = () => {
+    if (boxName.trim() === "") {
       setBoxName("Project");
     }
+    setTimeout(() => {
+      //clear name of file after download
+      setBoxName("");
+    }, 10); // Adjust the delay (in milliseconds) as needed
   };
 
   return (
