@@ -4,6 +4,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import auth from "../../firebase";
 import "../../CSS-Folder/Auth.css";
+import Parser from "./parser.tsx";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -22,6 +23,7 @@ export default function SignIn() {
 
   return (
     <>
+    <Parser></Parser>
       <div className="log-in-box">
         <div className="sign-in-container">
           <Card>

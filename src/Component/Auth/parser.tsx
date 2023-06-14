@@ -78,8 +78,21 @@ const Parser = () => {
     const compressedOutput = compressOutput(classData);
     console.log(compressedOutput);
 
-    return compressedOutput;
+    const shortenDependencies = (classes: ClassData[])=>{
+      return classes.map((box)=>{
+        box.dependencies = box.dependencies.map((dependency)=>{
+          return dependency.substring(dependency.lastIndexOf("/") + 1);
+        });
+        return box;
+      });
+    };
+  const newCompressedOutput = shortenDependencies(classData);
+  console.log(newCompressedOutput);
+
+  return newCompressedOutput;
   };
+
+
 
   const findDependencies = (node: any) => {
     const dependencies: string[] = [];
@@ -159,6 +172,7 @@ const Parser = () => {
     // Filter condition for user-defined dependencies
     return !dependencyName.startsWith('react');
   };
+  
 
   return (
     <div>
