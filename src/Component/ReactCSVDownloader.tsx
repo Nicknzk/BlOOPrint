@@ -13,7 +13,7 @@ export default function ReactCSVDownloader({ boxes }: { boxes: Box[] }) {
     setBoxName(event.target.value);
   };
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = () => {
     if (boxName.trim() === "") {
       setBoxName("Project");
     }
