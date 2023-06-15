@@ -75,35 +75,31 @@ const Parser = ({ onUpload }: { onUpload: (data: Box[]) => void }) => {
       })
     );
 
-    //console.log(classData);
-    const parsedClassData: Box[] = Object.entries(classes).map(
-      ([className, classInfo]) => ({
-        id: Date.now() * Math.floor(Math.random() * 1000000),
-        name: className,
-        dependencies: classInfo.dependencies,
-      })
-    );
-
-    onUpload(parsedClassData);
-
     const compressedOutput = compressOutput(classData);
-    //console.log(compressedOutput);
+    console.log(compressedOutput); //im leaving this line to prevent error from not using
 
-    const shortenDependencies = (classes: ClassData[])=>{
-      return classes.map((box)=>{
-        box.dependencies = box.dependencies.map((dependency)=>{
+    const shortenDependencies = (classes: ClassData[]) => {
+      return classes.map((box) => {
+        box.dependencies = box.dependencies.map((dependency) => {
           return dependency.substring(dependency.lastIndexOf("/") + 1);
         });
         return box;
       });
     };
-  const newCompressedOutput = shortenDependencies(classData);
-  console.log(newCompressedOutput);
+    const newCompressedOutput = shortenDependencies(classData);
+    console.log(newCompressedOutput);
 
-  return newCompressedOutput;
+    //console.log(classData);
+    const parsedClassData: Box[] = newCompressedOutput.map((box) => ({
+      id: Date.now() * Math.floor(Math.random() * 1000000),
+      name: box.className,
+      dependencies: box.dependencies,
+    }));
+
+    onUpload(parsedClassData);
+
+    return newCompressedOutput;
   };
-
-
 
   const findDependencies = (node: any) => {
     const dependencies: string[] = [];
@@ -183,7 +179,6 @@ const Parser = ({ onUpload }: { onUpload: (data: Box[]) => void }) => {
     // Filter condition for user-defined dependencies
     return !dependencyName.startsWith("react");
   };
-  
 
   return (
     <div>
