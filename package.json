@@ -14,6 +14,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.1",
+    "acorn-loose": "^8.3.0",
     "bootstrap": "^5.2.3",
     "classcat": "^5.0.4",
     "firebase": "^9.22.0",
