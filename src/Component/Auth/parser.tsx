@@ -1,6 +1,6 @@
-import React from 'react';
-import * as acorn from 'acorn-loose';
-
+import React from "react";
+import * as acorn from "acorn-loose";
+import { Box } from "../NewProjectTemplate";
 
 interface ClassInfo {
   methods: string[];
@@ -15,7 +15,7 @@ interface ClassData {
   dependencies: string[];
 }
 
-const Parser = () => {
+const Parser = ({ onUpload }: { onUpload: (data: Box[]) => void }) => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
 
@@ -24,10 +24,10 @@ const Parser = () => {
       reader.onload = (e) => {
         const sourceCode = e.target?.result;
         const extractedInfo = extractInfo(sourceCode as string);
-        console.log('file read', extractedInfo);
+        console.log("file read", extractedInfo);
       };
       reader.onerror = (e) => {
-        console.error('File reading error:', e.target?.error);
+        console.error("File reading error:", e.target?.error);
       };
       reader.readAsText(file);
     }
@@ -41,23 +41,23 @@ const Parser = () => {
 
     traverseAST(ast, {
       enter(node: any, parent: any) {
-        if (node.type === 'ClassDeclaration') {
+        if (node.type === "ClassDeclaration") {
           const className = (node.id as any).name;
           const methods: string[] = [];
           const attributes: string[] = [];
           const dependencies: string[] = [];
 
           node.body.body.forEach((classMember: any) => {
-            if (classMember.type === 'MethodDefinition') {
+            if (classMember.type === "MethodDefinition") {
               const methodName = (classMember.key as any).name;
               methods.push(methodName);
-            } else if (classMember.type === 'PropertyDefinition') {
+            } else if (classMember.type === "PropertyDefinition") {
               const attributeName = (classMember.key as any).name;
               attributes.push(attributeName);
             }
           });
 
-          if (parent && parent.type === 'Program') {
+          if (parent && parent.type === "Program") {
             dependencies.push(...findDependencies(parent));
           }
 
@@ -66,40 +66,47 @@ const Parser = () => {
       },
     });
 
-    const classData: ClassData[] = Object.entries(classes).map(([className, classInfo]) => ({
-      className,
-      methods: classInfo.methods,
-      attributes: classInfo.attributes,
-      dependencies: classInfo.dependencies,
-    }));
-
-    console.log(classData);
+    const classData: ClassData[] = Object.entries(classes).map(
+      ([className, classInfo]) => ({
+        className,
+        methods: classInfo.methods,
+        attributes: classInfo.attributes,
+        dependencies: classInfo.dependencies,
+      })
+    );
 
     const compressedOutput = compressOutput(classData);
-    console.log(compressedOutput);
+    console.log(compressedOutput); //im leaving this line to prevent error from not using
 
-    const shortenDependencies = (classes: ClassData[])=>{
-      return classes.map((box)=>{
-        box.dependencies = box.dependencies.map((dependency)=>{
+    const shortenDependencies = (classes: ClassData[]) => {
+      return classes.map((box) => {
+        box.dependencies = box.dependencies.map((dependency) => {
           return dependency.substring(dependency.lastIndexOf("/") + 1);
         });
         return box;
       });
     };
-  const newCompressedOutput = shortenDependencies(classData);
-  console.log(newCompressedOutput);
+    const newCompressedOutput = shortenDependencies(classData);
+    console.log(newCompressedOutput);
 
-  return newCompressedOutput;
+    //console.log(classData);
+    const parsedClassData: Box[] = newCompressedOutput.map((box) => ({
+      id: Date.now() * Math.floor(Math.random() * 1000000),
+      name: box.className,
+      dependencies: box.dependencies,
+    }));
+
+    onUpload(parsedClassData);
+
+    return newCompressedOutput;
   };
-
-
 
   const findDependencies = (node: any) => {
     const dependencies: string[] = [];
 
     traverseAST(node, {
       enter(node: any) {
-        if (node.type === 'ImportDeclaration') {
+        if (node.type === "ImportDeclaration") {
           const moduleName = node.source.value;
           dependencies.push(moduleName);
         }
@@ -120,7 +127,7 @@ const Parser = () => {
       for (const key in node) {
         if (Object.prototype.hasOwnProperty.call(node, key)) {
           const child = node[key];
-          if (typeof child === 'object' && child !== null) {
+          if (typeof child === "object" && child !== null) {
             if (Array.isArray(child)) {
               child.forEach((n) => {
                 traverse(n, node);
@@ -160,19 +167,18 @@ const Parser = () => {
 
   const isUserDefinedMethod = (methodName: string) => {
     // Filter condition for user-defined methods
-    return methodName !== 'constructor' && !methodName.startsWith('_');
+    return methodName !== "constructor" && !methodName.startsWith("_");
   };
 
   const isUserDefinedAttribute = (attributeName: string) => {
     // Filter condition for user-defined attributes
-    return !attributeName.startsWith('_');
+    return !attributeName.startsWith("_");
   };
 
   const isUserDefinedDependency = (dependencyName: string) => {
     // Filter condition for user-defined dependencies
-    return !dependencyName.startsWith('react');
+    return !dependencyName.startsWith("react");
   };
-  
 
   return (
     <div>

@@ -4,6 +4,7 @@ import DragDrop from "./DragDrop";
 import FlowMindMap from "./FlowMindMap";
 import ReactCSVDownloader from "./ReactCSVDownloader";
 import Papa from "papaparse";
+import Parser from "./Auth/parser";
 
 export interface Box {
   id: number;
@@ -23,7 +24,12 @@ export default function NewProjectTemplate() {
   const [newDependency, setNewDependency] = useState(""); //variable to allow new dependencies to be added
   const [reRenderCount, setReRenderCount] = useState(0);
 
-  const [data, setData] = useState<Box[]>([]); //parsing
+  const [data, setData] = useState<Box[]>([]); //parsing for ReactCSVUploader
+  const [parserData, setParserData] = useState([]); //for Parser.tsx
+
+  const handleParsedData = (data: any) => {
+    setParserData(data);
+  };
 
   const handleFileUpload = (e: any) => {
     const file = e.target.files[0];
@@ -41,6 +47,11 @@ export default function NewProjectTemplate() {
         setData(parsedData);
       },
     });
+  };
+
+  const handleSetParserData = () => {
+    setBoxes([...boxes, ...parserData]);
+    setParserData([]);
   };
 
   const handleSetData = () => {
@@ -128,6 +139,10 @@ export default function NewProjectTemplate() {
     setReRenderCount((prevCount) => prevCount + 1);
   };
 
+  const handleClearAll = () => {
+    setBoxes([]);
+  };
+
   useEffect(() => {
     setReRenderCount((prevCount) => prevCount + 1);
   }, [boxes]);
@@ -199,6 +214,13 @@ export default function NewProjectTemplate() {
         >
           Increment ReRender Count
         </button>
+        <button
+          className="contained"
+          onClick={handleClearAll}
+          style={{ color: "cyan", backgroundColor: "blue" }}
+        >
+          Clear All
+        </button>
         <div style={{ height: "500px", margin: "50px" }}>
           <FlowMindMap key={reRenderCount} boxes={boxes} />
         </div>
@@ -207,9 +229,12 @@ export default function NewProjectTemplate() {
         </div>
       </div>
       <ReactCSVDownloader key={reRenderCount} boxes={boxes} />
+      <h3>Upload CSV</h3>
       <input type="file" accept=".csv" onChange={handleFileUpload} />
-      {console.log(data.length ? data : null)}
       {data.length ? handleSetData() : null}
+      <h3>Upload JavaScript code</h3>
+      <Parser onUpload={handleParsedData} />
+      {parserData.length ? handleSetParserData() : null}
     </>
   );
 }
