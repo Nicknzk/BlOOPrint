@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import * as acorn from "acorn-loose";
 import { Box } from "../NewProjectTemplate";
 
@@ -17,19 +17,42 @@ interface ClassData {
 
 const Parser = ({ onUpload }: { onUpload: (data: Box[]) => void }) => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
+    const files = event.target.files;
 
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const sourceCode = e.target?.result;
-        const extractedInfo = extractInfo(sourceCode as string);
-        console.log("file read", extractedInfo);
+    if (files && files.length > 0) {
+      const parsedData: Box[] = []; // Array to store parsed data
+
+      const readFile = (file: File) => {
+        return new Promise<void>((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const sourceCode = e.target?.result;
+            const extractedInfo = extractInfo(sourceCode as string);
+            console.log("file read", extractedInfo);
+            parsedData.push(...extractedInfo); // Store parsed data
+            resolve();
+          };
+          reader.onerror = (e) => {
+            console.error("File reading error:", e.target?.error);
+            reject();
+          };
+          reader.readAsText(file);
+        });
       };
-      reader.onerror = (e) => {
-        console.error("File reading error:", e.target?.error);
+
+      const readAllFiles = async () => {
+        for (let i = 0; i < files.length; i++) {
+          try {
+            await readFile(files[i]);
+          } catch (error) {
+            // Handle error if necessary
+          }
+        }
+
+        onUpload(parsedData); // Call onUpload with all the parsed data
       };
-      reader.readAsText(file);
+
+      readAllFiles();
     }
   };
 
@@ -96,9 +119,7 @@ const Parser = ({ onUpload }: { onUpload: (data: Box[]) => void }) => {
       dependencies: box.dependencies,
     }));
 
-    onUpload(parsedClassData);
-
-    return newCompressedOutput;
+    return parsedClassData;
   };
 
   const findDependencies = (node: any) => {
@@ -182,7 +203,7 @@ const Parser = ({ onUpload }: { onUpload: (data: Box[]) => void }) => {
 
   return (
     <div>
-      <input type="file" onChange={handleFileChange} />
+      <input type="file" multiple onChange={handleFileChange} />
     </div>
   );
 };
