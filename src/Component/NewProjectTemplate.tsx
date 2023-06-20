@@ -5,6 +5,7 @@ import FlowMindMap from "./FlowMindMap";
 import ReactCSVDownloader from "./ReactCSVDownloader";
 import Papa from "papaparse";
 import Parser from "./Auth/parser";
+import { Link } from "react-router-dom";
 
 export interface Box {
   id: number;
@@ -235,6 +236,12 @@ export default function NewProjectTemplate() {
       <h3>Upload JavaScript code</h3>
       <Parser onUpload={handleParsedData} />
       {parserData.length ? handleSetParserData() : null}
+
+      <nav>
+        <Link className="BlankPage" to={"/BlankPage"}>
+          Go To BlankPage
+        </Link>
+      </nav>
     </>
   );
 }

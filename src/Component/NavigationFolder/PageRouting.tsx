@@ -5,6 +5,7 @@ import SignUp from "../Auth/SignUp";
 import { Route, Routes, Navigate } from "react-router-dom";
 import NewProjectTemplate from "../NewProjectTemplate";
 import ProjectTemplate from "../ProjectTemplate";
+import BlankPage from "../BlankPage";
 
 export default function PageRouting({ isAuthenticated }: any) {
   return (
@@ -28,7 +29,14 @@ export default function PageRouting({ isAuthenticated }: any) {
               </div>
             }
           />
-
+          <Route
+            path="/BlankPage"
+            element={
+              <div className="w-100" style={{ maxWidth: "400px" }}>
+                <BlankPage />
+              </div>
+            }
+          />
           <Route
             path="/NewProjectTemplate"
             element={
