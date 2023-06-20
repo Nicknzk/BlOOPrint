@@ -5,7 +5,7 @@ import SignUp from "../Auth/SignUp";
 import { Route, Routes, Navigate } from "react-router-dom";
 import NewProjectTemplate from "../NewProjectTemplate";
 import ProjectTemplate from "../ProjectTemplate";
-import BlankPage from "../blankPage";
+import BlankPage from "../BlankPage";
 
 export default function PageRouting({ isAuthenticated }: any) {
   return (
