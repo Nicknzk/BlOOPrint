@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import * as acorn from "acorn-loose";
 import { Box } from "../NewProjectTemplate";
 

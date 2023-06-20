@@ -5,6 +5,7 @@ import FlowMindMap from "./FlowMindMap";
 import ReactCSVDownloader from "./ReactCSVDownloader";
 import Papa from "papaparse";
 import Parser from "./Auth/parser";
+import { Link } from "react-router-dom";
 
 export interface Box {
   id: number;
@@ -31,36 +32,22 @@ export default function NewProjectTemplate() {
     setParserData(data);
   };
 
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-
-    if (files && files.length > 0) {
-      const parsedDataArray: Box[] = [];
-
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-
-        Papa.parse(file, {
-          header: true,
-          complete: (results: Papa.ParseResult<CSVRow>) => {
-            const parsedData = results.data.map((row) => {
-              const dependencies = row.dependencies.split(","); // Split dependencies by commas
-              return {
-                id: row.id,
-                name: row.name,
-                dependencies: dependencies,
-              };
-            });
-
-            parsedDataArray.push(...parsedData);
-
-            if (parsedDataArray.length === files.length) {
-              onUpload(parsedDataArray);
-            }
-          },
+  const handleFileUpload = (e: any) => {
+    const file = e.target.files[0];
+    Papa.parse(file, {
+      header: true,
+      complete: (results: Papa.ParseResult<CSVRow>) => {
+        const parsedData = results.data.map((row) => {
+          const dependencies = row.dependencies.split(","); // Split dependencies by commas
+          return {
+            id: row.id,
+            name: row.name,
+            dependencies: dependencies,
+          };
         });
-      }
-    }
+        setData(parsedData);
+      },
+    });
   };
 
   const handleSetParserData = () => {
@@ -249,6 +236,12 @@ export default function NewProjectTemplate() {
       <h3>Upload JavaScript code</h3>
       <Parser onUpload={handleParsedData} />
       {parserData.length ? handleSetParserData() : null}
+
+      <nav>
+        <Link className="BlankPage" to={"/BlankPage"}>
+          Go To BlankPage
+        </Link>
+      </nav>
     </>
   );
 }
