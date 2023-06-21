@@ -11,6 +11,8 @@ export interface Box {
   id: number;
   name: string;
   dependencies: string[];
+  methods: string[];
+  attributes:string[];
 }
 
 interface CSVRow {
@@ -19,12 +21,12 @@ interface CSVRow {
   dependencies: string;
 }
 
+
 export default function NewProjectTemplate() {
   const [boxes, setBoxes] = useState<Box[]>([]); //array of boxes
   const [newBoxName, setNewBoxName] = useState(""); //variable to allow names to be added
   const [newDependency, setNewDependency] = useState(""); //variable to allow new dependencies to be added
   const [reRenderCount, setReRenderCount] = useState(0);
-
   const [data, setData] = useState<Box[]>([]); //parsing for ReactCSVUploader
   const [parserData, setParserData] = useState([]); //for Parser.tsx
 
@@ -43,6 +45,8 @@ export default function NewProjectTemplate() {
             id: row.id,
             name: row.name,
             dependencies: dependencies,
+            methods: [],
+            attributes: []
           };
         });
         setData(parsedData);
@@ -72,6 +76,8 @@ export default function NewProjectTemplate() {
         id: Date.now() * Math.floor(Math.random() * 1000000), //unique number generated from the system time
         name: newBoxName,
         dependencies: [], //box is initialised without dependancies first
+        methods: [],
+        attributes: []
       };
       setBoxes([...boxes, newBox]); //box is added to the array of boxes
       setNewBoxName(""); //empty out the newBoxName variable
@@ -238,7 +244,13 @@ export default function NewProjectTemplate() {
       {parserData.length ? handleSetParserData() : null}
 
       <nav>
-        <Link className="BlankPage" to={"/BlankPage"}>
+      <Link
+          className="ProjectDetails"
+          to={{
+            pathname: "/ProjectDetails",
+            search: `?boxes=${encodeURIComponent(JSON.stringify(boxes))}`, // Pass boxes as a search parameter
+          }}
+        >
           Go To BlankPage
         </Link>
       </nav>

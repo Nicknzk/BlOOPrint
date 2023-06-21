@@ -4,6 +4,7 @@ import App from "./App.tsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material";//removed colors import as it is not used
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const theme = createTheme({
