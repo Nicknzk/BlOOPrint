@@ -116,6 +116,8 @@ const Parser = ({ onUpload }: { onUpload: (data: Box[]) => void }) => {
       id: Date.now() * Math.floor(Math.random() * 1000000),
       name: box.className,
       dependencies: box.dependencies,
+      methods:[],
+      attributes:[],
     }));
 
     return parsedClassData;

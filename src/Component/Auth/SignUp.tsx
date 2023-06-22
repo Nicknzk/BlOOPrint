@@ -6,7 +6,9 @@ import {
   sendEmailVerification,
 } from "firebase/auth";
 import auth from "../../firebase";
-import "../../CSS-Folder/Auth.css";
+import thumbsup from "../Images/sign in.jpg";
+import thumbsdown from "../Images/sign up.jpg";
+
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -58,6 +60,11 @@ export default function SignUp() {
 
   return (
     <>
+     <img
+      src={thumbsdown}
+      alt="thumbsdown"
+      style={{ width: '200px', height: 'auto' }}
+    />
       <div className="sign-in-container log-in-box">
         <Card>
           <Card.Body>

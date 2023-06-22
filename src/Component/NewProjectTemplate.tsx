@@ -191,7 +191,7 @@ export default function NewProjectTemplate() {
                 placeholder="Enter dependency"
               />
               <button onClick={() => handleAddDependency(box.id)}>
-                Add Dependency
+                Add
               </button>
             </div>
             {box.dependencies.map((dependency, index) => (

@@ -1,5 +1,5 @@
-import logo from "../Images/Logo.png";
 
+/*
 export default function Icon() {
   return (
     <>
@@ -7,3 +7,5 @@ export default function Icon() {
     </>
   );
 }
+
+*/

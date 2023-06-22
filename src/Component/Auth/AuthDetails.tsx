@@ -2,8 +2,8 @@ import { onAuthStateChanged, signOut, User } from "firebase/auth";
 import { useEffect, useState } from "react";
 import auth from "../../firebase";
 import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
-import "../../CSS-Folder/Auth.css";
+
+
 
 interface AuthDetailsProps {
   onAuthStatusChange?: (choice: boolean) => void;
@@ -45,7 +45,7 @@ export default function AuthDetails({ onAuthStatusChange }: AuthDetailsProps) {
 
   return (
     <div>
-      {authUser ? ( //if user is logged in... else remain as Sign Out
+      {authUser && ( //if user is logged in... else remain as Sign Out
         verifiedUser ? (
           <>
             <p>{`Signed In as ${authUser.email}`}</p>
@@ -54,9 +54,9 @@ export default function AuthDetails({ onAuthStatusChange }: AuthDetailsProps) {
                 Go To HomePage
               </Link>
             </nav>
-            <Button onClick={userSignOut} className="auth-page-button">
+            <button onClick={userSignOut} className="auth-page-button">
               Sign Out
-            </Button>
+            </button>
           </>
         ) : (
           <div className="email-verification-message">
@@ -64,9 +64,7 @@ export default function AuthDetails({ onAuthStatusChange }: AuthDetailsProps) {
             <p>Do check spam / junk folder</p>
           </div>
         )
-      ) : (
-        <p style={{ fontSize: 20 }}>Log In to access BLOOPrint</p>
-      )}
+      ) }
     </div>
   );
 }

@@ -1,8 +1,5 @@
 import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import "../../CSS-Folder/HomePage.css";
-import mindmap from "../Images/MindMap.webp";
-import buttonvector from "../Images/button-plus-icon-vector-better.png";
 
 export default function HomePage() {
   return (
@@ -13,7 +10,7 @@ export default function HomePage() {
         <nav>
           <Link to={"/NewProjectTemplate"}>
             <img
-              src={buttonvector}
+              //src={}
               alt="Picture for new project"
               className="newProjectPicture"
             />
@@ -25,7 +22,7 @@ export default function HomePage() {
       <nav>
         <Link to={"/ProjectTemplate"}>
           <img
-            src={mindmap}
+            //src={}
             alt="Picture for previously made project"
             className="projectPicture"
           />
