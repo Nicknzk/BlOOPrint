@@ -8,6 +8,7 @@ import {
 import auth from "../../firebase";
 import thumbsup from "../Images/sign in.jpg";
 import thumbsdown from "../Images/sign up.jpg";
+import { Typography } from "@mui/material";
 
 
 export default function SignUp() {
@@ -63,10 +64,18 @@ export default function SignUp() {
      <img
       src={thumbsdown}
       alt="thumbsdown"
-      style={{ width: '200px', height: 'auto' }}
+      style={{
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+        zIndex: '-1'
+      }}
     />
       <div className="sign-in-container log-in-box">
-        <Card>
+        <Card style={{ width: '400px', marginRight: '0', marginLeft: 'auto' }}>
           <Card.Body>
             <h2 className="text-center mb-4">Create Account</h2>
             <Form onSubmit={signUp}>
@@ -104,6 +113,9 @@ export default function SignUp() {
         </div>
       </div>
       <div>{alertShow.length > 0 && <Alert>{alertShow}</Alert>}</div>
+      <nav>
+            <Link to={"../"}><Typography variant= "h3">Back to Landing Page</Typography></Link>
+          </nav>
     </>
   );
 }

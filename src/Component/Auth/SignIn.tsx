@@ -4,6 +4,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import auth from "../../firebase";
 import thumbsup from "../Images/sign in.jpg";
+import { Typography } from "@mui/material";
 
 
 export default function SignIn() {
@@ -23,17 +24,20 @@ export default function SignIn() {
 
   return (
     <>
-     <img
-      src={thumbsup}
-      alt="thumbup"
-      style={{ position: 'fixed',
-        top: '0',
-        left: '0',
-        width: '100%',
-        height: '100%',
-        object-fit: 'cover',
-        z-index: '-1' }}
-    />
+<img
+  src={thumbsup}
+  alt="thumbup"
+  style={{
+    position: 'fixed',
+    top: '0',
+    left: '0',
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    zIndex: '-1'
+  }}
+/>
+
       <div className="log-in-box">
         <div className="sign-in-container">
           <Card>
@@ -72,6 +76,9 @@ export default function SignIn() {
           </nav>
         </div>
       </div>
+      <nav>
+            <Link to={"../"}><Typography variant= "h3">Back to Landing Page</Typography></Link>
+          </nav>
     </>
   );
 }
