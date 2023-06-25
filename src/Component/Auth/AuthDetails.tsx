@@ -2,6 +2,7 @@ import { onAuthStateChanged, signOut, User } from "firebase/auth";
 import { useEffect, useState } from "react";
 import auth from "../../firebase";
 import { Link } from "react-router-dom";
+import { Button, Typography } from "@mui/material"
 
 
 
@@ -48,15 +49,22 @@ export default function AuthDetails({ onAuthStatusChange }: AuthDetailsProps) {
       {authUser && ( //if user is logged in... else remain as Sign Out
         verifiedUser ? (
           <>
-            <p>{`Signed In as ${authUser.email}`}</p>
             <nav>
+              <Button variant="contained" style={{backgroundColor:'ECA400', color:"black", textDecoration:"none" }}>
               <Link className="auth-page-button" to={"/HomePage"}>
-                Go To HomePage
+                <Typography style={{textDecoration:"none", color:"white", textTransform:"none"}}>
+                Home
+                </Typography>
               </Link>
-            </nav>
-            <button onClick={userSignOut} className="auth-page-button">
+              </Button>
+            </nav>          
+            <p>{`Signed In as ${authUser.email}`}</p>
+
+            <div style={{ position: 'fixed', top: 0, right: 0, margin: '16px' }}>
+            <Button variant="contained" onClick={userSignOut} className="auth-page-button" style={{backgroundColor:"red", color:'black' }}>
               Sign Out
-            </button>
+            </Button>
+            </div>
           </>
         ) : (
           <div className="email-verification-message">

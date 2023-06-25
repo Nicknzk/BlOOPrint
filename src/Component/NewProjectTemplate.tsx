@@ -163,6 +163,7 @@ export default function NewProjectTemplate() {
 
   return (
     <>
+    <div> 
       <Typography variant="h2">New Project Page</Typography>
       <div className="Container">
         <div>
@@ -257,6 +258,7 @@ export default function NewProjectTemplate() {
           Go To BlankPage
         </Link>
       </nav>
+      </div>
     </>
   );
 }

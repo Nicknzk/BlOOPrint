@@ -66,19 +66,26 @@ export default function SignIn() {
                   Log In
                 </Button>
               </Form>
-            </Card.Body>
-          </Card>
-        </div>
-        <div className="w-100 text-center mt-2">
+              <div className="w-100 text-center mt-2">
           Don't have an account?
           <nav>
             <Link to={"/SignUp"}>Sign Up</Link>
           </nav>
         </div>
+            </Card.Body>
+          </Card>
+        </div>
+  
       </div>
+      <Button variant="contained" style={{
+    backgroundColor: "#ECA400",
+    color: "white",
+    textTransform: "none",
+    borderRadius: "20px",}}>
       <nav>
-            <Link to={"../"}><Typography variant= "h3">Back to Landing Page</Typography></Link>
+            <Link to={"../"}><Typography variant= "h4" style={{color:"black"}}>Back to Landing Page</Typography></Link>
           </nav>
+          </Button>
     </>
   );
 }
