@@ -50,3 +50,12 @@ Features implemented:
 - Easily visualize and explore entities and their dependencies in a simplified format.
 - Gain a clear understanding of the relationships between entities for efficient analysis and decision-making.
 
+Testing moving forward:
+
+- Usability testing with potential users with high-fidelity artefacts (e.g. working prototype)
+
+- Survey of potential users
+
+- System testing
+
+- User testing
