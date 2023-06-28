@@ -1,7 +1,7 @@
 import { CSVLink } from "react-csv";
 import { Box } from "./NewProjectTemplate";
 import { useState } from "react";
-import "../CSS-Folder/ReactCSV.css";
+
 
 export default function ReactCSVDownloader({ boxes }: { boxes: Box[] }) {
   const arrayBoxes = boxes.map((box) => [box.id, box.name, box.dependencies]);

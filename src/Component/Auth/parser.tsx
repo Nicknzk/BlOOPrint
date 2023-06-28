@@ -13,46 +13,37 @@ interface ClassData {
   attributes: string[];
   dependencies: string[];
 }
+const parseFiles = (files: File[], onUpload: (data: Box[]) => void) => {
+  const parsedData: Box[] = []; // Array to store parsed data
 
-const Parser = ({ onUpload }: { onUpload: (data: Box[]) => void }) => {
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-
-    if (files && files.length > 0) {
-      const parsedData: Box[] = []; // Array to store parsed data
-
-      const readFile = (file: File) => {
-        return new Promise<void>((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            const sourceCode = e.target?.result;
-            const extractedInfo = extractInfo(sourceCode as string);
-            console.log("file read", extractedInfo);
-            parsedData.push(...extractedInfo); // Store parsed data
-            resolve();
-          };
-          reader.onerror = (e) => {
-            console.error("File reading error:", e.target?.error);
-            reject();
-          };
-          reader.readAsText(file);
-        });
+  const readFile = (file: File) => {
+    return new Promise<void>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const sourceCode = e.target?.result;
+        const extractedInfo = extractInfo(sourceCode as string);
+        console.log("file read", extractedInfo);
+        parsedData.push(...extractedInfo); // Store parsed data
+        resolve();
       };
-
-      const readAllFiles = async () => {
-        for (let i = 0; i < files.length; i++) {
-          try {
-            await readFile(files[i]);
-          } catch (error) {
-            // Handle error if necessary
-          }
-        }
-
-        onUpload(parsedData); // Call onUpload with all the parsed data
+      reader.onerror = (e) => {
+        console.error("File reading error:", e.target?.error);
+        reject();
       };
+      reader.readAsText(file);
+    });
+  };
 
-      readAllFiles();
+  const readAllFiles = async () => {
+    for (let i = 0; i < files.length; i++) {
+      try {
+        await readFile(files[i]);
+      } catch (error) {
+        // Handle error if necessary
+      }
     }
+
+    onUpload(parsedData); // Call onUpload with all the parsed data
   };
 
   const extractInfo = (sourceCode: string) => {
@@ -116,6 +107,8 @@ const Parser = ({ onUpload }: { onUpload: (data: Box[]) => void }) => {
       id: Date.now() * Math.floor(Math.random() * 1000000),
       name: box.className,
       dependencies: box.dependencies,
+      methods: [],
+      attributes: [],
     }));
 
     return parsedClassData;
@@ -200,11 +193,7 @@ const Parser = ({ onUpload }: { onUpload: (data: Box[]) => void }) => {
     return !dependencyName.startsWith("react");
   };
 
-  return (
-    <div>
-      <input type="file" multiple onChange={handleFileChange} />
-    </div>
-  );
+  readAllFiles();
 };
 
-export default Parser;
+export default parseFiles;

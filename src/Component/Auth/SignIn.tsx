@@ -3,7 +3,9 @@ import { Form, Card, Button } from "react-bootstrap";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import auth from "../../firebase";
-import "../../CSS-Folder/Auth.css";
+import thumbsup from "../Images/sign in.jpg";
+import { Typography } from "@mui/material";
+
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -22,6 +24,20 @@ export default function SignIn() {
 
   return (
     <>
+<img
+  src={thumbsup}
+  alt="thumbup"
+  style={{
+    position: 'fixed',
+    top: '0',
+    left: '0',
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    zIndex: '-1'
+  }}
+/>
+
       <div className="log-in-box">
         <div className="sign-in-container">
           <Card>
@@ -50,16 +66,26 @@ export default function SignIn() {
                   Log In
                 </Button>
               </Form>
-            </Card.Body>
-          </Card>
-        </div>
-        <div className="w-100 text-center mt-2">
+              <div className="w-100 text-center mt-2">
           Don't have an account?
           <nav>
             <Link to={"/SignUp"}>Sign Up</Link>
           </nav>
         </div>
+            </Card.Body>
+          </Card>
+        </div>
+  
       </div>
+      <Button variant="contained" style={{
+    backgroundColor: "#ECA400",
+    color: "white",
+    textTransform: "none",
+    borderRadius: "20px",}}>
+      <nav>
+            <Link to={"../"}><Typography variant= "h4" style={{color:"black"}}>Back to Landing Page</Typography></Link>
+          </nav>
+          </Button>
     </>
   );
 }

@@ -2,8 +2,7 @@ import { onAuthStateChanged, signOut, User } from "firebase/auth";
 import { useEffect, useState } from "react";
 import auth from "../../firebase";
 import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
-import "../../CSS-Folder/Auth.css";
+import { Button, Typography } from "@mui/material";
 
 interface AuthDetailsProps {
   onAuthStatusChange?: (choice: boolean) => void;
@@ -45,28 +44,52 @@ export default function AuthDetails({ onAuthStatusChange }: AuthDetailsProps) {
 
   return (
     <div>
-      {authUser ? ( //if user is logged in... else remain as Sign Out
-        verifiedUser ? (
+      {authUser && //if user is logged in... else remain as Sign Out
+        (verifiedUser ? (
           <>
-            <p>{`Signed In as ${authUser.email}`}</p>
             <nav>
-              <Link className="auth-page-button" to={"/HomePage"}>
-                Go To HomePage
-              </Link>
+              <Button
+                variant="contained"
+                style={{
+                  backgroundColor: "ECA400",
+                  color: "black",
+                  textDecoration: "none",
+                }}
+              >
+                <Link className="auth-page-button" to={"/HomePage"}>
+                  <Typography
+                    style={{
+                      textDecoration: "none",
+                      color: "white",
+                      textTransform: "none",
+                    }}
+                  >
+                    Home
+                  </Typography>
+                </Link>
+              </Button>
             </nav>
-            <Button onClick={userSignOut} className="auth-page-button">
-              Sign Out
-            </Button>
+            <p>{`Signed In as ${authUser.email}`}</p>
+
+            <div
+              style={{ position: "fixed", top: 0, right: 0, margin: "16px" }}
+            >
+              <Button
+                variant="contained"
+                onClick={userSignOut}
+                className="auth-page-button"
+                style={{ backgroundColor: "red", color: "black" }}
+              >
+                Sign Out
+              </Button>
+            </div>
           </>
         ) : (
           <div className="email-verification-message">
             <p style={{ fontSize: 20 }}>Email Verification is not complete.</p>
             <p>Do check spam / junk folder</p>
           </div>
-        )
-      ) : (
-        <p style={{ fontSize: 20 }}>Log In to access BLOOPrint</p>
-      )}
+        ))}
     </div>
   );
 }

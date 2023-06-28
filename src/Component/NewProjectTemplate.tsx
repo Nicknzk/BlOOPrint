@@ -4,7 +4,7 @@ import DragDrop from "./DragDrop";
 import FlowMindMap from "./FlowMindMap";
 import ReactCSVDownloader from "./ReactCSVDownloader";
 import Papa from "papaparse";
-import Parser from "./Auth/parser";
+import parseFiles from "./Auth/parser";
 import { Link } from "react-router-dom";
 
 export interface Box {
@@ -12,7 +12,7 @@ export interface Box {
   name: string;
   dependencies: string[];
   methods: string[];
-  attributes:string[];
+  attributes: string[];
 }
 
 interface CSVRow {
@@ -20,7 +20,6 @@ interface CSVRow {
   name: string;
   dependencies: string;
 }
-
 
 export default function NewProjectTemplate() {
   const [boxes, setBoxes] = useState<Box[]>([]); //array of boxes
@@ -34,24 +33,32 @@ export default function NewProjectTemplate() {
     setParserData(data);
   };
 
-  const handleFileUpload = (e: any) => {
-    const file = e.target.files[0];
-    Papa.parse(file, {
-      header: true,
-      complete: (results: Papa.ParseResult<CSVRow>) => {
-        const parsedData = results.data.map((row) => {
-          const dependencies = row.dependencies.split(","); // Split dependencies by commas
-          return {
-            id: row.id,
-            name: row.name,
-            dependencies: dependencies,
-            methods: [],
-            attributes: []
-          };
-        });
-        setData(parsedData);
-      },
-    });
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files ? e.target.files[0] : null; // Add null check for e.target.files
+    const fileExtension = file ? file.name.split(".").pop() : null; // Add null check for file
+
+    const multipleFiles = e.target.files ? Array.from(e.target.files) : [];
+
+    if (fileExtension === "csv") {
+      Papa.parse(file as File, {
+        header: true,
+        complete: (results: Papa.ParseResult<CSVRow>) => {
+          const parsedData = results.data.map((row) => {
+            const dependencies = row.dependencies.split(",");
+            return {
+              id: row.id,
+              name: row.name,
+              dependencies: dependencies,
+              methods: [],
+              attributes: [],
+            };
+          });
+          setData(parsedData);
+        },
+      });
+    } else {
+      parseFiles(multipleFiles, handleParsedData); // Call your parseFiles function with the file and handleParsedData callback
+    }
   };
 
   const handleSetParserData = () => {
@@ -77,7 +84,7 @@ export default function NewProjectTemplate() {
         name: newBoxName,
         dependencies: [], //box is initialised without dependancies first
         methods: [],
-        attributes: []
+        attributes: [],
       };
       setBoxes([...boxes, newBox]); //box is added to the array of boxes
       setNewBoxName(""); //empty out the newBoxName variable
@@ -156,104 +163,102 @@ export default function NewProjectTemplate() {
 
   return (
     <>
-      <Typography variant="h2">New Project Page</Typography>
-      <div className="Container">
-        <div>
-          <input //this is the Name text box
-            type="text"
-            value={newBoxName}
-            onChange={handleNewBoxNameChange}
-            placeholder="Enter box name"
-          />
-          <button onClick={handleAddBox}>Add Box</button>
-        </div>
-        {boxes.map((box) => (
-          <div key={box.id} className="Box">
-            <input
+      <div>
+        <Typography variant="h2">New Project Page</Typography>
+        <div className="Container">
+          <div>
+            <input //this is the Name text box
               type="text"
-              value={box.name}
-              onChange={(event) => {
-                const updatedBoxes = boxes.map((b) => {
-                  //the b variable simply refers to an arbitrary box
-                  if (b.id === box.id) {
-                    return { ...b, name: event.target.value };
-                  }
-                  return b;
-                });
-                setBoxes(updatedBoxes); //empty out...
-              }}
+              value={newBoxName}
+              onChange={handleNewBoxNameChange}
+              placeholder="Enter box name"
             />
-            <div>
+            <button onClick={handleAddBox}>Add Box</button>
+          </div>
+          {boxes.map((box) => (
+            <div key={box.id} className="Box">
               <input
                 type="text"
-                value={newDependency}
-                onChange={(event) => setNewDependency(event.target.value)}
-                placeholder="Enter dependency"
+                value={box.name}
+                onChange={(event) => {
+                  const updatedBoxes = boxes.map((b) => {
+                    //the b variable simply refers to an arbitrary box
+                    if (b.id === box.id) {
+                      return { ...b, name: event.target.value };
+                    }
+                    return b;
+                  });
+                  setBoxes(updatedBoxes); //empty out...
+                }}
               />
-              <button onClick={() => handleAddDependency(box.id)}>
-                Add Dependency
-              </button>
-            </div>
-            {box.dependencies.map((dependency, index) => (
-              <div key={dependency}>
+              <div>
                 <input
                   type="text"
-                  value={dependency}
-                  onChange={(event) =>
-                    handleDependencyChange(box.id, index, event.target.value)
-                  }
+                  value={newDependency}
+                  onChange={(event) => setNewDependency(event.target.value)}
+                  placeholder="Enter dependency"
                 />
-                <button
-                  onClick={() => handleDeleteDependency(box.id, dependency)}
-                >
-                  Delete Dependency
-                </button>
+                <button onClick={() => handleAddDependency(box.id)}>Add</button>
               </div>
-            ))}
-            <button onClick={() => handleDeleteBox(box.id)}>Delete</button>
+              {box.dependencies.map((dependency, index) => (
+                <div key={dependency}>
+                  <input
+                    type="text"
+                    value={dependency}
+                    onChange={(event) =>
+                      handleDependencyChange(box.id, index, event.target.value)
+                    }
+                  />
+                  <button
+                    onClick={() => handleDeleteDependency(box.id, dependency)}
+                  >
+                    Delete Dependency
+                  </button>
+                </div>
+              ))}
+              <button onClick={() => handleDeleteBox(box.id)}>Delete</button>
+            </div>
+          ))}
+          <button
+            className="contained"
+            onClick={handleIncrementReRenderCount}
+            style={{ color: "cyan", backgroundColor: "blue" }}
+            //this is incase it doesnt rerender
+          >
+            Increment ReRender Count
+          </button>
+          <button
+            className="contained"
+            onClick={handleClearAll}
+            style={{ color: "cyan", backgroundColor: "blue" }}
+          >
+            Clear All
+          </button>
+          <div style={{ height: "500px", margin: "50px" }}>
+            <FlowMindMap key={reRenderCount} boxes={boxes} />
           </div>
-        ))}
-        <button
-          className="contained"
-          onClick={handleIncrementReRenderCount}
-          style={{ color: "cyan", backgroundColor: "blue" }}
-          //this is incase it doesnt rerender
-        >
-          Increment ReRender Count
-        </button>
-        <button
-          className="contained"
-          onClick={handleClearAll}
-          style={{ color: "cyan", backgroundColor: "blue" }}
-        >
-          Clear All
-        </button>
-        <div style={{ height: "500px", margin: "50px" }}>
-          <FlowMindMap key={reRenderCount} boxes={boxes} />
+          <div>
+            <DragDrop />
+          </div>
         </div>
-        <div>
-          <DragDrop />
-        </div>
-      </div>
-      <ReactCSVDownloader key={reRenderCount} boxes={boxes} />
-      <h3>Upload CSV</h3>
-      <input type="file" accept=".csv" onChange={handleFileUpload} />
-      {data.length ? handleSetData() : null}
-      <h3>Upload JavaScript code</h3>
-      <Parser onUpload={handleParsedData} />
-      {parserData.length ? handleSetParserData() : null}
+        <ReactCSVDownloader key={reRenderCount} boxes={boxes} />
+        <h3>Upload CSV or JavaScript code</h3>
+        <input type="file" multiple onChange={handleFileUpload} />
+        {data.length > 0 && <>{handleSetData()}</>}
+        {parserData.length > 0 && <>{handleSetParserData()}</>}
 
-      <nav>
-      <Link
-          className="ProjectDetails"
-          to={{
-            pathname: "/ProjectDetails",
-            search: `?boxes=${encodeURIComponent(JSON.stringify(boxes))}`, // Pass boxes as a search parameter
-          }}
-        >
-          Go To BlankPage
-        </Link>
-      </nav>
+        <nav>
+          <Link
+            className="ProjectDetails"
+            to={{
+              pathname: "/ProjectDetails",
+              search: `?boxes=${encodeURIComponent(JSON.stringify(boxes))}`, // Pass boxes as a search parameter
+            }}
+          >
+            Go To BlankPage
+          </Link>
+        </nav>
+      </div>
     </>
   );
 }
