@@ -76,10 +76,14 @@ export default function SignUp() {
       <div className="sign-in-container log-in-box">
         <Card style={{ width: "400px", marginRight: "0", marginLeft: "auto" }}>
           <Card.Body>
-            <h2 className="text-center mb-4">Create Account</h2>
+            <Typography variant="h4" className="text-center mb-4">
+              Create Account
+            </Typography>
             <Form onSubmit={signUp}>
               <Form.Group className="text-center">
-                <Form.Label>Email: </Form.Label>
+                <Form.Label>
+                  <Typography variant="h5">Email: </Typography>
+                </Form.Label>
                 <input
                   type="email"
                   placeholder="Enter your email"
@@ -89,7 +93,9 @@ export default function SignUp() {
                 ></input>
               </Form.Group>
               <Form.Group className="text-center">
-                <Form.Label>Password: </Form.Label>
+                <Form.Label>
+                  <Typography variant="h5">Password: </Typography>
+                </Form.Label>
                 <input
                   type="password"
                   placeholder="Enter your password"
@@ -99,13 +105,15 @@ export default function SignUp() {
                 ></input>
               </Form.Group>
               <Button className="w-100" type="submit">
-                Sign Up
+                <Typography variant="h5">Sign Up</Typography>
               </Button>
             </Form>
             <div className="w-100 text-center mt-2">
-              already have an account?
+              <Typography variant="h5">already have an account?</Typography>
               <nav>
-                <Link to={"/SignIn"}>Sign In</Link>
+                <Link to={"/SignIn"}>
+                  <Typography variant="h5">Sign In</Typography>
+                </Link>
               </nav>
             </div>
           </Card.Body>

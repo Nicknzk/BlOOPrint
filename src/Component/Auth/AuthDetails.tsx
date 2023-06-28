@@ -69,7 +69,7 @@ export default function AuthDetails({ onAuthStatusChange }: AuthDetailsProps) {
                 </Link>
               </Button>
             </nav>
-            <p>{`Signed In as ${authUser.email}`}</p>
+            <Typography variant="h6">{`Signed In as ${authUser.email}`}</Typography>
 
             <div
               style={{ position: "fixed", top: 0, right: 0, margin: "16px" }}
@@ -80,14 +80,16 @@ export default function AuthDetails({ onAuthStatusChange }: AuthDetailsProps) {
                 className="auth-page-button"
                 style={{ backgroundColor: "red", color: "black" }}
               >
-                Sign Out
+                <Typography variant="h6">Sign Out</Typography>
               </Button>
             </div>
           </>
         ) : (
           <div className="email-verification-message">
-            <p style={{ fontSize: 20 }}>Email Verification is not complete.</p>
-            <p>Do check spam / junk folder</p>
+            <Typography variant="h5" style={{ fontSize: 20 }}>
+              Email Verification is not complete.
+            </Typography>
+            <Typography variant="h5">Do check spam / junk folder</Typography>
           </div>
         ))}
     </div>

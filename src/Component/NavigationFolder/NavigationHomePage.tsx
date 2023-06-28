@@ -1,4 +1,4 @@
-import { AppBar, Toolbar } from "@mui/material";
+import { AppBar, Toolbar, Typography } from "@mui/material";
 import { ReactNode } from "react";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 
@@ -11,11 +11,15 @@ export default function NavigationHomePage() {
             <nav>
               <ul className="navigation-home-page">
                 <li>
-                  <Link to="/HomePage">HomePage</Link>
+                  <Link to="/HomePage">
+                    <Typography variant="h2">HomePage</Typography>
+                  </Link>
                 </li>
-                <CustomLink to="/ProjectTemplate">Project Template</CustomLink>
+                <CustomLink to="/ProjectTemplate">
+                  <Typography variant="h3">Project Template</Typography>
+                </CustomLink>
                 <CustomLink to="/NewProjectTemplate">
-                  New Project Template
+                  <Typography variant="h3">New Project Template </Typography>
                 </CustomLink>
               </ul>
             </nav>

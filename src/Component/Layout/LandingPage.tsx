@@ -51,6 +51,7 @@ export default function LandingPage() {
             style={{
               backgroundColor: "rgba(128, 128, 128, 0.5)",
               color: "white",
+              padding: "20px",
             }}
           >
             <Toolbar variant="dense">
@@ -68,7 +69,7 @@ export default function LandingPage() {
                       color: "white",
                     }}
                   >
-                    About Us
+                    <Typography variant="h5">About Us</Typography>
                   </span>
                 </ListItem>
                 <ListItem
@@ -83,7 +84,7 @@ export default function LandingPage() {
                       color: "white",
                     }}
                   >
-                    How it Works
+                    <Typography variant="h5">How it Works </Typography>
                   </span>
                 </ListItem>
                 <ListItem
@@ -96,7 +97,7 @@ export default function LandingPage() {
                   >
                     <CustomLink to="/SignIn">
                       <Typography
-                        variant="body1"
+                        variant="h5"
                         style={{ color: "white", textDecoration: "none" }}
                       >
                         Login
@@ -113,12 +114,22 @@ export default function LandingPage() {
                     style={{ textTransform: "none", textDecoration: "none" }}
                   >
                     <CustomLink to="/SignUp">
-                      <Typography
-                        variant="body1"
-                        style={{ color: "white", textDecoration: "none" }}
+                      <span
+                        style={{
+                          display: "flex",
+                          marginRight: "16px",
+                          whiteSpace: "nowrap",
+                          textDecoration: "none",
+                          color: "white",
+                        }}
                       >
-                        Get Started
-                      </Typography>
+                        <Typography
+                          variant="h5"
+                          style={{ color: "white", textDecoration: "none" }}
+                        >
+                          Get Started
+                        </Typography>
+                      </span>
                     </CustomLink>
                   </Button>
                 </ListItem>

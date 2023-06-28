@@ -149,10 +149,6 @@ export default function NewProjectTemplate() {
     setBoxes(updatedBoxes); //empty out...
   };
 
-  const handleIncrementReRenderCount = () => {
-    setReRenderCount((prevCount) => prevCount + 1);
-  };
-
   const handleClearAll = () => {
     setBoxes([]);
   };
@@ -165,68 +161,10 @@ export default function NewProjectTemplate() {
     <>
       <div>
         <Typography variant="h2">New Project Page</Typography>
-        <div className="Container">
-          <div>
-            <input //this is the Name text box
-              type="text"
-              value={newBoxName}
-              onChange={handleNewBoxNameChange}
-              placeholder="Enter box name"
-            />
-            <button onClick={handleAddBox}>Add Box</button>
+        <div>
+          <div style={{ height: "500px", margin: "50px" }}>
+            <FlowMindMap key={reRenderCount} boxes={boxes} />
           </div>
-          {boxes.map((box) => (
-            <div key={box.id} className="Box">
-              <input
-                type="text"
-                value={box.name}
-                onChange={(event) => {
-                  const updatedBoxes = boxes.map((b) => {
-                    //the b variable simply refers to an arbitrary box
-                    if (b.id === box.id) {
-                      return { ...b, name: event.target.value };
-                    }
-                    return b;
-                  });
-                  setBoxes(updatedBoxes); //empty out...
-                }}
-              />
-              <div>
-                <input
-                  type="text"
-                  value={newDependency}
-                  onChange={(event) => setNewDependency(event.target.value)}
-                  placeholder="Enter dependency"
-                />
-                <button onClick={() => handleAddDependency(box.id)}>Add</button>
-              </div>
-              {box.dependencies.map((dependency, index) => (
-                <div key={dependency}>
-                  <input
-                    type="text"
-                    value={dependency}
-                    onChange={(event) =>
-                      handleDependencyChange(box.id, index, event.target.value)
-                    }
-                  />
-                  <button
-                    onClick={() => handleDeleteDependency(box.id, dependency)}
-                  >
-                    Delete Dependency
-                  </button>
-                </div>
-              ))}
-              <button onClick={() => handleDeleteBox(box.id)}>Delete</button>
-            </div>
-          ))}
-          <button
-            className="contained"
-            onClick={handleIncrementReRenderCount}
-            style={{ color: "cyan", backgroundColor: "blue" }}
-            //this is incase it doesnt rerender
-          >
-            Increment ReRender Count
-          </button>
           <button
             className="contained"
             onClick={handleClearAll}
@@ -234,15 +172,12 @@ export default function NewProjectTemplate() {
           >
             Clear All
           </button>
-          <div style={{ height: "500px", margin: "50px" }}>
-            <FlowMindMap key={reRenderCount} boxes={boxes} />
-          </div>
           <div>
             <DragDrop />
           </div>
         </div>
         <ReactCSVDownloader key={reRenderCount} boxes={boxes} />
-        <h3>Upload CSV or JavaScript code</h3>
+        <Typography variant="h5">Upload CSV or JavaScript code</Typography>
         <input type="file" multiple onChange={handleFileUpload} />
         {data.length > 0 && <>{handleSetData()}</>}
         {parserData.length > 0 && <>{handleSetParserData()}</>}
@@ -255,9 +190,70 @@ export default function NewProjectTemplate() {
               search: `?boxes=${encodeURIComponent(JSON.stringify(boxes))}`, // Pass boxes as a search parameter
             }}
           >
-            Go To BlankPage
+            <Typography variant="h5">Go To BlankPage</Typography>
           </Link>
         </nav>
+      </div>
+      <div className="Container">
+        <div>
+          <input //this is the Name text box
+            type="text"
+            value={newBoxName}
+            onChange={handleNewBoxNameChange}
+            placeholder="Enter box name"
+          />
+          <button onClick={handleAddBox}>
+            <Typography variant="h5">Add Box</Typography>
+          </button>
+        </div>
+        {boxes.map((box) => (
+          <div key={box.id} className="Box">
+            <input
+              type="text"
+              value={box.name}
+              onChange={(event) => {
+                const updatedBoxes = boxes.map((b) => {
+                  //the b variable simply refers to an arbitrary box
+                  if (b.id === box.id) {
+                    return { ...b, name: event.target.value };
+                  }
+                  return b;
+                });
+                setBoxes(updatedBoxes); //empty out...
+              }}
+            />
+            <div>
+              <input
+                type="text"
+                value={newDependency}
+                onChange={(event) => setNewDependency(event.target.value)}
+                placeholder="Enter dependency"
+              />
+              <button onClick={() => handleAddDependency(box.id)}>
+                <Typography variant="h5">Add</Typography>
+              </button>
+            </div>
+            {box.dependencies.map((dependency, index) => (
+              <div key={dependency}>
+                <input
+                  type="text"
+                  value={dependency}
+                  onChange={(event) =>
+                    handleDependencyChange(box.id, index, event.target.value)
+                  }
+                />
+                <button
+                  onClick={() => handleDeleteDependency(box.id, dependency)}
+                >
+                  <Typography variant="h5">Delete Dependency</Typography>
+                </button>
+              </div>
+            ))}
+            <button onClick={() => handleDeleteBox(box.id)}>
+              <Typography variant="h5">Delete</Typography>
+            </button>
+          </div>
+        ))}
       </div>
     </>
   );
