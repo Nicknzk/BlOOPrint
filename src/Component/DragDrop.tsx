@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { Typography } from "@mui/material";
 import { useDropzone } from "react-dropzone"; //requires react-dropzone
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 
@@ -39,14 +39,16 @@ const DragDrop: React.FC = () => {
       >
         <input {...getInputProps()} />
         {isDragActive ? (
-          <p>Drop the file here...</p>
+          <Typography variant="h5">Drop the file here...</Typography>
         ) : (
-          <p>Drag and drop a file here, or click to select a file</p>
+          <Typography variant="h5">
+            Drag and drop a file here, or click to select a file
+          </Typography>
         )}
       </div>
       {fileContent && (
         <div className="file-content">
-          <h3>File Content:</h3>
+          <Typography variant="h5">File Content:</Typography>
           <pre>{fileContent}</pre>
         </div>
       )}

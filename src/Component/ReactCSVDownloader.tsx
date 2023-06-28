@@ -1,7 +1,7 @@
 import { CSVLink } from "react-csv";
 import { Box } from "./NewProjectTemplate";
 import { useState } from "react";
-
+import { Typography } from "@mui/material";
 
 export default function ReactCSVDownloader({ boxes }: { boxes: Box[] }) {
   const arrayBoxes = boxes.map((box) => [box.id, box.name, box.dependencies]);
@@ -40,7 +40,7 @@ export default function ReactCSVDownloader({ boxes }: { boxes: Box[] }) {
             style={{ color: "black" }}
             onClick={handleSubmit}
           >
-            <p>Download</p>
+            <Typography variant="h5">Download</Typography>
           </CSVLink>
         </div>
       </div>

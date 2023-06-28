@@ -177,7 +177,7 @@ export default function NewProjectTemplate() {
           </div>
         </div>
         <ReactCSVDownloader key={reRenderCount} boxes={boxes} />
-        <h3>Upload CSV or JavaScript code</h3>
+        <Typography variant="h5">Upload CSV or JavaScript code</Typography>
         <input type="file" multiple onChange={handleFileUpload} />
         {data.length > 0 && <>{handleSetData()}</>}
         {parserData.length > 0 && <>{handleSetParserData()}</>}
@@ -190,7 +190,7 @@ export default function NewProjectTemplate() {
               search: `?boxes=${encodeURIComponent(JSON.stringify(boxes))}`, // Pass boxes as a search parameter
             }}
           >
-            Go To BlankPage
+            <Typography variant="h5">Go To BlankPage</Typography>
           </Link>
         </nav>
       </div>
@@ -202,7 +202,9 @@ export default function NewProjectTemplate() {
             onChange={handleNewBoxNameChange}
             placeholder="Enter box name"
           />
-          <button onClick={handleAddBox}>Add Box</button>
+          <button onClick={handleAddBox}>
+            <Typography variant="h5">Add Box</Typography>
+          </button>
         </div>
         {boxes.map((box) => (
           <div key={box.id} className="Box">
@@ -227,7 +229,9 @@ export default function NewProjectTemplate() {
                 onChange={(event) => setNewDependency(event.target.value)}
                 placeholder="Enter dependency"
               />
-              <button onClick={() => handleAddDependency(box.id)}>Add</button>
+              <button onClick={() => handleAddDependency(box.id)}>
+                <Typography variant="h5">Add</Typography>
+              </button>
             </div>
             {box.dependencies.map((dependency, index) => (
               <div key={dependency}>
@@ -241,11 +245,13 @@ export default function NewProjectTemplate() {
                 <button
                   onClick={() => handleDeleteDependency(box.id, dependency)}
                 >
-                  Delete Dependency
+                  <Typography variant="h5">Delete Dependency</Typography>
                 </button>
               </div>
             ))}
-            <button onClick={() => handleDeleteBox(box.id)}>Delete</button>
+            <button onClick={() => handleDeleteBox(box.id)}>
+              <Typography variant="h5">Delete</Typography>
+            </button>
           </div>
         ))}
       </div>
