@@ -2,9 +2,7 @@ import { onAuthStateChanged, signOut, User } from "firebase/auth";
 import { useEffect, useState } from "react";
 import auth from "../../firebase";
 import { Link } from "react-router-dom";
-import { Button, Typography } from "@mui/material"
-
-
+import { Button, Typography } from "@mui/material";
 
 interface AuthDetailsProps {
   onAuthStatusChange?: (choice: boolean) => void;
@@ -46,24 +44,44 @@ export default function AuthDetails({ onAuthStatusChange }: AuthDetailsProps) {
 
   return (
     <div>
-      {authUser && ( //if user is logged in... else remain as Sign Out
-        verifiedUser ? (
+      {authUser && //if user is logged in... else remain as Sign Out
+        (verifiedUser ? (
           <>
             <nav>
-              <Button variant="contained" style={{backgroundColor:'ECA400', color:"black", textDecoration:"none" }}>
-              <Link className="auth-page-button" to={"/HomePage"}>
-                <Typography style={{textDecoration:"none", color:"white", textTransform:"none"}}>
-                Home
-                </Typography>
-              </Link>
+              <Button
+                variant="contained"
+                style={{
+                  backgroundColor: "ECA400",
+                  color: "black",
+                  textDecoration: "none",
+                }}
+              >
+                <Link className="auth-page-button" to={"/HomePage"}>
+                  <Typography
+                    style={{
+                      textDecoration: "none",
+                      color: "white",
+                      textTransform: "none",
+                    }}
+                  >
+                    Home
+                  </Typography>
+                </Link>
               </Button>
-            </nav>          
+            </nav>
             <p>{`Signed In as ${authUser.email}`}</p>
 
-            <div style={{ position: 'fixed', top: 0, right: 0, margin: '16px' }}>
-            <Button variant="contained" onClick={userSignOut} className="auth-page-button" style={{backgroundColor:"red", color:'black' }}>
-              Sign Out
-            </Button>
+            <div
+              style={{ position: "fixed", top: 0, right: 0, margin: "16px" }}
+            >
+              <Button
+                variant="contained"
+                onClick={userSignOut}
+                className="auth-page-button"
+                style={{ backgroundColor: "red", color: "black" }}
+              >
+                Sign Out
+              </Button>
             </div>
           </>
         ) : (
@@ -71,8 +89,7 @@ export default function AuthDetails({ onAuthStatusChange }: AuthDetailsProps) {
             <p style={{ fontSize: 20 }}>Email Verification is not complete.</p>
             <p>Do check spam / junk folder</p>
           </div>
-        )
-      ) }
+        ))}
     </div>
   );
 }
