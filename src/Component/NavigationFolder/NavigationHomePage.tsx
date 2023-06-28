@@ -1,12 +1,11 @@
-import { AppBar, Toolbar, Typography } from "@mui/material";
+import { AppBar, Toolbar } from "@mui/material";
 import { ReactNode } from "react";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
-
 
 export default function NavigationHomePage() {
   return (
     <>
-      <div style={{ background: '#007bff', minHeight: '100vh' }}>
+      <div style={{ background: "#007bff", minHeight: "100vh" }}>
         <AppBar position="relative" color="secondary">
           <Toolbar variant="dense">
             <nav>
