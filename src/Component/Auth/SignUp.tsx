@@ -6,10 +6,9 @@ import {
   sendEmailVerification,
 } from "firebase/auth";
 import auth from "../../firebase";
-import thumbsup from "../Images/sign in.jpg";
+//import thumbsup from "../Images/sign in.jpg";
 import thumbsdown from "../Images/sign up.jpg";
 import { Typography } from "@mui/material";
-
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -61,21 +60,21 @@ export default function SignUp() {
 
   return (
     <>
-     <img
-      src={thumbsdown}
-      alt="thumbsdown"
-      style={{
-        position: 'fixed',
-        top: '0',
-        left: '0',
-        width: '100%',
-        height: '100%',
-        objectFit: 'cover',
-        zIndex: '-1'
-      }}
-    />
+      <img
+        src={thumbsdown}
+        alt="thumbsdown"
+        style={{
+          position: "fixed",
+          top: "0",
+          left: "0",
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          zIndex: "-1",
+        }}
+      />
       <div className="sign-in-container log-in-box">
-        <Card style={{ width: '400px', marginRight: '0', marginLeft: 'auto' }}>
+        <Card style={{ width: "400px", marginRight: "0", marginLeft: "auto" }}>
           <Card.Body>
             <h2 className="text-center mb-4">Create Account</h2>
             <Form onSubmit={signUp}>
@@ -104,24 +103,32 @@ export default function SignUp() {
               </Button>
             </Form>
             <div className="w-100 text-center mt-2">
-          already have an account?
-          <nav>
-            <Link to={"/SignIn"}>Sign In</Link>
-          </nav>
-        </div>
+              already have an account?
+              <nav>
+                <Link to={"/SignIn"}>Sign In</Link>
+              </nav>
+            </div>
           </Card.Body>
         </Card>
       </div>
       <div>{alertShow.length > 0 && <Alert>{alertShow}</Alert>}</div>
-      <Button variant="contained" style={{
-    backgroundColor: "#ECA400",
-    color: "white",
-    textTransform: "none",
-    borderRadius: "20px" }}>
-      <nav>
-            <Link to={"../"}><Typography variant= "h4" style={{color:"black"}}>Back to Landing Page</Typography></Link>
-          </nav>
-          </Button>
+      <Button
+        variant="contained"
+        style={{
+          backgroundColor: "#ECA400",
+          color: "white",
+          textTransform: "none",
+          borderRadius: "20px",
+        }}
+      >
+        <nav>
+          <Link to={"../"}>
+            <Typography variant="h4" style={{ color: "black" }}>
+              Back to Landing Page
+            </Typography>
+          </Link>
+        </nav>
+      </Button>
     </>
   );
 }
