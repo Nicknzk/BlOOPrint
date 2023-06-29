@@ -1,11 +1,43 @@
-import { Typography, IconButton } from "@mui/material";
+import { useState, useEffect } from "react";
+import { Typography, IconButton, Card, CardContent } from "@mui/material";
 import { Link } from "react-router-dom";
 import AddIcon from '@mui/icons-material/Add';
-import examplechart from '../Images/colorful-circles-flowchart.png';
 import Auth from "../../firebase.tsx";
-import { getDownloadURL, ref, uploadBytes, getStorage } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes, getStorage, listAll } from "firebase/storage";
 
 export default function HomePage() {
+  const [projects, setProjects] = useState<{ id: string; downloadURL: string; }[]>([]);
+
+  useEffect(() => {
+    const user = Auth.currentUser;
+    if (user) {
+      const email = user.email;
+      const storage = getStorage();
+      const storageRef = ref(storage, `Uploads/${email}/Projects`);
+
+      listAll(storageRef)
+        .then((res) => {
+          const promises = res.items.map((item) =>
+            getDownloadURL(item).then((downloadURL) => ({
+              id: item.name.replace(".csv", ""),
+              downloadURL,
+            }))
+          );
+          Promise.all(promises)
+            .then((results) => {
+              setProjects(results);
+            })
+            .catch((error) => {
+              console.log("Error getting CSV download URLs:", error);
+            });
+        })
+        .catch((error) => {
+          console.log("Error listing CSV files:", error);
+        });
+    }
+  }, []);
+
+
   function createNewCsv() {
     return new Promise((resolve, reject) => {
       const CsvId = Date.now().toString();
@@ -15,7 +47,7 @@ export default function HomePage() {
       if (user) {
         const email = user.email;
         const CsvData = "Email:" + email;
-        const storageRef = ref(storage, `Uploads/${email}/${CsvId}.csv`);
+        const storageRef = ref(storage, `Uploads/${email}/Projects/${CsvId}.csv`);
         const blob = new Blob([CsvData], { type: "text/csv" });
 
         uploadBytes(storageRef, blob)
@@ -45,17 +77,21 @@ export default function HomePage() {
     <div style={{background:'#054A91', paddingBottom:"1000px"}}>
       <Typography variant="h2" style={{marginBottom:'100px'}}>Home</Typography>
 
+
       <Typography variant="h4">Existing Projects</Typography>
-      <nav>
-        <Link to={"/ProjectTemplate"}>
-          <img
-            src={examplechart}
-            alt="Picture for previously made project"
-            className="projectPicture"
-            style={{marginBottom:'100px'}}
-          />
-        </Link>
-      </nav>
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+        {projects.map((project) => (
+          <Card key={project.id} style={{ width: "200px", margin: "10px" }}>
+            <CardContent>
+              <Typography variant="h5">{project.id}</Typography> 
+              <Link to={`/ProjectTemplate/${project.id}`}>
+                View Project
+              </Link>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
 
       <div>
         <Typography variant="h4">Create new project</Typography>
