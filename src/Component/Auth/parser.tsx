@@ -13,6 +13,7 @@ interface ClassData {
   attributes: string[];
   dependencies: string[];
 }
+
 const parseFiles = (files: File[], onUpload: (data: Box[]) => void) => {
   const parsedData: Box[] = []; // Array to store parsed data
 
@@ -22,7 +23,7 @@ const parseFiles = (files: File[], onUpload: (data: Box[]) => void) => {
       reader.onload = (e) => {
         const sourceCode = e.target?.result;
         const extractedInfo = extractInfo(sourceCode as string);
-        console.log("file read", extractedInfo);
+        //console.log("file read", extractedInfo); //hide for now
         parsedData.push(...extractedInfo); // Store parsed data
         resolve();
       };
@@ -42,7 +43,7 @@ const parseFiles = (files: File[], onUpload: (data: Box[]) => void) => {
         // Handle error if necessary
       }
     }
-
+    console.log("parsedData", parsedData); //check for what  is sent, can delete whenever
     onUpload(parsedData); // Call onUpload with all the parsed data
   };
 
@@ -88,8 +89,7 @@ const parseFiles = (files: File[], onUpload: (data: Box[]) => void) => {
       })
     );
 
-    const compressedOutput = compressOutput(classData);
-    console.log(compressedOutput); //im leaving this line to prevent error from not using
+    compressOutput(classData);
 
     const shortenDependencies = (classes: ClassData[]) => {
       return classes.map((box) => {
@@ -100,15 +100,14 @@ const parseFiles = (files: File[], onUpload: (data: Box[]) => void) => {
       });
     };
     const newCompressedOutput = shortenDependencies(classData);
-    console.log(newCompressedOutput);
+    //console.log(newCompressedOutput); //hide for now
 
-    //console.log(classData);
     const parsedClassData: Box[] = newCompressedOutput.map((box) => ({
       id: Date.now() * Math.floor(Math.random() * 1000000),
       name: box.className,
       dependencies: box.dependencies,
-      methods: [],
-      attributes: [],
+      methods: box.methods,
+      attributes: box.attributes,
     }));
 
     return parsedClassData;
