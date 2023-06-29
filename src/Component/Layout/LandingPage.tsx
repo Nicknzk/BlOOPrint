@@ -7,7 +7,6 @@ import {
   AppBar,
   Toolbar,
   ListItem,
-  List,
   Button,
 } from "@mui/material";
 import JS from "../Images/VectorJavaScript.svg";
@@ -43,7 +42,7 @@ export default function LandingPage() {
         style={{
           background: "linear-gradient(to left, #054A91, #007bff)",
           minHeight: "100vh",
-          paddingBottom: "100px"
+          paddingBottom: "100px",
         }}
       >
         <div>
@@ -109,13 +108,18 @@ export default function LandingPage() {
                   className="navigation-landing-page"
                   style={{ listStyleType: "none" }}
                 >
-                  <Button variant="text" style={{ textTransform: "none", textDecoration: "none" }}>
-                  <CustomLink to="/SignUp"><Typography
+                  <Button
+                    variant="text"
+                    style={{ textTransform: "none", textDecoration: "none" }}
+                  >
+                    <CustomLink to="/SignUp">
+                      <Typography
                         variant="body1"
                         style={{ color: "white", textDecoration: "none" }}
                       >
                         Get Started
-                      </Typography></CustomLink>
+                      </Typography>
+                    </CustomLink>
                   </Button>
                 </ListItem>
               </nav>
@@ -225,11 +229,7 @@ export default function LandingPage() {
             </Grid>
             <Grid item xs={4}>
               <Card>
-                <CardMedia
-                  component="img"
-                  src={comingsoon}
-                  alt="coming soon"
-                />
+                <CardMedia component="img" src={comingsoon} alt="coming soon" />
                 <CardContent>
                   <Typography variant="h5">Cool functions</Typography>
                   <Typography variant="body1">
