@@ -19,12 +19,16 @@ interface CSVRow {
   id: number;
   name: string;
   dependencies: string;
+  methods: string;
+  attributes: string;
 }
 
 export default function NewProjectTemplate() {
   const [boxes, setBoxes] = useState<Box[]>([]); //array of boxes
   const [newBoxName, setNewBoxName] = useState(""); //variable to allow names to be added
   const [newDependency, setNewDependency] = useState(""); //variable to allow new dependencies to be added
+  const [newAttribute, setNewAttribute] = useState(""); // Add newAttribute state
+  const [newMethod, setNewMethod] = useState("");
   const [reRenderCount, setReRenderCount] = useState(0);
   const [data, setData] = useState<Box[]>([]); //parsing for ReactCSVUploader
   const [parserData, setParserData] = useState([]); //for Parser.tsx
@@ -45,12 +49,14 @@ export default function NewProjectTemplate() {
         complete: (results: Papa.ParseResult<CSVRow>) => {
           const parsedData = results.data.map((row) => {
             const dependencies = row.dependencies.split(",");
+            const methods = row.methods.split(",");
+            const attributes = row.attributes.split(",");
             return {
               id: row.id,
               name: row.name,
               dependencies: dependencies,
-              methods: [],
-              attributes: [],
+              methods: methods,
+              attributes: attributes,
             };
           });
           setData(parsedData);
@@ -129,6 +135,66 @@ export default function NewProjectTemplate() {
     setBoxes(updatedBoxes); //empty out...
   };
 
+  const handleAddAttribute = (boxId: number) => {
+    const selectedBox = boxes.find((box) => box.id === boxId);
+    if (selectedBox && newAttribute.trim() !== "") {
+      const updatedBoxes = boxes.map((box) => {
+        if (box.id === boxId) {
+          return {
+            ...box,
+            attributes: [...box.attributes, newAttribute.trim()],
+          };
+        }
+        return box;
+      });
+      setBoxes(updatedBoxes);
+      setNewAttribute("");
+    }
+  };
+
+  const handleDeleteAttribute = (boxId: number, attribute: string) => {
+    const updatedBoxes = boxes.map((box) => {
+      if (box.id === boxId) {
+        return {
+          ...box,
+          attributes: box.attributes.filter((attr) => attr !== attribute),
+        };
+      }
+      return box;
+    });
+    setBoxes(updatedBoxes);
+  };
+
+  const handleAddMethod = (boxId: number) => {
+    const selectedBox = boxes.find((box) => box.id === boxId);
+    if (selectedBox && newMethod.trim() !== "") {
+      const updatedBoxes = boxes.map((box) => {
+        if (box.id === boxId) {
+          return {
+            ...box,
+            methods: [...box.methods, newMethod.trim()],
+          };
+        }
+        return box;
+      });
+      setBoxes(updatedBoxes);
+      setNewMethod("");
+    }
+  };
+
+  const handleDeleteMethod = (boxId: number, method: string) => {
+    const updatedBoxes = boxes.map((box) => {
+      if (box.id === boxId) {
+        return {
+          ...box,
+          methods: box.methods.filter((m) => m !== method),
+        };
+      }
+      return box;
+    });
+    setBoxes(updatedBoxes);
+  };
+
   const handleDependencyChange = (
     boxId: number,
     index: number,
@@ -147,6 +213,40 @@ export default function NewProjectTemplate() {
       return box;
     });
     setBoxes(updatedBoxes); //empty out...
+  };
+
+  const handleAttributeChange = (
+    boxId: number,
+    index: number,
+    value: string
+  ) => {
+    const updatedBoxes = boxes.map((box) => {
+      if (box.id === boxId) {
+        const attributes = [...box.attributes];
+        attributes[index] = value;
+        return {
+          ...box,
+          attributes,
+        };
+      }
+      return box;
+    });
+    setBoxes(updatedBoxes);
+  };
+
+  const handleMethodChange = (boxId: number, index: number, value: string) => {
+    const updatedBoxes = boxes.map((box) => {
+      if (box.id === boxId) {
+        const methods = [...box.methods];
+        methods[index] = value;
+        return {
+          ...box,
+          methods,
+        };
+      }
+      return box;
+    });
+    setBoxes(updatedBoxes);
   };
 
   const handleClearAll = () => {
@@ -230,7 +330,7 @@ export default function NewProjectTemplate() {
                 placeholder="Enter dependency"
               />
               <button onClick={() => handleAddDependency(box.id)}>
-                <Typography variant="h5">Add</Typography>
+                <Typography variant="h5">Add Dependencies</Typography>
               </button>
             </div>
             {box.dependencies.map((dependency, index) => (
@@ -246,6 +346,62 @@ export default function NewProjectTemplate() {
                   onClick={() => handleDeleteDependency(box.id, dependency)}
                 >
                   <Typography variant="h5">Delete Dependency</Typography>
+                </button>
+              </div>
+            ))}
+
+            {/* Add attribute section */}
+            <div>
+              <input
+                type="text"
+                value={newAttribute}
+                onChange={(event) => setNewAttribute(event.target.value)}
+                placeholder="Enter attribute"
+              />
+              <button onClick={() => handleAddAttribute(box.id)}>
+                <Typography variant="h5">Add Attribute</Typography>
+              </button>
+            </div>
+            {box.attributes.map((attribute, index) => (
+              <div key={attribute}>
+                <input
+                  type="text"
+                  value={attribute}
+                  onChange={(event) =>
+                    handleAttributeChange(box.id, index, event.target.value)
+                  }
+                />
+                <button
+                  onClick={() => handleDeleteAttribute(box.id, attribute)}
+                >
+                  <Typography variant="h5">Delete Attribute</Typography>
+                </button>
+              </div>
+            ))}
+
+            {/* Add method section */}
+            <div>
+              <input
+                type="text"
+                value={newMethod}
+                onChange={(event) => setNewMethod(event.target.value)}
+                placeholder="Enter method"
+              />
+              <button onClick={() => handleAddMethod(box.id)}>
+                <Typography variant="h5">Add Method</Typography>
+              </button>
+            </div>
+            {box.methods.map((method, index) => (
+              <div key={method}>
+                <input
+                  type="text"
+                  value={method}
+                  onChange={(event) =>
+                    handleMethodChange(box.id, index, event.target.value)
+                  }
+                />
+                <button onClick={() => handleDeleteMethod(box.id, method)}>
+                  <Typography variant="h5">Delete Method</Typography>
                 </button>
               </div>
             ))}

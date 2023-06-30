@@ -4,8 +4,17 @@ import { useState } from "react";
 import { Typography } from "@mui/material";
 
 export default function ReactCSVDownloader({ boxes }: { boxes: Box[] }) {
-  const arrayBoxes = boxes.map((box) => [box.id, box.name, box.dependencies]);
-  const data = [["id", "name", "dependencies"], ...arrayBoxes];
+  const arrayBoxes = boxes.map((box) => [
+    box.id,
+    box.name,
+    box.dependencies,
+    box.methods.join(", "),
+    box.attributes.join(", "),
+  ]);
+  const data = [
+    ["id", "name", "dependencies", "methods", "attributes"],
+    ...arrayBoxes,
+  ];
   const [boxName, setBoxName] = useState("");
 
   const handleNewBoxNameChange = (event: any) => {
