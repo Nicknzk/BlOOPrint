@@ -1,14 +1,21 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { Typography } from "@mui/material";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@mui/material";
 
 interface Box {
   id: number;
   name: string;
   dependencies: string[];
   methods: string[];
-  attributes: string[];
 }
 
 export default function ProjectDetails() {
@@ -21,31 +28,52 @@ export default function ProjectDetails() {
 
   const BoxList: React.FC<{ boxes: Box[] }> = ({ boxes }) => {
     return (
-      <ul className="box-list">
-        {boxes.map((box) => (
-          <li key={box.id} className="box">
-            <h3 className="box-title">{box.name}</h3>
-
-            <section className="methods">
-              <Typography variant="h5">Methods:</Typography>
-              <ul className="method-list">{/* Render methods here */}</ul>
-            </section>
-
-            <section className="dependencies">
-              <Typography variant="h5">Dependencies:</Typography>
-              <ul className="dependency-list">
-                {/* Render dependencies here */}
-              </ul>
-            </section>
-          </li>
-        ))}
-      </ul>
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell style={{ paddingRight: "20px", fontSize: "16px" }}>
+                Entity Name
+              </TableCell>
+              <TableCell style={{ paddingRight: "20px", fontSize: "16px" }}>
+                Methods
+              </TableCell>
+              <TableCell style={{ paddingRight: "20px", fontSize: "16px" }}>
+                Dependencies
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {boxes.map((box) => (
+              <TableRow key={box.id}>
+                <TableCell style={{ paddingRight: "20px", fontSize: "20px" }}>
+                  {box.name}
+                </TableCell>
+                <TableCell style={{ paddingRight: "20px", fontSize: "14px" }}>
+                  <ul>
+                    {box.methods.map((method, index) => (
+                      <li key={index}>{method}</li>
+                    ))}
+                  </ul>
+                </TableCell>
+                <TableCell style={{ paddingRight: "20px", fontSize: "14px" }}>
+                  <ul>
+                    {box.dependencies.map((dependency, index) => (
+                      <li key={index}>{dependency}</li>
+                    ))}
+                  </ul>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     );
   };
 
   return (
     <>
-      <Typography variant="h5">Project Details</Typography>
+      <Typography variant="h4">Project Details</Typography>
       <BoxList boxes={boxes} />
       <nav>
         <Link

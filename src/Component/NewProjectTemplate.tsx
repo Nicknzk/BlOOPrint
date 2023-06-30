@@ -235,7 +235,7 @@ export default function NewProjectTemplate() {
               search: `?boxes=${encodeURIComponent(JSON.stringify(boxes))}`, // Pass boxes as a search parameter
             }}
           >
-            <Typography variant="h5">Go To BlankPage</Typography>
+            <Typography variant="h5">View Project Details</Typography>
           </Link>
         </nav>
       </div>
