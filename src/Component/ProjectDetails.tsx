@@ -31,11 +31,6 @@ export default function ProjectDetails() {
               <ul className="method-list">{/* Render methods here */}</ul>
             </section>
 
-            <section className="attributes">
-              <Typography variant="h5">Attributes:</Typography>
-              <ul className="attribute-list">{/* Render attributes here */}</ul>
-            </section>
-
             <section className="dependencies">
               <Typography variant="h5">Dependencies:</Typography>
               <ul className="dependency-list">

@@ -12,7 +12,6 @@ export interface Box {
   name: string;
   dependencies: string[];
   methods: string[];
-  attributes: string[];
 }
 
 interface CSVRow {
@@ -20,14 +19,12 @@ interface CSVRow {
   name: string;
   dependencies: string;
   methods: string;
-  attributes: string;
 }
 
 export default function NewProjectTemplate() {
   const [boxes, setBoxes] = useState<Box[]>([]); //array of boxes
   const [newBoxName, setNewBoxName] = useState(""); //variable to allow names to be added
   const [newDependency, setNewDependency] = useState(""); //variable to allow new dependencies to be added
-  const [newAttribute, setNewAttribute] = useState(""); // Add newAttribute state
   const [newMethod, setNewMethod] = useState("");
   const [reRenderCount, setReRenderCount] = useState(0);
   const [data, setData] = useState<Box[]>([]); //parsing for ReactCSVUploader
@@ -50,13 +47,11 @@ export default function NewProjectTemplate() {
           const parsedData = results.data.map((row) => {
             const dependencies = row.dependencies.split(",");
             const methods = row.methods.split(",");
-            const attributes = row.attributes.split(",");
             return {
               id: row.id,
               name: row.name,
               dependencies: dependencies,
               methods: methods,
-              attributes: attributes,
             };
           });
           setData(parsedData);
@@ -90,7 +85,6 @@ export default function NewProjectTemplate() {
         name: newBoxName,
         dependencies: [], //box is initialised without dependancies first
         methods: [],
-        attributes: [],
       };
       setBoxes([...boxes, newBox]); //box is added to the array of boxes
       setNewBoxName(""); //empty out the newBoxName variable
@@ -133,36 +127,6 @@ export default function NewProjectTemplate() {
       return box;
     });
     setBoxes(updatedBoxes); //empty out...
-  };
-
-  const handleAddAttribute = (boxId: number) => {
-    const selectedBox = boxes.find((box) => box.id === boxId);
-    if (selectedBox && newAttribute.trim() !== "") {
-      const updatedBoxes = boxes.map((box) => {
-        if (box.id === boxId) {
-          return {
-            ...box,
-            attributes: [...box.attributes, newAttribute.trim()],
-          };
-        }
-        return box;
-      });
-      setBoxes(updatedBoxes);
-      setNewAttribute("");
-    }
-  };
-
-  const handleDeleteAttribute = (boxId: number, attribute: string) => {
-    const updatedBoxes = boxes.map((box) => {
-      if (box.id === boxId) {
-        return {
-          ...box,
-          attributes: box.attributes.filter((attr) => attr !== attribute),
-        };
-      }
-      return box;
-    });
-    setBoxes(updatedBoxes);
   };
 
   const handleAddMethod = (boxId: number) => {
@@ -213,25 +177,6 @@ export default function NewProjectTemplate() {
       return box;
     });
     setBoxes(updatedBoxes); //empty out...
-  };
-
-  const handleAttributeChange = (
-    boxId: number,
-    index: number,
-    value: string
-  ) => {
-    const updatedBoxes = boxes.map((box) => {
-      if (box.id === boxId) {
-        const attributes = [...box.attributes];
-        attributes[index] = value;
-        return {
-          ...box,
-          attributes,
-        };
-      }
-      return box;
-    });
-    setBoxes(updatedBoxes);
   };
 
   const handleMethodChange = (boxId: number, index: number, value: string) => {
@@ -349,37 +294,6 @@ export default function NewProjectTemplate() {
                 </button>
               </div>
             ))}
-
-            {/* Add attribute section */}
-            <div>
-              <input
-                type="text"
-                value={newAttribute}
-                onChange={(event) => setNewAttribute(event.target.value)}
-                placeholder="Enter attribute"
-              />
-              <button onClick={() => handleAddAttribute(box.id)}>
-                <Typography variant="h5">Add Attribute</Typography>
-              </button>
-            </div>
-            {box.attributes.map((attribute, index) => (
-              <div key={attribute}>
-                <input
-                  type="text"
-                  value={attribute}
-                  onChange={(event) =>
-                    handleAttributeChange(box.id, index, event.target.value)
-                  }
-                />
-                <button
-                  onClick={() => handleDeleteAttribute(box.id, attribute)}
-                >
-                  <Typography variant="h5">Delete Attribute</Typography>
-                </button>
-              </div>
-            ))}
-
-            {/* Add method section */}
             <div>
               <input
                 type="text"

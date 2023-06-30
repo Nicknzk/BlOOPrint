@@ -9,12 +9,8 @@ export default function ReactCSVDownloader({ boxes }: { boxes: Box[] }) {
     box.name,
     box.dependencies,
     box.methods.join(", "),
-    box.attributes.join(", "),
   ]);
-  const data = [
-    ["id", "name", "dependencies", "methods", "attributes"],
-    ...arrayBoxes,
-  ];
+  const data = [["id", "name", "dependencies", "methods"], ...arrayBoxes];
   const [boxName, setBoxName] = useState("");
 
   const handleNewBoxNameChange = (event: any) => {
