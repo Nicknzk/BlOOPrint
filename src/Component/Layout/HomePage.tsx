@@ -40,30 +40,48 @@ export default function HomePage() {
 
   function createNewCsv() {
     return new Promise((resolve, reject) => {
-      const CsvId = Date.now().toString();
       const user = Auth.currentUser;
       const storage = getStorage();
-
+  
       if (user) {
         const email = user.email;
-        const CsvData = "Email:" + email;
-        const storageRef = ref(storage, `Uploads/${email}/Projects/${CsvId}.csv`);
-        const blob = new Blob([CsvData], { type: "text/csv" });
-
-        uploadBytes(storageRef, blob)
-          .then(() => {
-            getDownloadURL(storageRef)
-              .then((downloadURL) => {
-                console.log("CSV file uploaded successfully. Download URL:", downloadURL);
-                resolve(CsvId); // Resolve the promise with the CSV ID
+        const storageRef = ref(storage, `Uploads/${email}/Projects`);
+        const untitledRegex = /^Untitled\((\d+)\)\.csv$/;
+  
+        // Fetch all files in the "Projects" directory
+        listAll(storageRef)
+          .then((res) => {
+            const untitledFiles = res.items.filter((item) => untitledRegex.test(item.name));
+            const numbers = untitledFiles.map((item) => {
+              const match = item.name.match(untitledRegex);
+              return match ? parseInt(match[1]) : 0;
+            });
+  
+            const nextNumber = numbers.length > 0 ? Math.max(...numbers) + 1 : 1;
+            const CsvId = Date.now().toString();
+            const CsvData = CsvId;
+            const newStorageRef = ref(storage, `Uploads/${email}/Projects/Untitled(${nextNumber}).csv`);
+            const blob = new Blob([CsvData], { type: "text/csv" });
+  
+            uploadBytes(newStorageRef, blob)
+              .then(() => {
+                getDownloadURL(newStorageRef)
+                  .then((downloadURL) => {
+                    console.log("CSV file uploaded successfully. Download URL:", downloadURL);
+                    resolve(CsvId); // Resolve the promise with the CSV ID
+                  })
+                  .catch((error) => {
+                    console.log("Error getting download URL:", error);
+                    reject(error); // Reject the promise if there is an error
+                  });
               })
               .catch((error) => {
-                console.log("Error getting download URL:", error);
+                console.log("Error uploading CSV file:", error);
                 reject(error); // Reject the promise if there is an error
               });
           })
           .catch((error) => {
-            console.log("Error uploading CSV file:", error);
+            console.log("Error listing CSV files:", error);
             reject(error); // Reject the promise if there is an error
           });
       } else {
@@ -71,6 +89,7 @@ export default function HomePage() {
       }
     });
   }
+  
 
   return (
     <>
@@ -84,7 +103,7 @@ export default function HomePage() {
           <Card key={project.id} style={{ width: "200px", margin: "10px" }}>
             <CardContent>
               <Typography variant="h5">{project.id}</Typography> 
-              <Link to={`/ProjectTemplate/${project.id}`}>
+              <Link to={`/NewProjectTemplate`}>
                 View Project
               </Link>
             </CardContent>
