@@ -6,6 +6,7 @@ import ReactCSVDownloader from "./ReactCSVDownloader";
 import Papa from "papaparse";
 import parseFiles from "./Auth/parser";
 import { Link } from "react-router-dom";
+import ReactCSVSaver from "./ReactCSVSaver";
 
 export interface Box {
   id: number;
@@ -222,6 +223,7 @@ export default function NewProjectTemplate() {
           </div>
         </div>
         <ReactCSVDownloader key={reRenderCount} boxes={boxes} />
+        <ReactCSVSaver boxes={boxes} />
         <Typography variant="h5">Upload CSV or JavaScript code</Typography>
         <input type="file" multiple onChange={handleFileUpload} />
         {data.length > 0 && <>{handleSetData()}</>}
