@@ -73,16 +73,22 @@ export default function ReactCSVSaver({ boxes }: ReactCSVSaverProps) {
 
   return (
     <>
-      <div className="react-csv">
+      <div
+        className="react-csv"
+        style={{ display: "flex", alignItems: "center" }}
+      >
         <input
           type="text"
           value={boxName}
           onChange={handleNewBoxNameChange}
           placeholder="Type File Name Here"
-          style={{ fontSize: "3.0rem" }}
+          style={{ marginRight: "10px", fontSize: "3.0rem" }}
         />
-        <div className="download-csv">
-          <button onClick={handleDownload}>
+        <div className="download-csv" style={{ marginLeft: "auto" }}>
+          <button
+            onClick={handleDownload}
+            style={{ display: "flex", alignItems: "center" }}
+          >
             <Typography variant="h5">Save</Typography>
           </button>
         </div>
