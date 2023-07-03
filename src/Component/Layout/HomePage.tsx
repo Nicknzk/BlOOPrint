@@ -49,62 +49,55 @@ export default function HomePage() {
     return new Promise((resolve, reject) => {
       const user = Auth.currentUser;
       const storage = getStorage();
-
+  
       if (user) {
         const email = user.email;
         const storageRef = ref(storage, `Uploads/${email}/Projects`);
-        const untitledRegex = /^Untitled\((\d+)\)\.csv$/;
-
-        // Fetch all files in the "Projects" directory
-        listAll(storageRef)
-          .then((res) => {
-            const untitledFiles = res.items.filter((item) =>
-              untitledRegex.test(item.name)
-            );
-            const numbers = untitledFiles.map((item) => {
-              const match = item.name.match(untitledRegex);
-              return match ? parseInt(match[1]) : 0;
+  
+        const checkDuplicateName = (name:string , index:number) => {
+          const fileName = index === 0 ? name : `${name} (${index})`;
+          const newStorageRef = ref(storage, `Uploads/${email}/Projects/${fileName}.csv`);
+  
+          getDownloadURL(newStorageRef)
+            .then(() => {
+              // File with the same name exists, try with the next index
+              checkDuplicateName(name, index + 1);
+            })
+            .catch(() => {
+              // File with the same name does not exist, use this name
+              resolve(fileName);
+  
+              const CsvId = Date.now().toString();
+              const CsvData = CsvId;
+              const blob = new Blob([CsvData], { type: "text/csv" });
+  
+              uploadBytes(newStorageRef, blob)
+                .then(() => {
+                  getDownloadURL(newStorageRef)
+                    .then((downloadURL) => {
+                      console.log("CSV file uploaded successfully. Download URL:", downloadURL);
+                    })
+                    .catch((error) => {
+                      console.log("Error getting download URL:", error);
+                    });
+                })
+                .catch((error) => {
+                  console.log("Error uploading CSV file:", error);
+                });
             });
-
-            const nextNumber =
-              numbers.length > 0 ? Math.max(...numbers) + 1 : 1;
-            const CsvId = Date.now().toString();
-            const CsvData = CsvId;
-            const newStorageRef = ref(
-              storage,
-              `Uploads/${email}/Projects/Untitled(${nextNumber}).csv`
-            );
-            const blob = new Blob([CsvData], { type: "text/csv" });
-
-            uploadBytes(newStorageRef, blob)
-              .then(() => {
-                getDownloadURL(newStorageRef)
-                  .then((downloadURL) => {
-                    console.log(
-                      "CSV file uploaded successfully. Download URL:",
-                      downloadURL
-                    );
-                    resolve(CsvId); // Resolve the promise with the CSV ID
-                  })
-                  .catch((error) => {
-                    console.log("Error getting download URL:", error);
-                    reject(error); // Reject the promise if there is an error
-                  });
-              })
-              .catch((error) => {
-                console.log("Error uploading CSV file:", error);
-                reject(error); // Reject the promise if there is an error
-              });
-          })
-          .catch((error) => {
-            console.log("Error listing CSV files:", error);
-            reject(error); // Reject the promise if there is an error
-          });
+        };
+  
+        // Prompt for CSV name
+        let csvName = prompt("Enter a name for the CSV:") || "Untitled";
+  
+        // Check for duplicate names
+        checkDuplicateName(csvName, 0);
       } else {
         reject(new Error("User not logged in")); // Reject the promise if the user is not logged in
       }
     });
   }
+  
 
   return (
     <>
