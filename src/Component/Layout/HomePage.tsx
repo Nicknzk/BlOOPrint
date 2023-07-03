@@ -1,12 +1,20 @@
 import { useState, useEffect } from "react";
 import { Typography, IconButton, Card, CardContent } from "@mui/material";
 import { Link } from "react-router-dom";
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
 import Auth from "../../firebase.tsx";
-import { getDownloadURL, ref, uploadBytes, getStorage, listAll } from "firebase/storage";
+import {
+  getDownloadURL,
+  ref,
+  uploadBytes,
+  getStorage,
+  listAll,
+} from "firebase/storage";
 
 export default function HomePage() {
-  const [projects, setProjects] = useState<{ id: string; downloadURL: string; }[]>([]);
+  const [projects, setProjects] = useState<
+    { id: string; downloadURL: string }[]
+  >([]);
 
   useEffect(() => {
     const user = Auth.currentUser;
@@ -37,54 +45,61 @@ export default function HomePage() {
     }
   }, []);
 
-
   function createNewCsv() {
     return new Promise((resolve, reject) => {
       const user = Auth.currentUser;
       const storage = getStorage();
-  
+
       if (user) {
         const email = user.email;
         const storageRef = ref(storage, `Uploads/${email}/Projects`);
-  
-        const checkDuplicateName = (name:string, index:number) => {
-          const fileName = index === 0 ? name : `${name} (${index})`;
-          const newStorageRef = ref(storage, `Uploads/${email}/Projects/${fileName}.csv`);
-  
-          getDownloadURL(newStorageRef)
-            .then(() => {
-              // File with the same name exists, try with the next index
-              checkDuplicateName(name, index + 1);
-            })
-            .catch(() => {
-              // File with the same name does not exist, use this name
-              resolve(fileName);
-  
-              const CsvId = Date.now().toString();
-              const CsvData = CsvId;
-              const blob = new Blob([CsvData], { type: "text/csv" });
-  
-              uploadBytes(newStorageRef, blob)
-                .then(() => {
-                  getDownloadURL(newStorageRef)
-                    .then((downloadURL) => {
-                      console.log("CSV file uploaded successfully. Download URL:", downloadURL);
-                    })
-                    .catch((error) => {
-                      console.log("Error getting download URL:", error);
-                    });
-                })
-                .catch((error) => {
-                  console.log("Error uploading CSV file:", error);
-                });
+        const untitledRegex = /^Untitled\((\d+)\)\.csv$/;
+
+        // Fetch all files in the "Projects" directory
+        listAll(storageRef)
+          .then((res) => {
+            const untitledFiles = res.items.filter((item) =>
+              untitledRegex.test(item.name)
+            );
+            const numbers = untitledFiles.map((item) => {
+              const match = item.name.match(untitledRegex);
+              return match ? parseInt(match[1]) : 0;
             });
-        };
-  
-        // Prompt for CSV name
-        let csvName = prompt("Enter a name for the CSV:") || "Untitled";
-  
-        // Check for duplicate names
-        checkDuplicateName(csvName, 0);
+
+            const nextNumber =
+              numbers.length > 0 ? Math.max(...numbers) + 1 : 1;
+            const CsvId = Date.now().toString();
+            const CsvData = CsvId;
+            const newStorageRef = ref(
+              storage,
+              `Uploads/${email}/Projects/Untitled(${nextNumber}).csv`
+            );
+            const blob = new Blob([CsvData], { type: "text/csv" });
+
+            uploadBytes(newStorageRef, blob)
+              .then(() => {
+                getDownloadURL(newStorageRef)
+                  .then((downloadURL) => {
+                    console.log(
+                      "CSV file uploaded successfully. Download URL:",
+                      downloadURL
+                    );
+                    resolve(CsvId); // Resolve the promise with the CSV ID
+                  })
+                  .catch((error) => {
+                    console.log("Error getting download URL:", error);
+                    reject(error); // Reject the promise if there is an error
+                  });
+              })
+              .catch((error) => {
+                console.log("Error uploading CSV file:", error);
+                reject(error); // Reject the promise if there is an error
+              });
+          })
+          .catch((error) => {
+            console.log("Error listing CSV files:", error);
+            reject(error); // Reject the promise if there is an error
+          });
       } else {
         reject(new Error("User not logged in")); // Reject the promise if the user is not logged in
       }
@@ -93,44 +108,49 @@ export default function HomePage() {
 
   return (
     <>
-    <div style={{background:'#054A91', paddingBottom:"1000px"}}>
-      <Typography variant="h2" style={{marginBottom:'100px'}}>Home</Typography>
+      <div style={{ background: "#054A91", paddingBottom: "1000px" }}>
+        <Typography variant="h2" style={{ marginBottom: "100px" }}>
+          Home
+        </Typography>
 
+        <Typography variant="h4">Existing Projects</Typography>
+        <div style={{ display: "flex", flexWrap: "wrap" }}>
+          {projects.map((project) => (
+            <Card key={project.id} style={{ width: "200px", margin: "10px" }}>
+              <CardContent>
+                <Typography variant="h5">{project.id}</Typography>
+                <Link to={`/NewProjectTemplate`}>View Project</Link>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
 
-      <Typography variant="h4">Existing Projects</Typography>
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {projects.map((project) => (
-          <Card key={project.id} style={{ width: "200px", margin: "10px" }}>
-            <CardContent>
-              <Typography variant="h5">{project.id}</Typography> 
-              <Link to={`/NewProjectTemplate`}>
-                View Project
-              </Link>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-
-
-      <div>
-        <Typography variant="h4">Create new project</Typography>
-        <nav>
-          <Link to={`/NewProjectTemplate`} onClick={() => { createNewCsv()
-                .then((csvId) => {
-                  console.log("CSV ID:", csvId);
-                  // Perform any further actions with the CSV ID
-                })
-                .catch((error) => {
-                  console.log("Error creating CSV file:", error);
-                })
-
-          }}>
-          <IconButton color="primary" aria-label="add" style={{fontSize: '64px', width: '100px', height: '100px'}}>
-      <AddIcon style={{fontSize:"100px", color:""}} />
-    </IconButton>
-          </Link>
-        </nav>
-      </div>
+        <div>
+          <Typography variant="h4">Create new project</Typography>
+          <nav>
+            <Link
+              to={`/NewProjectTemplate`}
+              onClick={() => {
+                createNewCsv()
+                  .then((csvId) => {
+                    console.log("CSV ID:", csvId);
+                    // Perform any further actions with the CSV ID
+                  })
+                  .catch((error) => {
+                    console.log("Error creating CSV file:", error);
+                  });
+              }}
+            >
+              <IconButton
+                color="primary"
+                aria-label="add"
+                style={{ fontSize: "64px", width: "100px", height: "100px" }}
+              >
+                <AddIcon style={{ fontSize: "100px", color: "" }} />
+              </IconButton>
+            </Link>
+          </nav>
+        </div>
       </div>
     </>
   );

@@ -6,6 +6,7 @@ import ReactCSVDownloader from "./ReactCSVDownloader";
 import Papa from "papaparse";
 import parseFiles from "./Auth/parser";
 import { Link } from "react-router-dom";
+import ReactCSVSaver from "./ReactCSVSaver";
 
 export interface Box {
   id: number;
@@ -204,23 +205,25 @@ export default function NewProjectTemplate() {
 
   return (
     <>
-      <div>
-        <Typography variant="h2">New Project Page</Typography>
-        <div>
-          <div style={{ height: "500px", margin: "50px" }}>
-            <FlowMindMap key={reRenderCount} boxes={boxes} />
-          </div>
-          <button
-            className="contained"
-            onClick={handleClearAll}
-            style={{ color: "cyan", backgroundColor: "blue" }}
-          >
-            Clear All
-          </button>
-          <div>
-            <DragDrop />
-          </div>
-        </div>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <Typography variant="h2" style={{ marginRight: "10px" }}>
+          Project Name:
+        </Typography>
+        <ReactCSVSaver boxes={boxes} />
+      </div>
+
+      <div style={{ height: "500px", margin: "50px" }}>
+        <FlowMindMap key={reRenderCount} boxes={boxes} />
+      </div>
+      <div style={{ marginTop: "15%" }}>
+        <button
+          className="contained"
+          onClick={handleClearAll}
+          style={{ color: "cyan", backgroundColor: "blue" }}
+        >
+          Clear All
+        </button>
+        <DragDrop />
         <ReactCSVDownloader key={reRenderCount} boxes={boxes} />
         <Typography variant="h5">Upload CSV or JavaScript code</Typography>
         <input type="file" multiple onChange={handleFileUpload} />
@@ -238,92 +241,92 @@ export default function NewProjectTemplate() {
             <Typography variant="h5">View Project Details</Typography>
           </Link>
         </nav>
-      </div>
-      <div className="Container">
-        <div>
-          <input //this is the Name text box
-            type="text"
-            value={newBoxName}
-            onChange={handleNewBoxNameChange}
-            placeholder="Enter box name"
-          />
-          <button onClick={handleAddBox}>
-            <Typography variant="h5">Add Box</Typography>
-          </button>
-        </div>
-        {boxes.map((box) => (
-          <div key={box.id} className="Box">
-            <input
+        <div className="Container">
+          <div>
+            <input //this is the Name text box
               type="text"
-              value={box.name}
-              onChange={(event) => {
-                const updatedBoxes = boxes.map((b) => {
-                  //the b variable simply refers to an arbitrary box
-                  if (b.id === box.id) {
-                    return { ...b, name: event.target.value };
-                  }
-                  return b;
-                });
-                setBoxes(updatedBoxes); //empty out...
-              }}
+              value={newBoxName}
+              onChange={handleNewBoxNameChange}
+              placeholder="Enter box name"
             />
-            <div>
-              <input
-                type="text"
-                value={newDependency}
-                onChange={(event) => setNewDependency(event.target.value)}
-                placeholder="Enter dependency"
-              />
-              <button onClick={() => handleAddDependency(box.id)}>
-                <Typography variant="h5">Add Dependencies</Typography>
-              </button>
-            </div>
-            {box.dependencies.map((dependency, index) => (
-              <div key={dependency}>
-                <input
-                  type="text"
-                  value={dependency}
-                  onChange={(event) =>
-                    handleDependencyChange(box.id, index, event.target.value)
-                  }
-                />
-                <button
-                  onClick={() => handleDeleteDependency(box.id, dependency)}
-                >
-                  <Typography variant="h5">Delete Dependency</Typography>
-                </button>
-              </div>
-            ))}
-            <div>
-              <input
-                type="text"
-                value={newMethod}
-                onChange={(event) => setNewMethod(event.target.value)}
-                placeholder="Enter method"
-              />
-              <button onClick={() => handleAddMethod(box.id)}>
-                <Typography variant="h5">Add Method</Typography>
-              </button>
-            </div>
-            {box.methods.map((method, index) => (
-              <div key={method}>
-                <input
-                  type="text"
-                  value={method}
-                  onChange={(event) =>
-                    handleMethodChange(box.id, index, event.target.value)
-                  }
-                />
-                <button onClick={() => handleDeleteMethod(box.id, method)}>
-                  <Typography variant="h5">Delete Method</Typography>
-                </button>
-              </div>
-            ))}
-            <button onClick={() => handleDeleteBox(box.id)}>
-              <Typography variant="h5">Delete</Typography>
+            <button onClick={handleAddBox}>
+              <Typography variant="h5">Add Box</Typography>
             </button>
           </div>
-        ))}
+          {boxes.map((box) => (
+            <div key={box.id} className="Box">
+              <input
+                type="text"
+                value={box.name}
+                onChange={(event) => {
+                  const updatedBoxes = boxes.map((b) => {
+                    //the b variable simply refers to an arbitrary box
+                    if (b.id === box.id) {
+                      return { ...b, name: event.target.value };
+                    }
+                    return b;
+                  });
+                  setBoxes(updatedBoxes); //empty out...
+                }}
+              />
+              <div>
+                <input
+                  type="text"
+                  value={newDependency}
+                  onChange={(event) => setNewDependency(event.target.value)}
+                  placeholder="Enter dependency"
+                />
+                <button onClick={() => handleAddDependency(box.id)}>
+                  <Typography variant="h5">Add Dependencies</Typography>
+                </button>
+              </div>
+              {box.dependencies.map((dependency, index) => (
+                <div key={dependency}>
+                  <input
+                    type="text"
+                    value={dependency}
+                    onChange={(event) =>
+                      handleDependencyChange(box.id, index, event.target.value)
+                    }
+                  />
+                  <button
+                    onClick={() => handleDeleteDependency(box.id, dependency)}
+                  >
+                    <Typography variant="h5">Delete Dependency</Typography>
+                  </button>
+                </div>
+              ))}
+              <div>
+                <input
+                  type="text"
+                  value={newMethod}
+                  onChange={(event) => setNewMethod(event.target.value)}
+                  placeholder="Enter method"
+                />
+                <button onClick={() => handleAddMethod(box.id)}>
+                  <Typography variant="h5">Add Method</Typography>
+                </button>
+              </div>
+              {box.methods.map((method, index) => (
+                <div key={method}>
+                  <input
+                    type="text"
+                    value={method}
+                    onChange={(event) =>
+                      handleMethodChange(box.id, index, event.target.value)
+                    }
+                  />
+                  <button onClick={() => handleDeleteMethod(box.id, method)}>
+                    <Typography variant="h5">Delete Method</Typography>
+                  </button>
+                </div>
+              ))}
+              <button onClick={() => handleDeleteBox(box.id)}>
+                <Typography variant="h5">Delete</Typography>
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );
