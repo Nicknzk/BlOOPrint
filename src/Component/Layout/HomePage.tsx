@@ -9,7 +9,9 @@ import {
   uploadBytes,
   getStorage,
   listAll,
+  deleteObject,
 } from "firebase/storage";
+import { Button } from "react-bootstrap";
 
 export default function HomePage() {
   const [projects, setProjects] = useState<
@@ -49,15 +51,16 @@ export default function HomePage() {
     return new Promise((resolve, reject) => {
       const user = Auth.currentUser;
       const storage = getStorage();
-  
+
       if (user) {
         const email = user.email;
-        const storageRef = ref(storage, `Uploads/${email}/Projects`);
-  
-        const checkDuplicateName = (name:string , index:number) => {
+        const checkDuplicateName = (name: string, index: number) => {
           const fileName = index === 0 ? name : `${name} (${index})`;
-          const newStorageRef = ref(storage, `Uploads/${email}/Projects/${fileName}.csv`);
-  
+          const newStorageRef = ref(
+            storage,
+            `Uploads/${email}/Projects/${fileName}.csv`
+          );
+
           getDownloadURL(newStorageRef)
             .then(() => {
               // File with the same name exists, try with the next index
@@ -66,16 +69,19 @@ export default function HomePage() {
             .catch(() => {
               // File with the same name does not exist, use this name
               resolve(fileName);
-  
+
               const CsvId = Date.now().toString();
               const CsvData = CsvId;
               const blob = new Blob([CsvData], { type: "text/csv" });
-  
+
               uploadBytes(newStorageRef, blob)
                 .then(() => {
                   getDownloadURL(newStorageRef)
                     .then((downloadURL) => {
-                      console.log("CSV file uploaded successfully. Download URL:", downloadURL);
+                      console.log(
+                        "CSV file uploaded successfully. Download URL:",
+                        downloadURL
+                      );
                     })
                     .catch((error) => {
                       console.log("Error getting download URL:", error);
@@ -86,10 +92,10 @@ export default function HomePage() {
                 });
             });
         };
-  
+
         // Prompt for CSV name
         let csvName = prompt("Enter a name for the CSV:") || "Untitled";
-  
+
         // Check for duplicate names
         checkDuplicateName(csvName, 0);
       } else {
@@ -97,7 +103,20 @@ export default function HomePage() {
       }
     });
   }
-  
+
+  async function deleteFile(storagePath: string) {
+    try {
+      const storage = getStorage();
+      const fileRef = ref(storage, storagePath);
+
+      // Delete the file
+      await deleteObject(fileRef);
+      window.location.reload();
+      console.log("File deleted successfully");
+    } catch (error) {
+      console.error("Error deleting file:", error);
+    }
+  }
 
   return (
     <>
@@ -113,13 +132,21 @@ export default function HomePage() {
               <CardContent>
                 <Typography variant="h5">{project.id}</Typography>
                 <Link to={`/NewProjectTemplate`}>View Project</Link>
+                <Button style={{color:"black", background:"red"}}
+                  onClick={() =>
+                    deleteFile(
+                      `Uploads/${Auth.currentUser?.email}/Projects/${project.id}.csv`
+                    )
+                  }
+                >
+                  <Typography >Delete</Typography>
+                </Button>
               </CardContent>
             </Card>
           ))}
         </div>
-
+        <Typography variant="h4">Create New Project</Typography>
         <div>
-          <Typography variant="h4">Create new project</Typography>
           <nav>
             <Link
               to={`/NewProjectTemplate`}
