@@ -55,6 +55,7 @@ export default function ReactCSVSaver({ boxes }: ReactCSVSaverProps) {
           downloadURL
         );
         // Perform any further actions with the download URL
+        window.alert("CSV file saved and uploaded successfully!");
       } else {
         throw new Error("User not logged in");
       }
@@ -78,10 +79,11 @@ export default function ReactCSVSaver({ boxes }: ReactCSVSaverProps) {
           value={boxName}
           onChange={handleNewBoxNameChange}
           placeholder="Type File Name Here"
+          style={{ fontSize: "3.0rem" }}
         />
         <div className="download-csv">
           <button onClick={handleDownload}>
-            <Typography variant="h5">Save & Upload</Typography>
+            <Typography variant="h5">Save</Typography>
           </button>
         </div>
       </div>

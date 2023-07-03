@@ -206,7 +206,8 @@ export default function NewProjectTemplate() {
   return (
     <>
       <div>
-        <Typography variant="h2">New Project Page</Typography>
+        <Typography variant="h2">Project Name:</Typography>
+        <ReactCSVSaver boxes={boxes} />
         <div>
           <div style={{ height: "500px", margin: "50px" }}>
             <FlowMindMap key={reRenderCount} boxes={boxes} />
@@ -223,7 +224,6 @@ export default function NewProjectTemplate() {
           </div>
         </div>
         <ReactCSVDownloader key={reRenderCount} boxes={boxes} />
-        <ReactCSVSaver boxes={boxes} />
         <Typography variant="h5">Upload CSV or JavaScript code</Typography>
         <input type="file" multiple onChange={handleFileUpload} />
         {data.length > 0 && <>{handleSetData()}</>}
