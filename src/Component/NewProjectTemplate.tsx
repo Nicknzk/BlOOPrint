@@ -5,8 +5,10 @@ import FlowMindMap from "./FlowMindMap";
 import ReactCSVDownloader from "./ReactCSVDownloader";
 import Papa from "papaparse";
 import parseFiles from "./Auth/parser";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ReactCSVSaver from "./ReactCSVSaver";
+import { getDownloadURL, ref, getStorage } from "firebase/storage";
+import Auth from "../firebase.tsx";
 
 export interface Box {
   id: number;
@@ -30,6 +32,8 @@ export default function NewProjectTemplate() {
   const [reRenderCount, setReRenderCount] = useState(0);
   const [data, setData] = useState<Box[]>([]); //parsing for ReactCSVUploader
   const [parserData, setParserData] = useState([]); //for Parser.tsx
+  const { projectName } = useParams();
+  const [csvDownloadURL, setCsvDownloadURL] = useState("");
 
   const handleParsedData = (data: any) => {
     setParserData(data);
@@ -200,6 +204,26 @@ export default function NewProjectTemplate() {
   };
 
   useEffect(() => {
+    const user = Auth.currentUser;
+    if (user) {
+      const email = user.email;
+      const storage = getStorage();
+      const storageRef = ref(
+        storage,
+        `Uploads/${email}/Projects/${projectName}.csv`
+      );
+
+      getDownloadURL(storageRef)
+        .then((downloadURL) => {
+          setCsvDownloadURL(downloadURL);
+        })
+        .catch((error) => {
+          console.log("Error getting CSV download URL:", error);
+        });
+    }
+  }, [projectName]);
+
+  useEffect(() => {
     setReRenderCount((prevCount) => prevCount + 1);
   }, [boxes]);
 
@@ -211,7 +235,19 @@ export default function NewProjectTemplate() {
         </Typography>
         <ReactCSVSaver boxes={boxes} />
       </div>
-
+      <Typography variant="h6">
+        Instructions: Download CSV & Upload it to render it in the mindmap
+      </Typography>
+      <a href={csvDownloadURL} download={`${projectName}.csv`}>
+        <Typography variant="h5">Download Here</Typography>
+      </a>
+      <Typography variant="h6">
+        Instructions: Upload CSV / JavaScript Code
+      </Typography>
+      <Typography variant="h5">Upload CSV or JavaScript code</Typography>
+      <input type="file" multiple onChange={handleFileUpload} />
+      {data.length > 0 && <>{handleSetData()}</>}
+      {parserData.length > 0 && <>{handleSetParserData()}</>}
       <div style={{ height: "500px", margin: "50px" }}>
         <FlowMindMap key={reRenderCount} boxes={boxes} />
       </div>
@@ -225,11 +261,6 @@ export default function NewProjectTemplate() {
         </button>
         <DragDrop />
         <ReactCSVDownloader key={reRenderCount} boxes={boxes} />
-        <Typography variant="h5">Upload CSV or JavaScript code</Typography>
-        <input type="file" multiple onChange={handleFileUpload} />
-        {data.length > 0 && <>{handleSetData()}</>}
-        {parserData.length > 0 && <>{handleSetParserData()}</>}
-
         <nav>
           <Link
             className="ProjectDetails"

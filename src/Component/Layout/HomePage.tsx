@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Typography, IconButton, Card, CardContent } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import Auth from "../../firebase.tsx";
 import {
@@ -14,6 +14,7 @@ import {
 import { Button } from "react-bootstrap";
 
 export default function HomePage() {
+  const navigate = useNavigate();
   const [projects, setProjects] = useState<
     { id: string; downloadURL: string }[]
   >([]);
@@ -131,15 +132,22 @@ export default function HomePage() {
             <Card key={project.id} style={{ width: "200px", margin: "10px" }}>
               <CardContent>
                 <Typography variant="h5">{project.id}</Typography>
-                <Link to={`/NewProjectTemplate`}>View Project</Link>
-                <Button style={{color:"black", background:"red"}}
+                <Link
+                  to={`/NewProjectTemplate/${project.id}`}
+                  onClick={() => navigate(`/NewProjectTemplate/${project.id}`)}
+                >
+                  View Project
+                </Link>
+
+                <Button
+                  style={{ color: "black", background: "red" }}
                   onClick={() =>
                     deleteFile(
                       `Uploads/${Auth.currentUser?.email}/Projects/${project.id}.csv`
                     )
                   }
                 >
-                  <Typography >Delete</Typography>
+                  <Typography>Delete</Typography>
                 </Button>
               </CardContent>
             </Card>

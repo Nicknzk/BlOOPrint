@@ -46,6 +46,14 @@ export default function PageRouting({ isAuthenticated }: any) {
             }
           />
           <Route
+            path="/NewProjectTemplate/:projectName" // Add URL parameter ":projectName"
+            element={
+              <PrivateRoute isAuthenticated={isAuthenticated}>
+                <NewProjectTemplate />
+              </PrivateRoute>
+            }
+          />
+          <Route
             path="/ProjectTemplate"
             element={
               <PrivateRoute isAuthenticated={isAuthenticated}>
