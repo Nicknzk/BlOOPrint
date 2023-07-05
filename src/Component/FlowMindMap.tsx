@@ -10,6 +10,7 @@ import ReactFlow, {
 
 import "reactflow/dist/style.css";
 import { Box } from "./NewProjectTemplate";
+import { Paper } from "@mui/material";
 
 export default function FlowMindMap({ boxes }: { boxes: Box[] }) {
   const initialNodes = boxes.map((box, index) => {
@@ -47,18 +48,20 @@ export default function FlowMindMap({ boxes }: { boxes: Box[] }) {
   setNodes; //does nothing but prevent error of not using setNodes
 
   return (
-    <div style={{ width: "70vw", height: "70vh" }}>
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
-      >
-        <Controls />
-        <MiniMap zoomable pannable />
-        <Background gap={16} color="#aaa" size={3} />
-      </ReactFlow>
-    </div>
+    <Paper variant="outlined" style={{ padding: "20px" }}>
+      <div style={{ width: "70vw", height: "70vh" }}>
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+        >
+          <Controls />
+          <MiniMap zoomable pannable />
+          <Background gap={16} color="#aaa" size={3} />
+        </ReactFlow>
+      </div>
+    </Paper>
   );
 }

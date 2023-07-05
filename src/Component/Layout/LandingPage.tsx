@@ -15,6 +15,7 @@ import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import databasepic from "../Images/database pic.jpg";
 import howitworks from "../Images/how it works.jpg";
 import comingsoon from "../Images/coming-soon.jpg";
+import "../../CSS-Folder/LandingPage.css";
 
 function CustomLink({
   to,
@@ -69,7 +70,11 @@ export default function LandingPage() {
                       color: "white",
                     }}
                   >
-                    <Typography variant="h5">About Us</Typography>
+                    <a href="#about-us" style={{ color: "white" }}>
+                      <Typography variant="h5" className="link-text">
+                        About Us
+                      </Typography>
+                    </a>
                   </span>
                 </ListItem>
                 <ListItem
@@ -84,7 +89,11 @@ export default function LandingPage() {
                       color: "white",
                     }}
                   >
-                    <Typography variant="h5">How it Works </Typography>
+                    <a href="#how-it-works" style={{ color: "white" }}>
+                      <Typography variant="h5" className="link-text">
+                        How it Works{" "}
+                      </Typography>
+                    </a>
                   </span>
                 </ListItem>
                 <ListItem
@@ -99,6 +108,7 @@ export default function LandingPage() {
                       <Typography
                         variant="h5"
                         style={{ color: "white", textDecoration: "none" }}
+                        className="link-text"
                       >
                         Login
                       </Typography>
@@ -126,6 +136,7 @@ export default function LandingPage() {
                         <Typography
                           variant="h5"
                           style={{ color: "white", textDecoration: "none" }}
+                          className="link-text"
                         >
                           Get Started
                         </Typography>
@@ -178,9 +189,11 @@ export default function LandingPage() {
         </div>
 
         <div style={{ marginTop: "300px" }}>
-          <Typography variant="h1" id="about" style={{ textAlign: "center" }}>
-            About Us
-          </Typography>
+          <div id="about-us">
+            <Typography variant="h1" id="about" style={{ textAlign: "center" }}>
+              About Us
+            </Typography>
+          </div>
         </div>
 
         <div style={{ textAlign: "right" }}>
@@ -195,17 +208,19 @@ export default function LandingPage() {
         </div>
 
         <div style={{ marginBottom: "300px" }}>
-          <Typography
-            variant="h1"
-            id="howitworks"
-            style={{
-              textAlign: "center",
-              marginTop: "200px",
-              marginBottom: "200px",
-            }}
-          >
-            How it Works
-          </Typography>
+          <div id="how-it-works">
+            <Typography
+              variant="h1"
+              id="howitworks"
+              style={{
+                textAlign: "center",
+                marginTop: "200px",
+                marginBottom: "200px",
+              }}
+            >
+              How it Works
+            </Typography>
+          </div>
           <Grid container spacing={2}>
             <Grid item xs={4}>
               <Card>
@@ -252,6 +267,11 @@ export default function LandingPage() {
             </Grid>
           </Grid>
         </div>
+        <a href="#" style={{ color: "white", textAlign: "center" }}>
+          <Typography variant="h5" className="link-text">
+            Go to Top
+          </Typography>
+        </a>
       </div>
     </>
   );

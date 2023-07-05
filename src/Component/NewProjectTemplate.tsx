@@ -1,4 +1,15 @@
-import { Typography } from "@mui/material";
+import {
+  Typography,
+  Grid,
+  TableContainer,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+  Paper,
+  Button,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import DragDrop from "./DragDrop";
 import FlowMindMap from "./FlowMindMap";
@@ -235,43 +246,93 @@ export default function NewProjectTemplate() {
         </Typography>
         <ReactCSVSaver boxes={boxes} />
       </div>
-      <Typography variant="h6">
-        Instructions: Download CSV & Upload it to render it in the mindmap
-      </Typography>
-      <a href={csvDownloadURL} download={`${projectName}.csv`}>
-        <Typography variant="h5">Download Here</Typography>
-      </a>
-      <Typography variant="h6">
-        Instructions: Upload CSV / JavaScript Code
-      </Typography>
-      <Typography variant="h5">Upload CSV or JavaScript code</Typography>
-      <input type="file" multiple onChange={handleFileUpload} />
-      {data.length > 0 && <>{handleSetData()}</>}
-      {parserData.length > 0 && <>{handleSetParserData()}</>}
-      <div style={{ height: "500px", margin: "50px" }}>
-        <FlowMindMap key={reRenderCount} boxes={boxes} />
-      </div>
+      <TableContainer component={Paper} style={{ marginTop: "20px" }}>
+        <Table>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Typography variant="h6">
+                  Instructions: Download CSV & Upload it to render it in the
+                  mindmap
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <a href={csvDownloadURL} download={`${projectName}.csv`}>
+                  <Typography variant="h5">Download Here</Typography>
+                </a>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Typography variant="h6">
+                  Instructions: Upload CSV / JavaScript Code
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="h5">
+                  Upload CSV or JavaScript code
+                </Typography>
+                <input type="file" multiple onChange={handleFileUpload} />
+                {data.length > 0 && <>{handleSetData()}</>}
+                {parserData.length > 0 && <>{handleSetParserData()}</>}
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Typography variant="h6">
+                  Instructions: Click to download current mindmap as a CSV File
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <ReactCSVDownloader key={reRenderCount} boxes={boxes} />
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Typography variant="h6">
+                  Instructions: Click to view project details
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <nav>
+                  <Link
+                    className="ProjectDetails"
+                    to={{
+                      pathname: "/ProjectDetails",
+                      search: `?boxes=${encodeURIComponent(
+                        JSON.stringify(boxes)
+                      )}`, // Pass boxes as a search parameter
+                    }}
+                  >
+                    <Typography variant="h5">View Project Details</Typography>
+                  </Link>
+                </nav>
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </TableContainer>
+
+      <Grid container spacing={2}>
+        <Grid item xs={9}>
+          <div style={{ height: "500px", margin: "50px" }}>
+            <FlowMindMap key={reRenderCount} boxes={boxes} />
+          </div>
+        </Grid>
+        <Grid item xs={3}>
+          <div style={{ marginTop: "15%" }}>
+            <Button
+              className="contained"
+              onClick={handleClearAll}
+              style={{ color: "cyan", backgroundColor: "blue" }}
+            >
+              Clear All
+            </Button>
+          </div>
+        </Grid>
+      </Grid>
       <div style={{ marginTop: "15%" }}>
-        <button
-          className="contained"
-          onClick={handleClearAll}
-          style={{ color: "cyan", backgroundColor: "blue" }}
-        >
-          Clear All
-        </button>
         <DragDrop />
-        <ReactCSVDownloader key={reRenderCount} boxes={boxes} />
-        <nav>
-          <Link
-            className="ProjectDetails"
-            to={{
-              pathname: "/ProjectDetails",
-              search: `?boxes=${encodeURIComponent(JSON.stringify(boxes))}`, // Pass boxes as a search parameter
-            }}
-          >
-            <Typography variant="h5">View Project Details</Typography>
-          </Link>
-        </nav>
         <div className="Container">
           <div>
             <input //this is the Name text box
@@ -280,7 +341,7 @@ export default function NewProjectTemplate() {
               onChange={handleNewBoxNameChange}
               placeholder="Enter box name"
             />
-            <button onClick={handleAddBox}>
+            <button onClick={handleAddBox} style={{ marginLeft: "5px" }}>
               <Typography variant="h5">Add Box</Typography>
             </button>
           </div>
