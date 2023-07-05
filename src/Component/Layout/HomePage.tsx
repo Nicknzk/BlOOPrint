@@ -121,9 +121,15 @@ export default function HomePage() {
 
   return (
     <>
-      <div style={{ background: "#054A91", paddingBottom: "1000px" }}>
+      <div
+        style={{
+          background: "linear-gradient(to left, #054A91, #007bff)",
+          minHeight: "100vh",
+          paddingBottom: "100px",
+        }}
+      >
         <Typography variant="h2" style={{ marginBottom: "100px" }}>
-          Home
+          Homepage
         </Typography>
 
         <Typography variant="h4">Existing Projects</Typography>

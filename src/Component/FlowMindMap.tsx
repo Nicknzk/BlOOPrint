@@ -49,7 +49,7 @@ export default function FlowMindMap({ boxes }: { boxes: Box[] }) {
 
   return (
     <Paper variant="outlined" style={{ padding: "20px" }}>
-      <div style={{ width: "70vw", height: "70vh" }}>
+      <div style={{ width: "67vw", height: "70vh" }}>
         <ReactFlow
           nodes={nodes}
           edges={edges}

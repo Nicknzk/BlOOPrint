@@ -21,8 +21,14 @@ export default function App() {
     <>
       <div className="app-standard">
         <PageRouting isAuthenticated={authUser} />
-        <div className="permanent-icon-at-side"></div>
-        {<AuthDetails onAuthStatusChange={handleAuthStatusChange} />}
+        <div
+          style={{
+            background: "linear-gradient(to left, #054A91, #007bff)",
+          }}
+        >
+          {" "}
+          {<AuthDetails onAuthStatusChange={handleAuthStatusChange} />}
+        </div>
       </div>
     </>
   );

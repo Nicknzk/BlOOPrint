@@ -3,7 +3,6 @@ import {
   Grid,
   TableContainer,
   Table,
-  TableHead,
   TableBody,
   TableRow,
   TableCell,
@@ -240,184 +239,200 @@ export default function NewProjectTemplate() {
 
   return (
     <>
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <Typography variant="h2" style={{ marginRight: "10px" }}>
-          Project Name:
-        </Typography>
-        <ReactCSVSaver boxes={boxes} />
-      </div>
-      <TableContainer component={Paper} style={{ marginTop: "20px" }}>
-        <Table>
-          <TableBody>
-            <TableRow>
-              <TableCell>
-                <Typography variant="h6">
-                  Instructions: Download CSV & Upload it to render it in the
-                  mindmap
-                </Typography>
-              </TableCell>
-              <TableCell>
-                <a href={csvDownloadURL} download={`${projectName}.csv`}>
-                  <Typography variant="h5">Download Here</Typography>
-                </a>
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <Typography variant="h6">
-                  Instructions: Upload CSV / JavaScript Code
-                </Typography>
-              </TableCell>
-              <TableCell>
-                <Typography variant="h5">
-                  Upload CSV or JavaScript code
-                </Typography>
-                <input type="file" multiple onChange={handleFileUpload} />
-                {data.length > 0 && <>{handleSetData()}</>}
-                {parserData.length > 0 && <>{handleSetParserData()}</>}
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <Typography variant="h6">
-                  Instructions: Click to download current mindmap as a CSV File
-                </Typography>
-              </TableCell>
-              <TableCell>
-                <ReactCSVDownloader key={reRenderCount} boxes={boxes} />
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <Typography variant="h6">
-                  Instructions: Click to view project details
-                </Typography>
-              </TableCell>
-              <TableCell>
-                <nav>
-                  <Link
-                    className="ProjectDetails"
-                    to={{
-                      pathname: "/ProjectDetails",
-                      search: `?boxes=${encodeURIComponent(
-                        JSON.stringify(boxes)
-                      )}`, // Pass boxes as a search parameter
-                    }}
-                  >
-                    <Typography variant="h5">View Project Details</Typography>
-                  </Link>
-                </nav>
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <div
+        style={{
+          background: "linear-gradient(to left, #054A91, #007bff)",
+          minHeight: "100vh",
+          paddingBottom: "50px",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <Typography
+            variant="h1"
+            style={{ marginRight: "10px", color: "white" }}
+          >
+            Project Name:
+          </Typography>
+          <ReactCSVSaver boxes={boxes} />
+        </div>
+        <TableContainer component={Paper} style={{ marginTop: "20px" }}>
+          <Table>
+            <TableBody>
+              <TableRow>
+                <TableCell>
+                  <Typography variant="h6">
+                    Instructions: Download CSV & Upload it to render it in the
+                    mindmap
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <a href={csvDownloadURL} download={`${projectName}.csv`}>
+                    <Typography variant="h5">Download Here</Typography>
+                  </a>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>
+                  <Typography variant="h6">
+                    Instructions: Upload CSV / JavaScript Code
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="h5">
+                    Upload CSV or JavaScript code
+                  </Typography>
+                  <input type="file" multiple onChange={handleFileUpload} />
+                  {data.length > 0 && <>{handleSetData()}</>}
+                  {parserData.length > 0 && <>{handleSetParserData()}</>}
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>
+                  <Typography variant="h6">
+                    Instructions: Click to download current mindmap as a CSV
+                    File
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <ReactCSVDownloader key={reRenderCount} boxes={boxes} />
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>
+                  <Typography variant="h6">
+                    Instructions: Click to view project details
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <nav>
+                    <Link
+                      className="ProjectDetails"
+                      to={{
+                        pathname: "/ProjectDetails",
+                        search: `?boxes=${encodeURIComponent(
+                          JSON.stringify(boxes)
+                        )}`, // Pass boxes as a search parameter
+                      }}
+                    >
+                      <Typography variant="h5">View Project Details</Typography>
+                    </Link>
+                  </nav>
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
 
-      <Grid container spacing={2}>
-        <Grid item xs={9}>
-          <div style={{ height: "500px", margin: "50px" }}>
-            <FlowMindMap key={reRenderCount} boxes={boxes} />
-          </div>
+        <Grid container spacing={2}>
+          <Grid item xs={9}>
+            <div style={{ height: "500px", margin: "50px" }}>
+              <FlowMindMap key={reRenderCount} boxes={boxes} />
+            </div>
+          </Grid>
+          <Grid item xs={3}>
+            <div style={{ marginTop: "15%" }}>
+              <Button
+                className="contained"
+                onClick={handleClearAll}
+                style={{ color: "cyan", backgroundColor: "blue" }}
+              >
+                Clear All
+              </Button>
+            </div>
+          </Grid>
         </Grid>
-        <Grid item xs={3}>
-          <div style={{ marginTop: "15%" }}>
-            <Button
-              className="contained"
-              onClick={handleClearAll}
-              style={{ color: "cyan", backgroundColor: "blue" }}
-            >
-              Clear All
-            </Button>
-          </div>
-        </Grid>
-      </Grid>
-      <div style={{ marginTop: "15%" }}>
-        <DragDrop />
-        <div className="Container">
-          <div>
-            <input //this is the Name text box
-              type="text"
-              value={newBoxName}
-              onChange={handleNewBoxNameChange}
-              placeholder="Enter box name"
-            />
-            <button onClick={handleAddBox} style={{ marginLeft: "5px" }}>
-              <Typography variant="h5">Add Box</Typography>
-            </button>
-          </div>
-          {boxes.map((box) => (
-            <div key={box.id} className="Box">
-              <input
+        <div style={{ marginTop: "15%" }}>
+          <DragDrop />
+          <div className="Container">
+            <div>
+              <input //this is the Name text box
                 type="text"
-                value={box.name}
-                onChange={(event) => {
-                  const updatedBoxes = boxes.map((b) => {
-                    //the b variable simply refers to an arbitrary box
-                    if (b.id === box.id) {
-                      return { ...b, name: event.target.value };
-                    }
-                    return b;
-                  });
-                  setBoxes(updatedBoxes); //empty out...
-                }}
+                value={newBoxName}
+                onChange={handleNewBoxNameChange}
+                placeholder="Enter box name"
               />
-              <div>
-                <input
-                  type="text"
-                  value={newDependency}
-                  onChange={(event) => setNewDependency(event.target.value)}
-                  placeholder="Enter dependency"
-                />
-                <button onClick={() => handleAddDependency(box.id)}>
-                  <Typography variant="h5">Add Dependencies</Typography>
-                </button>
-              </div>
-              {box.dependencies.map((dependency, index) => (
-                <div key={dependency}>
-                  <input
-                    type="text"
-                    value={dependency}
-                    onChange={(event) =>
-                      handleDependencyChange(box.id, index, event.target.value)
-                    }
-                  />
-                  <button
-                    onClick={() => handleDeleteDependency(box.id, dependency)}
-                  >
-                    <Typography variant="h5">Delete Dependency</Typography>
-                  </button>
-                </div>
-              ))}
-              <div>
-                <input
-                  type="text"
-                  value={newMethod}
-                  onChange={(event) => setNewMethod(event.target.value)}
-                  placeholder="Enter method"
-                />
-                <button onClick={() => handleAddMethod(box.id)}>
-                  <Typography variant="h5">Add Method</Typography>
-                </button>
-              </div>
-              {box.methods.map((method, index) => (
-                <div key={method}>
-                  <input
-                    type="text"
-                    value={method}
-                    onChange={(event) =>
-                      handleMethodChange(box.id, index, event.target.value)
-                    }
-                  />
-                  <button onClick={() => handleDeleteMethod(box.id, method)}>
-                    <Typography variant="h5">Delete Method</Typography>
-                  </button>
-                </div>
-              ))}
-              <button onClick={() => handleDeleteBox(box.id)}>
-                <Typography variant="h5">Delete</Typography>
+              <button onClick={handleAddBox} style={{ marginLeft: "5px" }}>
+                <Typography variant="h5">Add Box</Typography>
               </button>
             </div>
-          ))}
+            {boxes.map((box) => (
+              <div key={box.id} className="Box">
+                <input
+                  type="text"
+                  value={box.name}
+                  onChange={(event) => {
+                    const updatedBoxes = boxes.map((b) => {
+                      //the b variable simply refers to an arbitrary box
+                      if (b.id === box.id) {
+                        return { ...b, name: event.target.value };
+                      }
+                      return b;
+                    });
+                    setBoxes(updatedBoxes); //empty out...
+                  }}
+                />
+                <div>
+                  <input
+                    type="text"
+                    value={newDependency}
+                    onChange={(event) => setNewDependency(event.target.value)}
+                    placeholder="Enter dependency"
+                  />
+                  <button onClick={() => handleAddDependency(box.id)}>
+                    <Typography variant="h5">Add Dependencies</Typography>
+                  </button>
+                </div>
+                {box.dependencies.map((dependency, index) => (
+                  <div key={dependency}>
+                    <input
+                      type="text"
+                      value={dependency}
+                      onChange={(event) =>
+                        handleDependencyChange(
+                          box.id,
+                          index,
+                          event.target.value
+                        )
+                      }
+                    />
+                    <button
+                      onClick={() => handleDeleteDependency(box.id, dependency)}
+                    >
+                      <Typography variant="h5">Delete Dependency</Typography>
+                    </button>
+                  </div>
+                ))}
+                <div>
+                  <input
+                    type="text"
+                    value={newMethod}
+                    onChange={(event) => setNewMethod(event.target.value)}
+                    placeholder="Enter method"
+                  />
+                  <button onClick={() => handleAddMethod(box.id)}>
+                    <Typography variant="h5">Add Method</Typography>
+                  </button>
+                </div>
+                {box.methods.map((method, index) => (
+                  <div key={method}>
+                    <input
+                      type="text"
+                      value={method}
+                      onChange={(event) =>
+                        handleMethodChange(box.id, index, event.target.value)
+                      }
+                    />
+                    <button onClick={() => handleDeleteMethod(box.id, method)}>
+                      <Typography variant="h5">Delete Method</Typography>
+                    </button>
+                  </div>
+                ))}
+                <button onClick={() => handleDeleteBox(box.id)}>
+                  <Typography variant="h5">Delete</Typography>
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>

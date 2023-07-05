@@ -43,7 +43,7 @@ export default function LandingPage() {
         style={{
           background: "linear-gradient(to left, #054A91, #007bff)",
           minHeight: "100vh",
-          paddingBottom: "100px",
+          paddingBottom: "50px",
         }}
       >
         <div>
