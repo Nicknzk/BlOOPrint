@@ -17,21 +17,31 @@ export default function SignUp() {
   let messages: string[] = [];
 
   function passTest() {
-    setAlertShow(""); //password format
+    setAlertShow(""); // Clear previous messages
+    let hasRequirements = false; // Flag to track if any requirements are met
+
     if (password.length < 8) {
-      messages.push("Password must be minimum 8 characters");
+      messages.push("Password must be minimum 8 characters\n");
+      hasRequirements = true;
     }
 
     if (password.length > 20) {
-      messages.push("Password cannot exceed 20 characters");
+      messages.push("Password cannot exceed 20 characters\n");
+      hasRequirements = true;
     }
 
     if (password.search(/[a-z]/i) < 0) {
-      messages.push("Password must contain atleast one letter");
+      messages.push("Password must contain at least one letter\n");
+      hasRequirements = true;
     }
 
     if (password.search(/[0-9]/) < 0) {
-      messages.push("Password must contain atleast one number");
+      messages.push("Password must contain at least one number\n");
+      hasRequirements = true;
+    }
+
+    if (hasRequirements) {
+      messages.unshift("Password Requirements:\n"); // Add the requirements message at the beginning
     }
   }
 
@@ -73,10 +83,27 @@ export default function SignUp() {
           zIndex: "-1",
         }}
       />
-      <div className="sign-in-container log-in-box">
-        <Card style={{ width: "400px", marginRight: "0", marginLeft: "auto" }}>
+      <div
+        className="sign-in-container log-in-box"
+        style={{
+          position: "relative",
+          top: "25px",
+          left: "25px",
+          border: "3px solid #ccc",
+          borderRadius: "20px",
+          borderColor: "black",
+          width: "500px",
+        }}
+      >
+        <Card
+          style={{
+            borderRadius: "20px", // Set the border radius here
+            padding: "20px",
+            margin: "0 auto", // To center the login box horizontally
+          }}
+        >
           <Card.Body>
-            <Typography variant="h4" className="text-center mb-4">
+            <Typography variant="h3" className="text-center mb-4">
               Create Account
             </Typography>
             <Form onSubmit={signUp}>
@@ -119,10 +146,29 @@ export default function SignUp() {
           </Card.Body>
         </Card>
       </div>
-      <div>{alertShow.length > 0 && <Alert>{alertShow}</Alert>}</div>
+      <div
+        style={{
+          position: "absolute",
+          top: "100px",
+          right: "770px",
+          width: "400px",
+          marginRight: "200px", // Adjust the value to position the alert on the right
+        }}
+      >
+        {alertShow.length > 0 && (
+          <Alert>
+            {alertShow.split("\n").map((message, index) => (
+              <div key={index}>{message}</div>
+            ))}
+          </Alert>
+        )}
+      </div>
       <Button
         variant="contained"
         style={{
+          position: "fixed",
+          bottom: "20px",
+          left: "20px",
           backgroundColor: "#ECA400",
           color: "white",
           textTransform: "none",
@@ -130,9 +176,9 @@ export default function SignUp() {
         }}
       >
         <nav>
-          <Link to={"../"}>
+          <Link to={"../"} style={{ textDecoration: "none" }}>
             <Typography variant="h4" style={{ color: "black" }}>
-              Back to Landing Page
+              Back
             </Typography>
           </Link>
         </nav>

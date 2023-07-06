@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import auth from "../../firebase";
 import { Link } from "react-router-dom";
 import { Button, Typography } from "@mui/material";
+import { Container, Alert } from "react-bootstrap";
 
 interface AuthDetailsProps {
   onAuthStatusChange?: (choice: boolean) => void;
@@ -72,24 +73,40 @@ export default function AuthDetails({ onAuthStatusChange }: AuthDetailsProps) {
             <Typography variant="h6">{`Signed In as ${authUser.email}`}</Typography>
 
             <div
-              style={{ position: "fixed", top: 0, right: 0, margin: "16px" }}
+              style={{
+                position: "absolute",
+                bottom: "10px",
+                right: "10px",
+                margin: "16px",
+              }}
             >
               <Button
                 variant="contained"
                 onClick={userSignOut}
                 className="auth-page-button"
-                style={{ backgroundColor: "red", color: "black" }}
+                style={{
+                  backgroundColor: "red",
+                  color: "black",
+                }}
               >
                 <Typography variant="h6">Sign Out</Typography>
               </Button>
             </div>
           </>
         ) : (
-          <div className="email-verification-message">
-            <Typography variant="h5" style={{ fontSize: 20 }}>
-              Email Verification is not complete.
-            </Typography>
-            <Typography variant="h5">Do check spam / junk folder</Typography>
+          <div
+            style={{
+              position: "absolute",
+              bottom: "50%",
+              left: "1.2%",
+              width: "15%",
+              padding: "10px",
+            }}
+          >
+            <Alert variant="warning" className="email-verification-alert">
+              <Alert.Heading>Email Verification is not complete.</Alert.Heading>
+              <p>Do check spam / junk folder</p>
+            </Alert>
           </div>
         ))}
     </div>

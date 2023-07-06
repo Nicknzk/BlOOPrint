@@ -148,39 +148,64 @@ export default function LandingPage() {
             </Toolbar>
           </AppBar>
         </div>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <div
+            style={{ width: "400px", marginTop: "100px", marginLeft: "100px" }}
+          >
+            <Typography className="landing-page" variant="h2">
+              Understanding and Documenting code doesn't have to be complicated
+            </Typography>
 
-        <div
-          style={{ width: "400px", marginTop: "100px", marginLeft: "100px" }}
-        >
-          <Typography className="landing-page" variant="h2">
-            Understanding and Documenting code doesn't have to be complicated
-          </Typography>
+            <div style={{ marginTop: "30px" }}>
+              <Button
+                variant="contained"
+                color="primary"
+                style={{
+                  backgroundColor: "#ECA400",
+                  color: "#FFFFFF",
+                  textTransform: "none",
+                  borderRadius: "20px",
+                }}
+              >
+                <Link
+                  to="/SignUp"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <Typography
+                    variant="h2"
+                    style={{
+                      color: "black",
+                      fontSize: "65px",
+                    }}
+                  >
+                    Let's Get Started
+                  </Typography>
+                </Link>
+              </Button>
+            </div>
+          </div>
 
-          <div style={{ marginTop: "30px" }}>
-            <Button
-              variant="contained"
-              color="primary"
+          <div style={{ marginLeft: "40px" }}>
+            <Typography
+              variant="h1"
               style={{
-                backgroundColor: "#ECA400",
-                color: "#FFFFFF",
-                textTransform: "none",
-                borderRadius: "20px",
+                marginTop: "300px",
+                marginLeft: "150px",
+                fontSize: "200px",
+                color: "white",
+                fontFamily: "Arial, sans-serif",
+                fontWeight: "bold",
+                textShadow: "20px 10px 4px rgba(0, 0, 0, 0.5)",
               }}
             >
-              <Link
-                to="/SignUp"
-                style={{ textDecoration: "none", color: "inherit" }}
-              >
-                <Typography variant="h2" style={{ color: "black" }}>
-                  Let's Get Started
-                </Typography>
-              </Link>
-            </Button>
+              BLOOPrint
+            </Typography>
           </div>
         </div>
-
         <div style={{ marginTop: "20px", marginLeft: "40px" }}>
-          <Typography variant="h4">Supports:</Typography>
+          <Typography variant="h4" style={{ fontWeight: "bold" }}>
+            Supports:
+          </Typography>
           <img
             src={JS}
             alt="JavaScript"
@@ -190,7 +215,15 @@ export default function LandingPage() {
 
         <div style={{ marginTop: "300px" }}>
           <div id="about-us">
-            <Typography variant="h1" id="about" style={{ textAlign: "center" }}>
+            <Typography
+              variant="h1"
+              id="about"
+              style={{
+                textAlign: "center",
+                fontWeight: "bold",
+                color: "white",
+              }}
+            >
               About Us
             </Typography>
           </div>
@@ -199,7 +232,16 @@ export default function LandingPage() {
         <div style={{ textAlign: "right" }}>
           <Typography
             variant="h4"
-            style={{ width: "400px", marginTop: "100px" }}
+            style={{
+              width: "700px",
+              marginTop: "100px",
+              marginLeft: "auto",
+              marginRight: "auto",
+              fontFamily: "Arial, sans-serif",
+              fontStyle: "italic",
+              fontWeight: "normal",
+              fontSize: "48px",
+            }}
           >
             Object Oriented Programming can get complex. With BlOOPrint,
             debugging and documentation is made easier and better. BlOOPrint
@@ -216,6 +258,8 @@ export default function LandingPage() {
                 textAlign: "center",
                 marginTop: "200px",
                 marginBottom: "200px",
+                fontWeight: "bold",
+                color: "white",
               }}
             >
               How it Works

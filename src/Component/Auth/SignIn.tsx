@@ -37,12 +37,29 @@ export default function SignIn() {
         }}
       />
 
-      <div className="log-in-box">
+      <div
+        className="log-in-box"
+        style={{
+          position: "relative",
+          top: "25px",
+          left: "25px",
+          border: "3px solid #ccc",
+          borderRadius: "20px",
+          borderColor: "black",
+          width: "500px",
+        }}
+      >
         <div className="sign-in-container">
-          <Card>
+          <Card
+            style={{
+              borderRadius: "20px", // Set the border radius here
+              padding: "20px",
+              margin: "0 auto", // To center the login box horizontally
+            }}
+          >
             <Card.Body>
-              <Typography variant="h4" className="text-center mb-4">
-                Log In to your Account
+              <Typography variant="h3" className="text-center mb-4">
+                Login
               </Typography>
               <Form onSubmit={signIn}>
                 <Form.Group className="text-center">
@@ -86,6 +103,9 @@ export default function SignIn() {
       <Button
         variant="contained"
         style={{
+          position: "fixed",
+          bottom: "20px",
+          left: "20px",
           backgroundColor: "#ECA400",
           color: "white",
           textTransform: "none",
@@ -93,9 +113,9 @@ export default function SignIn() {
         }}
       >
         <nav>
-          <Link to={"../"}>
+          <Link to={"../"} style={{ textDecoration: "none" }}>
             <Typography variant="h4" style={{ color: "black" }}>
-              Back to Landing Page
+              Back
             </Typography>
           </Link>
         </nav>

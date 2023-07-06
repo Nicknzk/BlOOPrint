@@ -128,39 +128,97 @@ export default function HomePage() {
           paddingBottom: "100px",
         }}
       >
-        <Typography variant="h2" style={{ marginBottom: "100px" }}>
-          Homepage
+        <Typography
+          variant="h1"
+          style={{
+            marginLeft: "150px",
+            paddingTop: "30px",
+            fontSize: "120px",
+            color: "white",
+            fontFamily: "Arial, sans-serif",
+            fontWeight: "bold",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+            marginBottom: "40px",
+          }}
+        >
+          BLOOPrint Homepage
         </Typography>
 
-        <Typography variant="h4">Existing Projects</Typography>
-        <div style={{ display: "flex", flexWrap: "wrap" }}>
-          {projects.map((project) => (
-            <Card key={project.id} style={{ width: "200px", margin: "10px" }}>
-              <CardContent>
-                <Typography variant="h5">{project.id}</Typography>
-                <Link
-                  to={`/NewProjectTemplate/${project.id}`}
-                  onClick={() => navigate(`/NewProjectTemplate/${project.id}`)}
-                >
-                  View Project
-                </Link>
+        <Typography
+          variant="h4"
+          style={{
+            color: "white",
+            display: "flex",
+            justifyContent: "center",
+            fontSize: "56px",
+          }}
+        >
+          Existing Projects:
+        </Typography>
+        <div
+          style={{
+            border: "2px solid white",
+            borderRadius: "8px",
+            padding: "10px",
+            margin: "10px",
+          }}
+        >
+          <div style={{ display: "flex", flexWrap: "wrap" }}>
+            {projects.map((project) => (
+              <Card key={project.id} style={{ width: "300px", margin: "10px" }}>
+                <CardContent>
+                  <div style={{ float: "left" }}>
+                    <Typography variant="h5" style={{ wordWrap: "break-word" }}>
+                      {project.id}
+                    </Typography>
+                    <Link
+                      to={`/NewProjectTemplate/${project.id}`}
+                      onClick={() =>
+                        navigate(`/NewProjectTemplate/${project.id}`)
+                      }
+                    >
+                      <Typography variant="h6">View Project</Typography>
+                    </Link>
+                  </div>
 
-                <Button
-                  style={{ color: "black", background: "red" }}
-                  onClick={() =>
-                    deleteFile(
-                      `Uploads/${Auth.currentUser?.email}/Projects/${project.id}.csv`
-                    )
-                  }
-                >
-                  <Typography>Delete</Typography>
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
+                  <Button
+                    style={{
+                      color: "black",
+                      background: "red",
+                      marginTop: "10px",
+                      marginLeft: "30px",
+                    }}
+                    onClick={() =>
+                      deleteFile(
+                        `Uploads/${Auth.currentUser?.email}/Projects/${project.id}.csv`
+                      )
+                    }
+                  >
+                    <Typography variant="h6">Delete</Typography>
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
-        <Typography variant="h4">Create New Project</Typography>
-        <div>
+        <Typography
+          variant="h4"
+          style={{
+            color: "white",
+            display: "flex",
+            justifyContent: "center",
+            fontSize: "56px",
+          }}
+        >
+          Create New Project:
+        </Typography>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "20px",
+          }}
+        >
           <nav>
             <Link
               to={`/NewProjectTemplate`}
@@ -174,14 +232,30 @@ export default function HomePage() {
                     console.log("Error creating CSV file:", error);
                   });
               }}
+              style={{ textDecoration: "none" }}
             >
               <IconButton
                 color="primary"
                 aria-label="add"
-                style={{ fontSize: "64px", width: "100px", height: "100px" }}
+                style={{
+                  width: "150px",
+                  height: "150px",
+                  backgroundColor: "#ECA400",
+                }}
               >
-                <AddIcon style={{ fontSize: "100px", color: "" }} />
+                <AddIcon style={{ fontSize: "100px", color: "#FFFFFF" }} />
               </IconButton>
+              <Typography
+                variant="h5"
+                style={{
+                  color: "#FFFFFF",
+                  marginTop: "10px",
+                  justifyContent: "center",
+                  marginLeft: "20px",
+                }}
+              >
+                Click Here!
+              </Typography>
             </Link>
           </nav>
         </div>
