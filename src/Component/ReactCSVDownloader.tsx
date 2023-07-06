@@ -32,23 +32,40 @@ export default function ReactCSVDownloader({ boxes }: { boxes: Box[] }) {
     <>
       <div
         className="react-csv"
-        style={{ display: "flex", alignItems: "center" }}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          marginLeft: "5px",
+          textDecoration: "none",
+          backgroundColor: "blue",
+          padding: "4px",
+          borderRadius: "5px",
+        }}
       >
         <input
           type="text"
           value={boxName}
           onChange={handleNewBoxNameChange}
           placeholder="Type File Name Here"
+          style={{ textDecoration: "none" }}
         />
         <div className="download-csv">
           <CSVLink
             data={data}
             filename={boxName}
             target="_Blank"
-            style={{ color: "black" }}
+            style={{ color: "black", textDecoration: "none" }}
             onClick={handleSubmit}
           >
-            <Typography variant="h5" style={{ marginLeft: "5px" }}>
+            <Typography
+              variant="h5"
+              style={{
+                marginLeft: "5px",
+                textDecoration: "none",
+                borderRadius: "5px",
+                color: "white",
+              }}
+            >
               Download
             </Typography>
           </CSVLink>

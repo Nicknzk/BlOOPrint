@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import auth from "../../firebase";
 import { Link } from "react-router-dom";
 import { Button, Typography } from "@mui/material";
-import { Container, Alert } from "react-bootstrap";
+import { Alert } from "react-bootstrap";
+import "../../CSS-Folder/Auth.css";
 
 interface AuthDetailsProps {
   onAuthStatusChange?: (choice: boolean) => void;
@@ -72,14 +73,7 @@ export default function AuthDetails({ onAuthStatusChange }: AuthDetailsProps) {
             </nav>
             <Typography variant="h6">{`Signed In as ${authUser.email}`}</Typography>
 
-            <div
-              style={{
-                position: "absolute",
-                bottom: "10px",
-                right: "10px",
-                margin: "16px",
-              }}
-            >
+            <div className="sign-out-container">
               <Button
                 variant="contained"
                 onClick={userSignOut}

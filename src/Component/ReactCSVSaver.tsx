@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Typography } from "@mui/material";
+import { Typography, Grid, TextField, Button } from "@mui/material";
 import Papa from "papaparse";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Auth from "../firebase.tsx";
@@ -73,26 +73,51 @@ export default function ReactCSVSaver({ boxes }: ReactCSVSaverProps) {
 
   return (
     <>
-      <div
-        className="react-csv"
-        style={{ display: "flex", alignItems: "center" }}
-      >
-        <input
-          type="text"
-          value={boxName}
-          onChange={handleNewBoxNameChange}
-          placeholder="Type File Name Here"
-          style={{ marginRight: "10px", fontSize: "3.0rem" }}
-        />
-        <div className="download-csv" style={{ marginLeft: "auto" }}>
-          <button
+      <Grid container spacing={2} alignItems="center">
+        <Grid item>
+          <Typography
+            variant="h3"
+            style={{
+              marginRight: "10px",
+              color: "white",
+              marginLeft: "100px",
+              marginTop: "30px",
+              fontSize: "2.5rem",
+              fontWeight: "bold",
+            }}
+          >
+            Project Name:
+          </Typography>
+        </Grid>
+        <Grid item style={{ marginTop: "30px" }}>
+          <TextField
+            type="text"
+            value={boxName}
+            onChange={handleNewBoxNameChange}
+            placeholder="Type File Name Here"
+            style={{
+              fontSize: "2.0rem",
+              backgroundColor: "white",
+              borderRadius: "4px",
+              padding: "8px",
+              width: "300px",
+            }}
+          />
+        </Grid>
+        <Grid item style={{ marginTop: "30px" }}>
+          <Button
             onClick={handleDownload}
-            style={{ display: "flex", alignItems: "center" }}
+            style={{
+              backgroundColor: "white",
+              color: "black",
+              textTransform: "none",
+              borderRadius: "4px",
+            }}
           >
             <Typography variant="h5">Save</Typography>
-          </button>
-        </div>
-      </div>
+          </Button>
+        </Grid>
+      </Grid>
     </>
   );
 }
