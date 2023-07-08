@@ -18,6 +18,7 @@ import { Link, useParams } from "react-router-dom";
 import ReactCSVSaver from "./ReactCSVSaver";
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import Auth from "../firebase.tsx";
+import QuestionMark from './QuestionMark';
 
 export interface Box {
   id: number;
@@ -293,6 +294,7 @@ export default function NewProjectTemplate() {
                     <Typography variant="h6">
                       Download CSV & Upload it to render it in the mindmap
                     </Typography>
+                    <QuestionMark instructions="Hover over the question mark to see instructions." />
                   </TableCell>
                   <TableCell>
                     <Button
@@ -314,6 +316,7 @@ export default function NewProjectTemplate() {
                     <Typography variant="h6">
                       Upload CSV / JavaScript Code
                     </Typography>
+                    <QuestionMark instructions="Hover over the question mark to see instructions." />
                   </TableCell>
                   <TableCell>
                     <input
@@ -337,6 +340,7 @@ export default function NewProjectTemplate() {
                     <Typography variant="h6">
                       Click to download current mindmap as a CSV File
                     </Typography>
+                    <QuestionMark instructions="Hover over the question mark to see instructions." />
                   </TableCell>
                   <TableCell>
                     <ReactCSVDownloader key={reRenderCount} boxes={boxes} />
@@ -347,6 +351,7 @@ export default function NewProjectTemplate() {
                     <Typography variant="h6">
                       Click to view project details
                     </Typography>
+                    <QuestionMark instructions="Hover over the question mark to see instructions." />
                   </TableCell>
                   <TableCell>
                     <nav>
