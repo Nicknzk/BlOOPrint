@@ -263,51 +263,57 @@ export default function LandingPage() {
               How it Works
             </Typography>
           </div>
-          <Grid container spacing={2}>
-            <Grid item xs={4}>
-              <Card>
-                <CardMedia
-                  component="img"
-                  src={databasepic}
-                  alt="Database pic"
-                />
-                <CardContent>
-                  <Typography variant="h5">Save your Progress</Typography>
-                  <Typography variant="body1">
-                    All your projects are stored with us.
-                  </Typography>
-                </CardContent>
-              </Card>
+          <div style={{ maxWidth: "90vw", margin: "0 auto" }}>
+            <Grid container spacing={2}>
+              <Grid item xs={4}>
+                <Card>
+                  <CardMedia
+                    component="img"
+                    src={databasepic}
+                    alt="Database pic"
+                  />
+                  <CardContent>
+                    <Typography variant="h5">Save your Progress</Typography>
+                    <Typography variant="body1">
+                      All your projects are stored with us.
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={4}>
+                <Card>
+                  <CardMedia
+                    component="img"
+                    src={howitworks}
+                    alt="how it works"
+                  />
+                  <CardContent>
+                    <Typography variant="h5">How it Works</Typography>
+                    <Typography variant="body1">
+                      To start you either draw your own diagram or upload your
+                      code for blOOPrint to do it for you.
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={4}>
+                <Card>
+                  <CardMedia
+                    component="img"
+                    src={comingsoon}
+                    alt="coming soon"
+                  />
+                  <CardContent>
+                    <Typography variant="h5">Cool functions</Typography>
+                    <Typography variant="body1">
+                      Use our report writer function to write a report on your
+                      code automatically
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
             </Grid>
-            <Grid item xs={4}>
-              <Card>
-                <CardMedia
-                  component="img"
-                  src={howitworks}
-                  alt="how it works"
-                />
-                <CardContent>
-                  <Typography variant="h5">How it Works</Typography>
-                  <Typography variant="body1">
-                    To start you either draw your own diagram or upload your
-                    code for blOOPrint to do it for you.
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={4}>
-              <Card>
-                <CardMedia component="img" src={comingsoon} alt="coming soon" />
-                <CardContent>
-                  <Typography variant="h5">Cool functions</Typography>
-                  <Typography variant="body1">
-                    Use our report writer function to write a report on your
-                    code automatically
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
+          </div>
         </div>
         <a href="#" style={{ color: "white", textAlign: "center" }}>
           <Typography variant="h5" className="link-text">
