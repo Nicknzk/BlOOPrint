@@ -19,7 +19,7 @@ export default function App() {
 
   return (
     <>
-      <div className="app-standard">
+      <div className="app-standard" style={{ height: "100vh", width: "100vw" }}>
         <PageRouting isAuthenticated={authUser} />
         <div
           style={{
