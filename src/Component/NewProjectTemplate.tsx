@@ -18,7 +18,7 @@ import { Link, useParams } from "react-router-dom";
 import ReactCSVSaver from "./ReactCSVSaver";
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import Auth from "../firebase.tsx";
-import QuestionMark from './QuestionMark';
+import QuestionMark from "./QuestionMark";
 
 export interface Box {
   id: number;
@@ -42,8 +42,6 @@ export default function NewProjectTemplate() {
   const [reRenderCount, setReRenderCount] = useState(0);
   const [data, setData] = useState<Box[]>([]); //parsing for ReactCSVUploader
   const [parserData, setParserData] = useState([]); //for Parser.tsx
-  const { projectName } = useParams();
-  const [csvDownloadURL, setCsvDownloadURL] = useState("");
 
   const handleParsedData = (data: any) => {
     setParserData(data);
@@ -214,26 +212,6 @@ export default function NewProjectTemplate() {
   };
 
   useEffect(() => {
-    const user = Auth.currentUser;
-    if (user) {
-      const email = user.email;
-      const storage = getStorage();
-      const storageRef = ref(
-        storage,
-        `Uploads/${email}/Projects/${projectName}.csv`
-      );
-
-      getDownloadURL(storageRef)
-        .then((downloadURL) => {
-          setCsvDownloadURL(downloadURL);
-        })
-        .catch((error) => {
-          console.log("Error getting CSV download URL:", error);
-        });
-    }
-  }, [projectName]);
-
-  useEffect(() => {
     setReRenderCount((prevCount) => prevCount + 1);
   }, [boxes]);
 
@@ -287,28 +265,6 @@ export default function NewProjectTemplate() {
                     >
                       Instructions:
                     </Typography>
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell style={{ alignItems: "center" }}>
-                    <Typography variant="h6">
-                      Download CSV & Upload it to render it in the mindmap
-                    </Typography>
-                    <QuestionMark instructions="Hover over the question mark to see instructions." />
-                  </TableCell>
-                  <TableCell>
-                    <Button
-                      href={csvDownloadURL}
-                      download={`${projectName}.csv`}
-                      variant="contained"
-                      style={{
-                        textDecoration: "none",
-                        backgroundColor: "blue",
-                        color: "white",
-                      }}
-                    >
-                      <Typography variant="h5">Existing CSV</Typography>
-                    </Button>
                   </TableCell>
                 </TableRow>
                 <TableRow>

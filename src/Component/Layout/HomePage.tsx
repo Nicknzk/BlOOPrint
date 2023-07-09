@@ -151,66 +151,10 @@ export default function HomePage() {
             display: "flex",
             justifyContent: "center",
             fontSize: "56px",
+            marginTop: "100px",
           }}
         >
-          Existing Projects:
-        </Typography>
-        <div
-          style={{
-            border: "2px solid white",
-            borderRadius: "8px",
-            padding: "10px",
-            margin: "10px",
-          }}
-        >
-          <div style={{ display: "flex", flexWrap: "wrap" }}>
-            {projects.map((project) => (
-              <Card key={project.id} style={{ width: "300px", margin: "10px" }}>
-                <CardContent>
-                  <div style={{ float: "left" }}>
-                    <Typography variant="h5" style={{ wordWrap: "break-word" }}>
-                      {project.id}
-                    </Typography>
-                    <Link
-                      to={`/NewProjectTemplate/${project.id}`}
-                      onClick={() =>
-                        navigate(`/NewProjectTemplate/${project.id}`)
-                      }
-                    >
-                      <Typography variant="h6">View Project</Typography>
-                    </Link>
-                  </div>
-
-                  <Button
-                    style={{
-                      color: "black",
-                      background: "red",
-                      marginTop: "10px",
-                      marginLeft: "30px",
-                    }}
-                    onClick={() =>
-                      deleteFile(
-                        `Uploads/${Auth.currentUser?.email}/Projects/${project.id}.csv`
-                      )
-                    }
-                  >
-                    <Typography variant="h6">Delete</Typography>
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-        <Typography
-          variant="h4"
-          style={{
-            color: "white",
-            display: "flex",
-            justifyContent: "center",
-            fontSize: "56px",
-          }}
-        >
-          Create New Project:
+          Go to Mindmap:
         </Typography>
         <div
           style={{
@@ -258,6 +202,63 @@ export default function HomePage() {
               </Typography>
             </Link>
           </nav>
+        </div>
+
+        <Typography
+          variant="h4"
+          style={{
+            color: "white",
+            display: "flex",
+            justifyContent: "center",
+            fontSize: "56px",
+            marginTop: "100px",
+          }}
+        >
+          Previous Saves (CSV files)
+        </Typography>
+        <div
+          style={{
+            border: "2px solid white",
+            borderRadius: "8px",
+            padding: "10px",
+            margin: "10px",
+          }}
+        >
+          <div style={{ display: "flex", flexWrap: "wrap" }}>
+            {projects.map((project) => (
+              <Card key={project.id} style={{ width: "300px", margin: "10px" }}>
+                <CardContent>
+                  <div style={{ float: "left" }}>
+                    <Typography variant="h5" style={{ wordWrap: "break-word" }}>
+                      {project.id}
+                    </Typography>
+                    <a
+                      href={project.downloadURL}
+                      download={`${project.id}.csv`}
+                    >
+                      <Typography variant="h6">Download</Typography>
+                    </a>
+                  </div>
+
+                  <Button
+                    style={{
+                      color: "black",
+                      background: "red",
+                      marginTop: "10px",
+                      marginLeft: "30px",
+                    }}
+                    onClick={() =>
+                      deleteFile(
+                        `Uploads/${Auth.currentUser?.email}/Projects/${project.id}.csv`
+                      )
+                    }
+                  >
+                    <Typography variant="h6">Delete</Typography>
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </div>
     </>
