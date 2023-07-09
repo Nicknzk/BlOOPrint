@@ -236,38 +236,38 @@ export default function NewProjectTemplate() {
         style={{
           background: "linear-gradient(to left, #054A91, #007bff)",
           minHeight: "100vh",
-          paddingBottom: "50px",
+          paddingBottom: "1.95%",
         }}
       >
         <Typography
           variant="h1"
           style={{
-            marginLeft: "50px",
+            marginLeft: "1.95%",
             paddingTop: "0",
-            fontSize: "120px",
+            fontSize: "750%",
             color: "white",
             fontFamily: "Arial, sans-serif",
             fontWeight: "bold",
-            textShadow: "12px 6px 4px rgba(0, 0, 0, 0.5)",
+            textShadow: "75% 37.5% 25% rgba(0, 0, 0, 0.5)",
             marginBottom: "0",
             float: "left",
           }}
         >
           BLOOPrint
         </Typography>
-        <div style={{ position: "absolute", right: "50px" }}>
+        <div style={{ position: "absolute", right: "1.95%" }}>
           <ReactCSVSaver boxes={boxes} />
         </div>
         <div style={{}}>
           <TableContainer
             component={Paper}
             style={{
-              marginTop: "20px",
-              borderRadius: "30px",
-              paddingLeft: "20px",
-              width: "900px",
+              marginTop: "0.78%",
+              borderRadius: "1.2&",
+              paddingLeft: "0.78&",
+              width: "40%",
               clear: "both",
-              marginLeft: "50px",
+              marginLeft: "1.95%",
             }}
           >
             <Table>
@@ -297,8 +297,8 @@ export default function NewProjectTemplate() {
                       style={{
                         textDecoration: "none",
                         backgroundColor: "blue",
-                        padding: "5px",
-                        borderRadius: "5px",
+                        padding: "2%",
+                        borderRadius: "4%",
                         color: "white",
                       }}
                     />
@@ -356,7 +356,7 @@ export default function NewProjectTemplate() {
 
         <Grid container spacing={2}>
           <Grid item xs={9}>
-            <div style={{ height: "500px", margin: "50px" }}>
+            <div style={{ height: "500px", margin: "3%" }}>
               <FlowMindMap key={reRenderCount} boxes={boxes} />
             </div>
           </Grid>
@@ -373,14 +373,14 @@ export default function NewProjectTemplate() {
           </Grid>
         </Grid>
         <div
-          style={{ marginTop: "15%", marginLeft: "50px" }}
+          style={{ marginTop: "15%", marginLeft: "1.95%" }}
           className="Container"
         >
           <div
             style={{
               display: "flex",
               justifyContent: "center",
-              padding: "20px",
+              padding: "0.8%",
             }}
           >
             <input //this is the Name text box
@@ -388,15 +388,15 @@ export default function NewProjectTemplate() {
               value={newBoxName}
               onChange={handleNewBoxNameChange}
               placeholder="Enter box name"
-              style={{ width: "300px", height: "50px" }}
+              style={{ width: "18%" }}
             />
-            <button onClick={handleAddBox} style={{ marginLeft: "5px" }}>
-              <Typography variant="h4" style={{ marginTop: "5px" }}>
+            <button onClick={handleAddBox} style={{ marginLeft: "0.5%" }}>
+              <Typography variant="h4" style={{ marginTop: "0.5%" }}>
                 Add Box
               </Typography>
             </button>
           </div>
-          <div style={{ padding: "20px" }}>
+          <div style={{ padding: "0.8%" }}>
             <Grid container spacing={2}>
               {boxes.map((box) => (
                 <Grid item xs={4} key={box.id}>
@@ -404,9 +404,9 @@ export default function NewProjectTemplate() {
                     key={box.id}
                     className="Box"
                     style={{
-                      padding: "20px",
+                      padding: "2%",
                       backgroundColor: "white",
-                      borderRadius: "20px",
+                      borderRadius: "5%",
                     }}
                   >
                     <input
