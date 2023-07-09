@@ -45,6 +45,7 @@ export default function LandingPage() {
           minHeight: "100vh",
           paddingBottom: "1%",
           maxWidth: "100vw",
+          boxSizing: "border-box",
         }}
       >
         <div>
@@ -194,7 +195,7 @@ export default function LandingPage() {
                 color: "white",
                 fontFamily: "Arial, sans-serif",
                 fontWeight: "bold",
-                textShadow: "2.7% 1.35% 0.54% rgba(0, 0, 0, 0.5)",
+                textShadow: "30px 10px 4px rgba(0, 0, 0, 0.5)",
               }}
             >
               BLOOPrint
