@@ -190,7 +190,7 @@ export default function LandingPage() {
               style={{
                 marginTop: "12%",
                 marginLeft: "12%",
-                fontSize: "1500%",
+                fontSize: "1200%",
                 color: "white",
                 fontFamily: "Arial, sans-serif",
                 fontWeight: "bold",
