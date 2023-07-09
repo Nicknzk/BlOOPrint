@@ -16,9 +16,8 @@ import Papa from "papaparse";
 import parseFiles from "./Auth/parser";
 import { Link, useParams } from "react-router-dom";
 import ReactCSVSaver from "./ReactCSVSaver";
-import { getDownloadURL, ref, getStorage } from "firebase/storage";
-import Auth from "../firebase.tsx";
 import QuestionMark from "./QuestionMark";
+import { useLocation } from "react-router-dom";
 
 export interface Box {
   id: number;
@@ -42,6 +41,22 @@ export default function NewProjectTemplate() {
   const [reRenderCount, setReRenderCount] = useState(0);
   const [data, setData] = useState<Box[]>([]); //parsing for ReactCSVUploader
   const [parserData, setParserData] = useState([]); //for Parser.tsx
+  const location = useLocation();
+
+  useEffect(() => {
+    // Check if location state contains boxes data
+    if (location.state && location.state.boxes) {
+      setBoxes(location.state.boxes);
+    } else {
+      // Parse the query parameter and update boxes if available
+      const searchParams = new URLSearchParams(location.search);
+      const boxesParam = searchParams.get("boxes");
+      if (boxesParam) {
+        const decodedBoxes = JSON.parse(decodeURIComponent(boxesParam));
+        setBoxes(decodedBoxes);
+      }
+    }
+  }, [location]);
 
   const handleParsedData = (data: any) => {
     setParserData(data);
