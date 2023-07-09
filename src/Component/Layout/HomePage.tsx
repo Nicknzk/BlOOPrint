@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Typography, IconButton, Card, CardContent } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import Auth from "../../firebase.tsx";
 import {
@@ -14,7 +14,6 @@ import {
 import { Button } from "react-bootstrap";
 
 export default function HomePage() {
-  const navigate = useNavigate();
   const [projects, setProjects] = useState<
     { id: string; downloadURL: string }[]
   >([]);

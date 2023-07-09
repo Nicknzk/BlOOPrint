@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Button, Typography, Tooltip } from '@mui/material';
-import { HelpOutline } from '@mui/icons-material';
+import React, { useState } from "react";
+import { Button, Tooltip } from "@mui/material";
+import { HelpOutline } from "@mui/icons-material";
 
 interface QuestionMarkProps {
   instructions: string;

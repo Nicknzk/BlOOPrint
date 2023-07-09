@@ -14,7 +14,7 @@ import FlowMindMap from "./FlowMindMap";
 import ReactCSVDownloader from "./ReactCSVDownloader";
 import Papa from "papaparse";
 import parseFiles from "./Auth/parser";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ReactCSVSaver from "./ReactCSVSaver";
 import QuestionMark from "./QuestionMark";
 import { useLocation } from "react-router-dom";
