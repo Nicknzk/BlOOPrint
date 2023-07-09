@@ -43,7 +43,7 @@ export default function LandingPage() {
         style={{
           background: "linear-gradient(to left, #054A91, #007bff)",
           minHeight: "100vh",
-          paddingBottom: "50px",
+          paddingBottom: "1%",
           maxWidth: "100vw",
         }}
       >
@@ -53,7 +53,7 @@ export default function LandingPage() {
             style={{
               backgroundColor: "rgba(128, 128, 128, 0.5)",
               color: "white",
-              padding: "20px",
+              padding: "1%",
             }}
           >
             <Toolbar variant="dense">
@@ -65,7 +65,7 @@ export default function LandingPage() {
                   <span
                     style={{
                       display: "flex",
-                      marginRight: "16px",
+                      marginRight: "0.8%",
                       whiteSpace: "nowrap",
                       textDecoration: "none",
                       color: "white",
@@ -84,7 +84,7 @@ export default function LandingPage() {
                 >
                   <span
                     style={{
-                      marginRight: "30px",
+                      marginRight: "1.2%",
                       whiteSpace: "nowrap",
                       textDecoration: "none",
                       color: "white",
@@ -128,7 +128,7 @@ export default function LandingPage() {
                       <span
                         style={{
                           display: "flex",
-                          marginRight: "16px",
+                          marginRight: "0.8%",
                           whiteSpace: "nowrap",
                           textDecoration: "none",
                           color: "white",
@@ -190,29 +190,29 @@ export default function LandingPage() {
               style={{
                 marginTop: "12%",
                 marginLeft: "12%",
-                fontSize: "1200%",
+                fontSize: "1500%",
                 color: "white",
                 fontFamily: "Arial, sans-serif",
                 fontWeight: "bold",
-                textShadow: "20px 10px 4px rgba(0, 0, 0, 0.5)",
+                textShadow: "2.7% 1.35% 0.54% rgba(0, 0, 0, 0.5)",
               }}
             >
               BLOOPrint
             </Typography>
           </div>
         </div>
-        <div style={{ marginTop: "20px", marginLeft: "40px" }}>
+        <div style={{ marginTop: "0.8%", marginLeft: "1.6%" }}>
           <Typography variant="h4" style={{ fontWeight: "bold" }}>
             Supports:
           </Typography>
           <img
             src={JS}
             alt="JavaScript"
-            style={{ width: "200px", height: "auto", marginLeft: "200px" }}
+            style={{ width: "12%", height: "auto", marginLeft: "12%" }}
           />
         </div>
 
-        <div style={{ marginTop: "300px" }}>
+        <div style={{ marginTop: "12%" }}>
           <div id="about-us">
             <Typography
               variant="h1"
@@ -232,14 +232,15 @@ export default function LandingPage() {
           <Typography
             variant="h4"
             style={{
-              width: "700px",
-              marginTop: "100px",
+              width: "33%",
+              marginTop: "4%",
               marginLeft: "auto",
               marginRight: "auto",
               fontFamily: "Arial, sans-serif",
               fontStyle: "italic",
               fontWeight: "normal",
-              fontSize: "48px",
+              fontSize: "300%",
+              textAlign: "center",
             }}
           >
             Object Oriented Programming can get complex. With BlOOPrint,
@@ -248,15 +249,15 @@ export default function LandingPage() {
           </Typography>
         </div>
 
-        <div style={{ marginBottom: "300px" }}>
+        <div style={{ marginBottom: "12%" }}>
           <div id="how-it-works">
             <Typography
               variant="h1"
               id="howitworks"
               style={{
                 textAlign: "center",
-                marginTop: "200px",
-                marginBottom: "200px",
+                marginTop: "8%",
+                marginBottom: "6%",
                 fontWeight: "bold",
                 color: "white",
               }}
