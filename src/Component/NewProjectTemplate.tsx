@@ -248,7 +248,7 @@ export default function NewProjectTemplate() {
             color: "white",
             fontFamily: "Arial, sans-serif",
             fontWeight: "bold",
-            textShadow: "75% 37.5% 25% rgba(0, 0, 0, 0.5)",
+            textShadow: "12px 6px 4px rgba(0, 0, 0, 0.5)",
             marginBottom: "0",
             float: "left",
           }}
@@ -263,8 +263,10 @@ export default function NewProjectTemplate() {
             component={Paper}
             style={{
               marginTop: "0.78%",
-              borderRadius: "1.2&",
-              paddingLeft: "0.78&",
+              borderRadius: "5vh",
+              paddingLeft: "1%",
+              paddingRight: "1%",
+              paddingBottom: "1%",
               width: "40%",
               clear: "both",
               marginLeft: "1.95%",
@@ -406,7 +408,7 @@ export default function NewProjectTemplate() {
                     style={{
                       padding: "2%",
                       backgroundColor: "white",
-                      borderRadius: "5%",
+                      borderRadius: "2vh",
                     }}
                   >
                     <input
