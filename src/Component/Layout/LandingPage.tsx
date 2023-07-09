@@ -44,6 +44,7 @@ export default function LandingPage() {
           background: "linear-gradient(to left, #054A91, #007bff)",
           minHeight: "100vh",
           paddingBottom: "50px",
+          maxWidth: "100vw",
         }}
       >
         <div>
