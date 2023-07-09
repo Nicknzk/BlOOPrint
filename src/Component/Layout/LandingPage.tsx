@@ -149,14 +149,12 @@ export default function LandingPage() {
           </AppBar>
         </div>
         <div style={{ display: "flex", alignItems: "center" }}>
-          <div
-            style={{ width: "400px", marginTop: "100px", marginLeft: "100px" }}
-          >
+          <div style={{ width: "15%", marginTop: "1%", marginLeft: "4.2%" }}>
             <Typography className="landing-page" variant="h2">
               Understanding and Documenting code doesn't have to be complicated
             </Typography>
 
-            <div style={{ marginTop: "30px" }}>
+            <div style={{ marginTop: "1.5%" }}>
               <Button
                 variant="contained"
                 color="primary"
@@ -164,7 +162,7 @@ export default function LandingPage() {
                   backgroundColor: "#ECA400",
                   color: "#FFFFFF",
                   textTransform: "none",
-                  borderRadius: "20px",
+                  borderRadius: "2vh",
                 }}
               >
                 <Link
@@ -175,7 +173,7 @@ export default function LandingPage() {
                     variant="h2"
                     style={{
                       color: "black",
-                      fontSize: "65px",
+                      fontSize: "400%",
                     }}
                   >
                     Let's Get Started
@@ -185,13 +183,13 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div style={{ marginLeft: "40px" }}>
+          <div style={{ marginLeft: "1.6%" }}>
             <Typography
               variant="h1"
               style={{
-                marginTop: "300px",
-                marginLeft: "150px",
-                fontSize: "200px",
+                marginTop: "12%",
+                marginLeft: "12%",
+                fontSize: "1500%",
                 color: "white",
                 fontFamily: "Arial, sans-serif",
                 fontWeight: "bold",
