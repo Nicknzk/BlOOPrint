@@ -46,6 +46,7 @@ export default function LandingPage() {
           paddingBottom: "1%",
           maxWidth: "100vw",
           boxSizing: "border-box",
+          overflowX: "hidden",
         }}
       >
         <div>
@@ -155,8 +156,9 @@ export default function LandingPage() {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            width: "80%",
-            margin: "0 auto",
+            width: "90%",
+            margin: "0",
+            marginLeft: "5%",
           }}
         >
           <div style={{ flex: "0 0 15%", marginTop: "1%" }}>
@@ -204,6 +206,7 @@ export default function LandingPage() {
                 fontFamily: "Arial, sans-serif",
                 fontWeight: "bold",
                 textShadow: "30px 10px 4px rgba(0, 0, 0, 0.5)",
+                maxWidth: "100%",
               }}
             >
               BLOOPrint
