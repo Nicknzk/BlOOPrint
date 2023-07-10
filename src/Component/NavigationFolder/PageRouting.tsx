@@ -32,9 +32,9 @@ export default function PageRouting({ isAuthenticated }: any) {
           <Route
             path="/ProjectDetails"
             element={
-              <div className="w-100" style={{ maxWidth: "400px" }}>
+              <PrivateRoute isAuthenticated={isAuthenticated}>
                 <ProjectDetails />
-              </div>
+              </PrivateRoute>
             }
           />
           <Route

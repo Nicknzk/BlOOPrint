@@ -28,36 +28,80 @@ export default function ProjectDetails() {
 
   const BoxList: React.FC<{ boxes: Box[] }> = ({ boxes }) => {
     return (
-      <TableContainer>
-        <Table>
+      <TableContainer
+        style={{ margin: "0 auto", paddingLeft: "5vh", paddingRight: "5vh" }}
+      >
+        <Table style={{ border: "0.3vh solid white" }}>
           <TableHead>
             <TableRow>
-              <TableCell style={{ paddingRight: "20px", fontSize: "16px" }}>
-                Entity Name
+              <TableCell
+                style={{
+                  fontSize: "3vh",
+                  color: "white",
+                  textAlign: "center",
+                  fontFamily: "Helvatica, Arial, sans-serif",
+                  fontWeight: "bold",
+                }}
+              >
+                Entity Name:
               </TableCell>
-              <TableCell style={{ paddingRight: "20px", fontSize: "16px" }}>
-                Methods
+              <TableCell
+                style={{
+                  fontSize: "3vh",
+                  color: "white",
+                  textAlign: "center",
+                  fontFamily: "Helvatica, Arial, sans-serif",
+                  fontWeight: "bold",
+                }}
+              >
+                Methods:
               </TableCell>
-              <TableCell style={{ paddingRight: "20px", fontSize: "16px" }}>
-                Dependencies
+              <TableCell
+                style={{
+                  fontSize: "3vh",
+                  color: "white",
+                  textAlign: "center",
+                  fontFamily: "Helvatica, Arial, sans-serif",
+                  fontWeight: "bold",
+                }}
+              >
+                Dependencies:
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {boxes.map((box) => (
               <TableRow key={box.id}>
-                <TableCell style={{ paddingRight: "20px", fontSize: "20px" }}>
+                <TableCell
+                  style={{
+                    fontSize: "2vh",
+                    textAlign: "center",
+                    fontFamily: "Open Sans, Arial, sans-serif",
+                  }}
+                >
                   {box.name}
                 </TableCell>
-                <TableCell style={{ paddingRight: "20px", fontSize: "14px" }}>
-                  <ul>
+                <TableCell
+                  style={{
+                    fontSize: "2vh",
+                    textAlign: "center",
+                    fontFamily: "Open Sans, Arial, sans-serif",
+                  }}
+                >
+                  <ul style={{ listStyle: "none" }}>
                     {box.methods.map((method, index) => (
                       <li key={index}>{method}</li>
                     ))}
                   </ul>
                 </TableCell>
-                <TableCell style={{ paddingRight: "20px", fontSize: "14px" }}>
-                  <ul>
+                <TableCell
+                  style={{
+                    fontSize: "2vh",
+                    textAlign: "center",
+                    fontFamily: "Open Sans, Arial, sans-serif",
+                  }}
+                >
+                  <ul style={{ listStyle: "none" }}>
                     {box.dependencies.map((dependency, index) => (
                       <li key={index}>{dependency}</li>
                     ))}
@@ -73,19 +117,45 @@ export default function ProjectDetails() {
 
   return (
     <>
-      <Typography variant="h4">Project Details</Typography>
-      <BoxList boxes={boxes} />
-      <nav>
-        <Link
-          className="NewProjectTemplate"
-          to={{
-            pathname: "/NewProjectTemplate",
-            search: `?boxes=${encodeURIComponent(JSON.stringify(boxes))}`, // Pass boxes as a search parameter
+      <div
+        style={{
+          background: "linear-gradient(to left, #054A91, #007bff)",
+          minHeight: "100vh",
+          paddingBottom: "1%",
+          maxWidth: "100vw",
+          boxSizing: "border-box",
+          overflowX: "hidden",
+        }}
+      >
+        <Typography
+          variant="h1"
+          style={{
+            textAlign: "center",
+            paddingTop: "2vh",
+            fontSize: "120px",
+            color: "white",
+            fontFamily: "Arial, sans-serif",
+            fontWeight: "bold",
+            marginBottom: "2vh",
+            textShadow: "12px 6px 4px rgba(0, 0, 0, 0.5)",
           }}
         >
-          <Typography variant="h5">Back to Project Template</Typography>
-        </Link>
-      </nav>
+          Project Details{" "}
+        </Typography>
+        <BoxList boxes={boxes} />
+
+        <nav>
+          <Link
+            className="NewProjectTemplate"
+            to={{
+              pathname: "/NewProjectTemplate",
+              search: `?boxes=${encodeURIComponent(JSON.stringify(boxes))}`,
+            }}
+          >
+            <Typography variant="h5">Back to Project Template</Typography>
+          </Link>
+        </nav>
+      </div>
     </>
   );
 }
