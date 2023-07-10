@@ -154,11 +154,12 @@ export default function LandingPage() {
           style={{
             display: "flex",
             alignItems: "center",
+            justifyContent: "space-between",
             width: "90%",
             margin: "0 auto",
           }}
         >
-          <div style={{ width: "15%", marginTop: "1%", marginLeft: "4.2%" }}>
+          <div style={{ flex: "0 0 15%", marginTop: "1%" }}>
             <Typography className="landing-page" variant="h2">
               Understanding and Documenting code doesn't have to be complicated
             </Typography>
@@ -192,13 +193,13 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div style={{ marginLeft: "1.6%" }}>
+          <div style={{ flex: "0 0 70%", marginLeft: "1.6%" }}>
             <Typography
               variant="h1"
               style={{
                 marginTop: "12%",
-                marginLeft: "12%",
-                fontSize: "1500%",
+                marginLeft: "4%",
+                fontSize: "1300%",
                 color: "white",
                 fontFamily: "Arial, sans-serif",
                 fontWeight: "bold",
