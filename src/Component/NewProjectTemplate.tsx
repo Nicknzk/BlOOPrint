@@ -18,6 +18,8 @@ import { Link } from "react-router-dom";
 import ReactCSVSaver from "./ReactCSVSaver";
 import QuestionMark from "./QuestionMark";
 import { useLocation } from "react-router-dom";
+import PullOutDrawer from './Drawer';
+
 
 export interface Box {
   id: number;
@@ -239,6 +241,8 @@ export default function NewProjectTemplate() {
           paddingBottom: "1.95%",
         }}
       >
+        <PullOutDrawer/>
+
         <Typography
           variant="h1"
           style={{
