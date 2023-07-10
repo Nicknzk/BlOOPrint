@@ -150,7 +150,14 @@ export default function LandingPage() {
             </Toolbar>
           </AppBar>
         </div>
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            width: "90%",
+            margin: "0 auto",
+          }}
+        >
           <div style={{ width: "15%", marginTop: "1%", marginLeft: "4.2%" }}>
             <Typography className="landing-page" variant="h2">
               Understanding and Documenting code doesn't have to be complicated
