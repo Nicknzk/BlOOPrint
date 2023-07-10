@@ -87,18 +87,18 @@ export default function SignUp() {
         className="sign-in-container log-in-box"
         style={{
           position: "relative",
-          top: "25px",
-          left: "25px",
-          border: "3px solid #ccc",
-          borderRadius: "20px",
+          top: "1vh",
+          left: "1vh",
+          border: "0.1% solid #ccc",
+          borderRadius: "5vh",
           borderColor: "black",
-          width: "500px",
+          width: "120%",
         }}
       >
         <Card
           style={{
-            borderRadius: "20px", // Set the border radius here
-            padding: "20px",
+            borderRadius: "5vh", // Set the border radius here
+            padding: "1vh",
             margin: "0 auto", // To center the login box horizontally
           }}
         >
@@ -149,10 +149,10 @@ export default function SignUp() {
       <div
         style={{
           position: "absolute",
-          top: "100px",
-          right: "770px",
-          width: "400px",
-          marginRight: "200px", // Adjust the value to position the alert on the right
+          top: "5vh",
+          right: "72vh",
+          width: "35vh",
+          marginRight: "20vh", // Adjust the value to position the alert on the right
         }}
       >
         {alertShow.length > 0 && (
@@ -167,12 +167,12 @@ export default function SignUp() {
         variant="contained"
         style={{
           position: "fixed",
-          bottom: "20px",
-          left: "20px",
+          bottom: "1vh",
+          left: "1vh",
           backgroundColor: "#ECA400",
           color: "white",
           textTransform: "none",
-          borderRadius: "20px",
+          borderRadius: "5vh",
         }}
       >
         <nav>
