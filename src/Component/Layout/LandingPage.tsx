@@ -159,6 +159,7 @@ export default function LandingPage() {
             width: "90%",
             margin: "0",
             marginLeft: "5%",
+            maxWidth: "100vw",
           }}
         >
           <div style={{ flex: "0 0 15%", marginTop: "1%" }}>
@@ -201,7 +202,7 @@ export default function LandingPage() {
               style={{
                 marginTop: "12%",
                 marginLeft: "4%",
-                fontSize: "1300%",
+                fontSize: "10vw",
                 color: "white",
                 fontFamily: "Arial, sans-serif",
                 fontWeight: "bold",
