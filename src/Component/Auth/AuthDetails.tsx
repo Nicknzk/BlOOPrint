@@ -91,10 +91,10 @@ export default function AuthDetails({ onAuthStatusChange }: AuthDetailsProps) {
           <div
             style={{
               position: "absolute",
-              bottom: "50%",
-              left: "1.2%",
-              width: "15%",
-              padding: "10px",
+              bottom: "1vh",
+              left: "1vh",
+              width: "25%",
+              padding: "5vh",
             }}
           >
             <Alert variant="warning" className="email-verification-alert">
