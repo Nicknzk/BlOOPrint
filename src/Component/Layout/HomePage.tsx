@@ -104,12 +104,6 @@ export default function HomePage() {
                 });
             });
         };
-
-        // Prompt for CSV name
-        let csvName = prompt("Enter a name for the CSV:") || "Untitled";
-
-        // Check for duplicate names
-        checkDuplicateName(csvName, 0);
       } else {
         reject(new Error("User not logged in")); // Reject the promise if the user is not logged in
       }

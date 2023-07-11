@@ -292,7 +292,7 @@ export default function NewProjectTemplate() {
                     <Typography variant="h6">
                       Upload CSV / JavaScript Code
                     </Typography>
-                    <QuestionMark instructions="Hover over the question mark to see instructions." />
+                    <QuestionMark instructions="Upload your project's files as a txt file for BLOOPrint to turn in into a diagram" />
                   </TableCell>
                   <TableCell>
                     <input
@@ -316,7 +316,7 @@ export default function NewProjectTemplate() {
                     <Typography variant="h6">
                       Click to download current mindmap as a CSV File
                     </Typography>
-                    <QuestionMark instructions="Hover over the question mark to see instructions." />
+                    <QuestionMark instructions="Download this file so that this diagram can be saved on your device" />
                   </TableCell>
                   <TableCell>
                     <ReactCSVDownloader key={reRenderCount} boxes={boxes} />
@@ -327,7 +327,7 @@ export default function NewProjectTemplate() {
                     <Typography variant="h6">
                       Click to view project details
                     </Typography>
-                    <QuestionMark instructions="Hover over the question mark to see instructions." />
+                    <QuestionMark instructions="This shows you more information about your code" />
                   </TableCell>
                   <TableCell>
                     <nav>
