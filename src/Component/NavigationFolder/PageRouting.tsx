@@ -16,7 +16,7 @@ export default function PageRouting({ isAuthenticated }: any) {
           <Route
             path="/SignIn"
             element={
-              <div className="w-100" style={{ maxWidth: "400px" }}>
+              <div className="w-100" style={{ maxWidth: "40vh" }}>
                 <SignIn />
               </div>
             }
@@ -24,7 +24,7 @@ export default function PageRouting({ isAuthenticated }: any) {
           <Route
             path="/SignUp"
             element={
-              <div className="w-100" style={{ maxWidth: "400px" }}>
+              <div className="w-100" style={{ maxWidth: "40vh" }}>
                 <SignUp />
               </div>
             }
