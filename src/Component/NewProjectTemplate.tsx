@@ -18,8 +18,7 @@ import { Link } from "react-router-dom";
 import ReactCSVSaver from "./ReactCSVSaver";
 import QuestionMark from "./QuestionMark";
 import { useLocation } from "react-router-dom";
-import PullOutDrawer from './Drawer';
-
+import PullOutDrawer from "./Drawer";
 
 export interface Box {
   id: number;
@@ -241,7 +240,7 @@ export default function NewProjectTemplate() {
           paddingBottom: "1.95%",
         }}
       >
-        <PullOutDrawer/>
+        <PullOutDrawer />
 
         <Typography
           variant="h1"
@@ -262,7 +261,7 @@ export default function NewProjectTemplate() {
         <div style={{ position: "absolute", right: "1.95%" }}>
           <ReactCSVSaver boxes={boxes} />
         </div>
-        <div style={{}}>
+        <div>
           <TableContainer
             component={Paper}
             style={{
@@ -270,7 +269,7 @@ export default function NewProjectTemplate() {
               borderRadius: "5vh",
               paddingLeft: "1%",
               paddingRight: "1%",
-              paddingBottom: "1%",
+
               width: "40%",
               clear: "both",
               marginLeft: "1.95%",

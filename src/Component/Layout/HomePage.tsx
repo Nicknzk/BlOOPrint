@@ -1,5 +1,17 @@
 import { useState, useEffect } from "react";
-import { Typography, IconButton, Card, CardContent } from "@mui/material";
+import {
+  Typography,
+  IconButton,
+  Card,
+  CardContent,
+  TableContainer,
+  Table,
+  TableBody,
+  TableRow,
+  TableCell,
+  Paper,
+  Grid,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import Auth from "../../firebase.tsx";
@@ -136,81 +148,145 @@ export default function HomePage() {
             color: "white",
             fontFamily: "Arial, sans-serif",
             fontWeight: "bold",
-            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+            textShadow: "8px 4px 2px rgba(0, 0, 0, 0.5)",
             marginBottom: "40px",
           }}
         >
           BLOOPrint Homepage
         </Typography>
-
-        <Typography
-          variant="h4"
-          style={{
-            color: "white",
-            display: "flex",
-            justifyContent: "center",
-            fontSize: "56px",
-            marginTop: "100px",
-          }}
-        >
-          Go to Mindmap:
-        </Typography>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginTop: "20px",
-          }}
-        >
-          <nav>
-            <Link
-              to={`/NewProjectTemplate`}
-              onClick={() => {
-                createNewCsv()
-                  .then((csvId) => {
-                    console.log("CSV ID:", csvId);
-                    // Perform any further actions with the CSV ID
-                  })
-                  .catch((error) => {
-                    console.log("Error creating CSV file:", error);
-                  });
+        <div className="Mindmap-instructions">
+          <Grid container spacing={2}>
+            <Grid
+              item
+              xs={6}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
               }}
-              style={{ textDecoration: "none" }}
             >
-              <IconButton
-                color="primary"
-                aria-label="add"
+              <TableContainer
+                component={Paper}
                 style={{
-                  width: "150px",
-                  height: "150px",
-                  backgroundColor: "#ECA400",
-                }}
-              >
-                <AddIcon style={{ fontSize: "100px", color: "#FFFFFF" }} />
-              </IconButton>
-              <Typography
-                variant="h5"
-                style={{
-                  color: "#FFFFFF",
-                  marginTop: "10px",
-                  justifyContent: "center",
-                  marginLeft: "20px",
-                }}
-              >
-                Click Here!
-              </Typography>
-            </Link>
-          </nav>
-        </div>
+                  marginTop: "3.5vh",
+                  borderRadius: "2vh",
+                  paddingLeft: "1%",
+                  paddingRight: "1%",
 
+                  clear: "both",
+                  width: "66.6%",
+                }}
+              >
+                <Table>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell align="center" colSpan={2}>
+                        <Typography
+                          variant="h4"
+                          style={{ marginLeft: "auto", marginRight: "auto" }}
+                        >
+                          Instructions:
+                        </Typography>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell colSpan={2}>
+                        <Typography variant="h6">
+                          Click "Go to Mindmap" to start a new project
+                        </Typography>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell colSpan={2}>
+                        <Typography variant="h6">
+                          Download save files and upload in "Go to Mindmap" to
+                          render entities
+                        </Typography>
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Grid>
+            <Grid
+              item
+              xs={6}
+              style={{
+                textAlign: "center",
+              }}
+            >
+              <Typography
+                variant="h4"
+                style={{
+                  color: "white",
+                  display: "flex",
+                  justifyContent: "center",
+                  fontSize: "6.5vh",
+                  marginTop: "2vh",
+                }}
+              >
+                Go to Mindmap:
+              </Typography>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "20px",
+                }}
+              >
+                <nav>
+                  <Link
+                    to={`/NewProjectTemplate`}
+                    onClick={() => {
+                      createNewCsv()
+                        .then((csvId) => {
+                          console.log("CSV ID:", csvId);
+                          // Perform any further actions with the CSV ID
+                        })
+                        .catch((error) => {
+                          console.log("Error creating CSV file:", error);
+                        });
+                    }}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <IconButton
+                      color="primary"
+                      aria-label="add"
+                      style={{
+                        width: "150px",
+                        height: "150px",
+                        backgroundColor: "#ECA400",
+                      }}
+                    >
+                      <AddIcon
+                        style={{ fontSize: "100px", color: "#FFFFFF" }}
+                      />
+                    </IconButton>
+                    <Typography
+                      variant="h5"
+                      style={{
+                        color: "#FFFFFF",
+                        marginTop: "10px",
+                        justifyContent: "center",
+                        marginLeft: "20px",
+                      }}
+                    >
+                      Click Here!
+                    </Typography>
+                  </Link>
+                </nav>
+              </div>
+            </Grid>
+          </Grid>
+        </div>
         <Typography
           variant="h4"
           style={{
             color: "white",
             display: "flex",
             justifyContent: "center",
-            fontSize: "56px",
-            marginTop: "100px",
+            fontSize: "6.5vh",
+            marginTop: "5vh",
           }}
         >
           Previous Saves (CSV files)
