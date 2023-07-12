@@ -76,9 +76,11 @@ Searching through entities for methods & properties is tedious and time-consumin
 
 8\. Entity, Methods & Dependency viewing in Table format:
 
-  - Convenient alternative method for viewing entity details in a single page.
+  - Convenient alternative method for viewing entity details on a single page.
 
-## Testing moving forward:
+## Architecture diagrams
+
+## Testing Procedures:
 
 - Usability testing with potential users with high-fidelity artifacts (e.g. working prototype)
 
@@ -87,4 +89,8 @@ Searching through entities for methods & properties is tedious and time-consumin
 - System testing
 
 - User testing
+
+## User & Developer guide:
+
+
 
