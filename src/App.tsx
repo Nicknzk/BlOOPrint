@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import AuthDetails from "./Component/Auth/AuthDetails";
 import PageRouting from "./Component/NavigationFolder/PageRouting";
-import { useNavigation } from "./Component/NavigationFolder/UseNavigation";
+import { useNavigate } from "react-router-dom";
 
 export default function App() {
   const [authUser, setAuthUser] = useState(false);
-  const navigation = useNavigation();
+  const navigation = useNavigate();
 
   const handleAuthStatusChange = (trueOrFalse: any) => {
     setAuthUser(trueOrFalse);

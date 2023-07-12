@@ -152,7 +152,12 @@ export default function ProjectDetails() {
               search: `?boxes=${encodeURIComponent(JSON.stringify(boxes))}`,
             }}
           >
-            <Typography variant="h5">Back to Project Template</Typography>
+            <Typography
+              variant="h5"
+              style={{ color: "white", marginLeft: "5vh" }}
+            >
+              Back to Project Template
+            </Typography>
           </Link>
         </nav>
       </div>

@@ -71,7 +71,9 @@ export default function AuthDetails({ onAuthStatusChange }: AuthDetailsProps) {
                 </Link>
               </Button>
             </nav>
-            <Typography variant="h6">{`Signed In as ${authUser.email}`}</Typography>
+            {
+              //<Typography variant="h6">{`Signed In as ${authUser.email}`}</Typography>
+            }
 
             <div className="sign-out-container">
               <Button

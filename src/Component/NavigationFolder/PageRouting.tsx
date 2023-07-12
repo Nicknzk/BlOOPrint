@@ -4,7 +4,6 @@ import SignIn from "../Auth/SignIn";
 import SignUp from "../Auth/SignUp";
 import { Route, Routes, Navigate } from "react-router-dom";
 import NewProjectTemplate from "../NewProjectTemplate";
-import ProjectTemplate from "../ProjectTemplate";
 import ProjectDetails from "../ProjectDetails";
 
 export default function PageRouting({ isAuthenticated }: any) {
@@ -50,14 +49,6 @@ export default function PageRouting({ isAuthenticated }: any) {
             element={
               <PrivateRoute isAuthenticated={isAuthenticated}>
                 <NewProjectTemplate />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/ProjectTemplate"
-            element={
-              <PrivateRoute isAuthenticated={isAuthenticated}>
-                <ProjectTemplate />
               </PrivateRoute>
             }
           />
