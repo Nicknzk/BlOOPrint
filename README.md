@@ -33,24 +33,25 @@ Documenting code is annoying and tedious - As a student who does projects, docum
 Features implemented:
 
 1. User Account Authentication:
-- Securely authenticate user accounts with email verification.
-- Enforce strong password criteria to ensure account security.
-2. Interactive Walkthrough:
-- Guided tour to help users quickly familiarize themselves with website usage.
+  - Securely authenticate user accounts with email verification.
+  - Enforce strong password criteria to ensure account security.
+2. Interactive Walkthrough (bottom of landingpage and sidebar):
+  - Guided tour to help users quickly familiarize themselves with website usage.
 3. Manual Mind Map Creation:
-- Intuitively create mind maps with a user-friendly interface.
-- Edit and update mind maps as needed even after creation.
+  - Intuitively create mind maps with a user-friendly interface.
+  - Edit and update mind maps as needed even after creation.
 4. Automatic Mind Map Creation:
-- Seamlessly upload JavaScript files of any format for automatic mind map generation.
-- Upload CSV files to instantly generate mind maps based on the provided data.
-5. Download Mind Map in CSV Format:
-- Download mind maps in CSV format for offline viewing and easy sharing.
-- Conveniently re-upload downloaded mind maps to the website for further collaboration.
-6. Simplified Entity & Dependencies Viewing:
-- Easily visualize and explore entities and their dependencies in a simplified format.
-- Gain a clear understanding of the relationships between entities for efficient analysis and decision-making.
-
-
+  - Seamlessly upload JavaScript files of any format for automatic mind map generation.
+  - Upload CSV files to instantly generate mind maps based on the provided data.
+5. Saving and Downloading Mind Map in CSV format:
+  - Conveniently re-upload downloaded mind maps to the website for further updating.
+  - Download mind maps in CSV format for offline viewing and easy sharing.
+  - Optional: Download directly on project page 
+7. Simplified Entity & Dependencies Viewing:
+  - Easily visualize and explore entities and their dependencies in a simplified format.
+  - Gain a clear understanding of the relationships between entities for efficient analysis and decision-making.
+8. Entity, Methods & Dependency viewing in Table format:
+  - Convenient alternative method for viewing entities details in a single page.
 
 =======
 Testing moving forward:
