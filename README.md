@@ -78,8 +78,6 @@ Searching through entities for methods & properties is tedious and time-consumin
 
   - Convenient alternative method for viewing entity details in a single page.
 
-=======
-
 ## Testing moving forward:
 
 - Usability testing with potential users with high-fidelity artifacts (e.g. working prototype)
