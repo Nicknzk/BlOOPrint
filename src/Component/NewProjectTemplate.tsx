@@ -325,7 +325,7 @@ export default function NewProjectTemplate() {
                             verticalAlign: "middle",
                           }}
                         />
-                        <Typography style={{color:"red"}}>Only txt files are accepted</Typography>
+                        <Typography style={{color:"red"}}>Only txt files containing Javascript are accepted</Typography>
                       </>
                     )}
                     {data.length > 0 && <>{handleSetData()}</>}
