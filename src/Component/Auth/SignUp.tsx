@@ -7,7 +7,7 @@ import {
 } from "firebase/auth";
 import auth from "../../firebase";
 //import thumbsup from "../Images/sign in.jpg";
-import thumbsdown from "../Images/sign up.jpg";
+import thumbsdown from "../Images/signup.jpg";
 import { Typography } from "@mui/material";
 
 export default function SignUp() {

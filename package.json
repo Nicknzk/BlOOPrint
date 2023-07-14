@@ -8,6 +8,11 @@
     "transform": {
       "^.+\\.(ts|tsx)?$": "ts-jest",
       "^.+\\.(js|jsx)$": "babel-jest"
+    },
+    "testEnvironment": "jsdom",
+    "moduleNameMapper": {
+      "\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/fileMock.js"
     }
   },
   "scripts": {
@@ -20,6 +25,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
+    "@faker-js/faker": "^8.0.2",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.6",
     "acorn": "^8.9.0",
@@ -47,6 +53,8 @@
     "@babel/preset-env": "^7.22.9",
     "@babel/preset-react": "^7.22.5",
     "@babel/preset-typescript": "^7.22.5",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.5.3",
     "@types/papaparse": "^5.3.7",
     "@types/react": "^18.2.6",
@@ -61,6 +69,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
     "jest": "^29.6.1",
+    "jest-environment-jsdom": "^29.6.1",
     "ts-jest": "^29.1.1",
     "typescript": "^5.1.6",
     "vite": "^4.3.2",
