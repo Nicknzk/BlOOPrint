@@ -1,7 +1,7 @@
 import { onAuthStateChanged, signOut, User } from "firebase/auth";
 import { useEffect, useState } from "react";
 import auth from "../../firebase";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Button, Typography } from "@mui/material";
 import { Alert } from "react-bootstrap";
 import "../../CSS-Folder/Auth.css";
@@ -13,6 +13,8 @@ interface AuthDetailsProps {
 export default function AuthDetails({ onAuthStatusChange }: AuthDetailsProps) {
   const [authUser, setAuthUser] = useState<User | null>(null);
   const [verifiedUser, setVerifiedUser] = useState<User | null>(null);
+  const location = useLocation();
+  const { pathname } = location;
 
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
@@ -90,20 +92,24 @@ export default function AuthDetails({ onAuthStatusChange }: AuthDetailsProps) {
             </div>
           </>
         ) : (
-          <div
-            style={{
-              position: "absolute",
-              bottom: "1vh",
-              left: "1vh",
-              width: "25%",
-              padding: "5vh",
-            }}
-          >
-            <Alert variant="warning" className="email-verification-alert">
-              <Alert.Heading>Email Verification is not complete.</Alert.Heading>
-              <p>Do check spam / junk folder</p>
-            </Alert>
-          </div>
+          pathname === "/SignUp" && (
+            <div
+              style={{
+                position: "absolute",
+                bottom: "10vh",
+                left: "1vh",
+                width: "25%",
+                padding: "5vh",
+              }}
+            >
+              <Alert variant="warning" className="email-verification-alert">
+                <Alert.Heading>
+                  Email Verification is not complete.
+                </Alert.Heading>
+                <p>Do check spam / junk folder</p>
+              </Alert>
+            </div>
+          )
         ))}
     </div>
   );
