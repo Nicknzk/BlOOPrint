@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Drawer, Button } from '@mui/material';
+import { Link } from "react-router-dom";
 
 const PullOutDrawer: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -14,8 +15,9 @@ const PullOutDrawer: React.FC = () => {
         {open ? 'Close Drawer' : 'Help/Settings'}
       </Button>
       <Drawer anchor="right" open={open} onClose={handleToggleDrawer} style={{ width: '400px' }}>
-        <Button>Button 1</Button>
-        <Button>Button 2</Button>
+        <Link to= "/HomePage">
+        <Button>Back to Home</Button>
+        </Link>
         <video src="path_to_video.mp4" controls width="100%" height="auto" />
       </Drawer>
     </div>

@@ -75,19 +75,22 @@ export default function AuthDetails({ onAuthStatusChange }: AuthDetailsProps) {
               //<Typography variant="h6">{`Signed In as ${authUser.email}`}</Typography>
             }
 
-            <div className="sign-out-container">
-              <Button
-                variant="contained"
-                onClick={userSignOut}
-                className="auth-page-button"
-                style={{
-                  backgroundColor: "red",
-                  color: "black",
-                }}
-              >
-                <Typography variant="h6">Sign Out</Typography>
-              </Button>
-            </div>
+<div className="sign-out-container" style={{ height: '100px', overflow: 'hidden'}}>
+  <Button
+    variant="contained"
+    onClick={userSignOut}
+    className="auth-page-button"
+    style={{
+      backgroundColor: "red",
+      color: "black",
+      position: 'absolute',
+      right: '20px',
+    }}
+  >
+    <Typography variant="h6">Sign Out</Typography>
+  </Button>
+</div>
+
           </>
         ) : (
           <div
