@@ -173,6 +173,7 @@ export default function SignUp() {
           color: "white",
           textTransform: "none",
           borderRadius: "5vh",
+          border: "0.3vh solid black",
         }}
       >
         <nav>
