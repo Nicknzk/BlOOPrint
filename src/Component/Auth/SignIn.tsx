@@ -94,6 +94,9 @@ export default function SignIn() {
                   <Link to={"/SignUp"}>
                     <Typography variant="h5">Sign Up</Typography>
                   </Link>
+                  <Link to={"/ForgotPassword"}>
+                    <Typography variant="h5">Forgot Password?</Typography>
+                  </Link>
                 </nav>
               </div>
             </Card.Body>

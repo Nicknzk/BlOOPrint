@@ -5,6 +5,7 @@ import SignUp from "../Auth/SignUp";
 import { Route, Routes, Navigate } from "react-router-dom";
 import NewProjectTemplate from "../NewProjectTemplate";
 import ProjectDetails from "../ProjectDetails";
+import ForgotPassword from "../Auth/ForgotPassword";
 
 export default function PageRouting({ isAuthenticated }: any) {
   return (
@@ -17,6 +18,14 @@ export default function PageRouting({ isAuthenticated }: any) {
             element={
               <div className="w-100" style={{ maxWidth: "40vh" }}>
                 <SignIn />
+              </div>
+            }
+          />
+          <Route
+            path="/ForgotPassword"
+            element={
+              <div>
+                <ForgotPassword />
               </div>
             }
           />
