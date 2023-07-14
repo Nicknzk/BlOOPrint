@@ -24,8 +24,6 @@ export default function ProjectDetails() {
   const boxesString = searchParams.get("boxes");
   const boxes = boxesString ? JSON.parse(decodeURIComponent(boxesString)) : [];
 
-  console.log(boxes);
-
   const BoxList: React.FC<{ boxes: Box[] }> = ({ boxes }) => {
     return (
       <TableContainer
@@ -77,6 +75,7 @@ export default function ProjectDetails() {
                     fontSize: "2vh",
                     textAlign: "center",
                     fontFamily: "Open Sans, Arial, sans-serif",
+                    color: "white",
                   }}
                 >
                   {box.name}
@@ -86,6 +85,7 @@ export default function ProjectDetails() {
                     fontSize: "2vh",
                     textAlign: "center",
                     fontFamily: "Open Sans, Arial, sans-serif",
+                    color: "white",
                   }}
                 >
                   <ul style={{ listStyle: "none" }}>
@@ -99,6 +99,7 @@ export default function ProjectDetails() {
                     fontSize: "2vh",
                     textAlign: "center",
                     fontFamily: "Open Sans, Arial, sans-serif",
+                    color: "white",
                   }}
                 >
                   <ul style={{ listStyle: "none" }}>
@@ -154,7 +155,15 @@ export default function ProjectDetails() {
           >
             <Typography
               variant="h5"
-              style={{ color: "white", marginLeft: "5vh" }}
+              style={{
+                color: "white",
+                marginLeft: "5vh",
+                border: "0.3vh solid black",
+                padding: "10px",
+                backgroundColor: "#ECA400",
+                borderRadius: "10vh",
+                display: "inline-block",
+              }}
             >
               Back to Project Template
             </Typography>
