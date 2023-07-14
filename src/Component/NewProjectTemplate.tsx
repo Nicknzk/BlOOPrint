@@ -19,6 +19,7 @@ import ReactCSVSaver from "./ReactCSVSaver";
 import QuestionMark from "./QuestionMark";
 import { useLocation } from "react-router-dom";
 import PullOutDrawer from "./Drawer";
+import { ErrorOutline } from "@mui/icons-material";
 
 export interface Box {
   id: number;
@@ -43,6 +44,7 @@ export default function NewProjectTemplate() {
   const [data, setData] = useState<Box[]>([]); //parsing for ReactCSVUploader
   const [parserData, setParserData] = useState([]); //for Parser.tsx
   const location = useLocation();
+  const [fileError, setFileError] = useState(false);
 
   useEffect(() => {
     // Check if location state contains boxes data
@@ -65,29 +67,36 @@ export default function NewProjectTemplate() {
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files ? e.target.files[0] : null; // Add null check for e.target.files
-    const fileExtension = file ? file.name.split(".").pop() : null; // Add null check for file
+    const fileExtension = file
+      ? file.name.split(".").pop()?.toLowerCase()
+      : null; // Add null check for file
 
     const multipleFiles = e.target.files ? Array.from(e.target.files) : [];
 
-    if (fileExtension === "csv") {
-      Papa.parse(file as File, {
-        header: true,
-        complete: (results: Papa.ParseResult<CSVRow>) => {
-          const parsedData = results.data.map((row) => {
-            const dependencies = row.dependencies.split(",");
-            const methods = row.methods.split(",");
-            return {
-              id: row.id,
-              name: row.name,
-              dependencies: dependencies,
-              methods: methods,
-            };
-          });
-          setData(parsedData);
-        },
-      });
+    if (fileExtension === "txt" || fileExtension === "csv") {
+      if (fileExtension === "csv") {
+        Papa.parse(file as File, {
+          header: true,
+          complete: (results: Papa.ParseResult<CSVRow>) => {
+            const parsedData = results.data.map((row) => {
+              const dependencies = row.dependencies.split(",");
+              const methods = row.methods.split(",");
+              return {
+                id: row.id,
+                name: row.name,
+                dependencies: dependencies,
+                methods: methods,
+              };
+            });
+            setData(parsedData);
+          },
+        });
+      } else {
+        parseFiles(multipleFiles, handleParsedData); // Call your parseFiles function with the file and handleParsedData callback
+      }
+      setFileError(false);
     } else {
-      parseFiles(multipleFiles, handleParsedData); // Call your parseFiles function with the file and handleParsedData callback
+      setFileError(true);
     }
   };
 
@@ -292,6 +301,7 @@ export default function NewProjectTemplate() {
                     <Typography variant="h6">
                       Upload CSV / JavaScript Code
                     </Typography>
+                 
                     <QuestionMark instructions="Upload your project's files as a txt file for BLOOPrint to turn in into a diagram" />
                   </TableCell>
                   <TableCell>
@@ -306,7 +316,18 @@ export default function NewProjectTemplate() {
                         borderRadius: "4%",
                         color: "white",
                       }}
-                    />
+                    />   {fileError && (
+                      <>
+                        <ErrorOutline
+                          sx={{
+                            color: "red",
+                            marginLeft: "5px",
+                            verticalAlign: "middle",
+                          }}
+                        />
+                        <Typography style={{color:"red"}}>Only txt files are accepted</Typography>
+                      </>
+                    )}
                     {data.length > 0 && <>{handleSetData()}</>}
                     {parserData.length > 0 && <>{handleSetParserData()}</>}
                   </TableCell>
