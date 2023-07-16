@@ -67,10 +67,21 @@ Searching through entities for methods & properties is tedious and time-consumin
 
 ## Testing Procedures
 
-- Usability testing with potential users with high-fidelity artifacts (e.g., working prototype)
-- Survey of potential users
-- System testing
-- User testing
+### System testing Summary: (Testing of UI component rendering, Click testing (check if individual component is working), Whole Page testing) 
+
+
+### User Feedback Summary: (Survey of potential users & high-fidelity artifacts)
+
+- View Project Details page, "Back to Project" button blends in too much (Done, added in borders & background color)
+- Add further specification that we only accept JavaScript code in non-CSV upload (Done, added line in red for further clarification)
+- Alert for email verification cuts into the "Back" button (Done, adjusted positioning)
+- Alert for email verification remains when navigating to other pages (Done, adjusted logic to only show on SignUp page)
+- No place to reset the password (Done, using Firebase, added a new page for resetting the password)
+
+### Possible future implementations from user feedback:
+
+- Create a download image function to save the mind map as a JPG
+
 
 ## User & Developer guide
 
