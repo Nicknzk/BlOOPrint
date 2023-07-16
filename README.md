@@ -82,5 +82,10 @@ Searching through entities for methods & properties is tedious and time-consumin
 
 - Create a download image function to save the mind map as a JPG
 
+### Steps taken in User Feedback:
+
+- Criteria: Basic knowledge of coding and object-oriented programming
+- Online video call (Google Meet) to directly view the user's real-time experience with the prototype
+- Went through project creation, saving, account creation, and finally, overall UI experience.
 
 

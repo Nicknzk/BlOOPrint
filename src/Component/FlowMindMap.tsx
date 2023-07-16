@@ -7,8 +7,6 @@ import ReactFlow, {
   useEdgesState,
   addEdge,
 } from "reactflow";
-
-import "reactflow/dist/style.css";
 import { Box } from "./NewProjectTemplate";
 import { Paper } from "@mui/material";
 
