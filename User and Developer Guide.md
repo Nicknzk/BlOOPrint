@@ -10,6 +10,8 @@ No installation is required, to access BLOOPrint simply access this [link](https
 
 BLOOPrint requires users to have an internet connection to allow BLOOPrint to store information. Users should also have access to a working email to allow users to create an account. To create an account click on "Get Started" and fill in the fields. Exisiting users may skip ahead to the login page. 
 
+![Image](/src/Component/Images/LandingPage.png)
+
 ## Usage Examples
 
 BLOOPrint allows users to draw diagrams by uploading their Javascript files and the diagrams are automatically generated. Uploaded code will additionally, be parsed for the attributes and variables which will be displayed in the "View Project Details' tab.
@@ -41,6 +43,8 @@ This project mainly uses Typescript
 
 
 ## Project Structure
+
+![Image](/src/Component/Images/Directories.png)
 Within the BLOOPrint directory, only the src folder was used in the making of the app, thus we will only be focusing on the src folder in this section. The rest of the folders/files are only boiler-plate code created by react.
 ### src/
 This folder is the main workspace of BLOOPrint and thus contains the Component/ folder, CSS-Folder/ folder, App.tsx, firebase.tsx, acorn-loose.d.ts and main.tsx.
@@ -58,5 +62,14 @@ This folder contains the Home page and landing page displayed in BLOOPrint.
 This folder only contains 1 file responsible for the navigation bar.
 ## Testing and Quality Assurance
 ## Known Issues
+### Vulnerabilities
+There are a few vulnerabilities that will show upon running
+```npm audit```
+
+These issues are, what we believe to be, benign dependency issues within the firebase libraries which aren't even in use. Attempts to run
+
+```npm audit fix```
+
+or similar commands will not solve the issue. 
 
 
