@@ -83,7 +83,4 @@ Searching through entities for methods & properties is tedious and time-consumin
 - Create a download image function to save the mind map as a JPG
 
 
-## User & Developer guide
-
-
 
