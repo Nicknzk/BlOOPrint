@@ -301,7 +301,6 @@ export default function NewProjectTemplate() {
                     <Typography variant="h6">
                       Upload CSV / JavaScript Code
                     </Typography>
-                 
                     <QuestionMark instructions="Upload your project's files as a txt file for BLOOPrint to turn in into a diagram" />
                   </TableCell>
                   <TableCell>
@@ -316,7 +315,8 @@ export default function NewProjectTemplate() {
                         borderRadius: "4%",
                         color: "white",
                       }}
-                    />   {fileError && (
+                    />
+                    {fileError && (
                       <>
                         <ErrorOutline
                           sx={{
@@ -325,7 +325,9 @@ export default function NewProjectTemplate() {
                             verticalAlign: "middle",
                           }}
                         />
-                        <Typography style={{color:"red"}}>Only txt files containing Javascript are accepted</Typography>
+                        <Typography style={{ color: "red" }}>
+                          Only txt files containing Javascript are accepted
+                        </Typography>
                       </>
                     )}
                     {data.length > 0 && <>{handleSetData()}</>}
