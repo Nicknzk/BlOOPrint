@@ -60,6 +60,12 @@ This folder just stores all the images used in our app.
 This folder contains the Home page and landing page displayed in BLOOPrint.
 ##### NavigationFolder/
 This folder only contains 1 file responsible for the navigation bar.
+## UI Layout
+The following diagram displays the flow of the pages within BLOOPrint starting from the top.
+![Image](src\Component\Images\pagelayout.png)
+######powered by BLOOPrint
+
+
 ## Testing and Quality Assurance
 ## Known Issues
 ### Vulnerabilities
