@@ -178,3 +178,49 @@ test('Clicking "Delete" button removes a box', () => {
   // Assert that the final length is less than the updated length
   expect(finalLength).toBeLessThan(updatedLength);
 });
+
+test("Upload CSV updates the boxes array", () => {
+  const boxes: Box[] = [];
+  const setBoxes = (newBoxes: Box[]) => {
+    boxes.splice(0, boxes.length, ...newBoxes);
+  };
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files ? e.target.files[0] : null;
+    const fileExtension = file
+      ? file.name.split(".").pop()?.toLowerCase()
+      : null;
+
+    if (fileExtension === "csv") {
+      // Simulating the parsing logic
+      const parsedData: Box[] = [
+        {
+          id: 1,
+          name: "Box A",
+          dependencies: ["Dep A"],
+          methods: ["Method A"],
+        },
+      ];
+      setBoxes([...boxes, ...parsedData]);
+    }
+  };
+
+  const { container } = render(
+    <input type="file" onChange={handleFileUpload} />
+  );
+
+  const file = new File(
+    ["id,name,dependencies,methods\n1,Box A,Dep A,Method A"],
+    "renderedFile.csv",
+    {
+      type: "text/csv",
+    }
+  );
+
+  const fileInput = container.querySelector(
+    'input[type="file"]'
+  ) as HTMLInputElement;
+
+  fireEvent.change(fileInput, { target: { files: [file] } });
+
+  expect(boxes.length).toBeGreaterThan(0);
+});

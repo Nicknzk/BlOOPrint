@@ -1,8 +1,0 @@
-id,name,dependencies,methods
-349238506048686850,Grandparent,Parent,"constructor,  supportEducation,  getChildParentName"
-1237680562420151300,MinistryOfEducation,,"constructor,  registerSchool,  getCountry"
-1043610027326706400,Parent,Teacher,"constructor,  attendParentTeacherMeeting,  getTeacherName"
-6762580687622412,Principal,MinistryOfEducation,"constructor,  promoteSchoolEvent,  getMinistryOfEducationCountry"
-853400206670811600,School,Teacher,"constructor,  conductClass,  getTeacherName"
-1045593560108242700,Student,Parent,"constructor,  study,  getParentName"
-903800508472221600,Teacher,Principal,"constructor,  teach,  getPrincipalName"
