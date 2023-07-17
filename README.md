@@ -6,7 +6,7 @@ Level of Achievement: Apollo
 
 Website hosted:
 
-[https://blooprint-rust.vercel.app/](https://blooprint-rust.vercel.app/)
+[BLOOPrint Website](https://blooprint-rust.vercel.app/)
 
 ## Aim
 
@@ -67,8 +67,36 @@ Searching through entities for methods & properties is tedious and time-consumin
 
 ## Testing Procedures
 
-### System testing Summary: (Testing of UI component rendering, Click testing (check if individual component is working), Whole Page testing) 
+### System testing Summary: (Testing of UI component rendering, Click testing (check if the individual component is working), Whole Page testing) 
 
+Test format:
+Test type: Stubbing rather than importing from packages
+due to errors from irrelevant components not being tested
+Using Jest
+preset: “ts-jest”
+transform: “ts-jest” & “babel-jest”
+testEnvironment: “jsdom”
+
+- NewProjectTemplate:
+  - Clicking "Add Box" increases `boxes.length` (pass)
+  - Clicking "Add Dependency" adds to the dependencies of an entity (pass)
+  - Clicking "Add Method" adds to the methods of an entity (pass)
+
+- ReactCSVSaver:
+  - Clicking the "Save" button triggers file upload (pass)
+
+- ReactCSVDownloader:
+  - Clicking "Download" triggers file download (pass)
+
+- ProjectDetails:
+  - ProjectDetails renders Entity name, Methods, Dependencies (pass)
+
+- HomePage:
+  - HomePage renders the table (pass)
+
+- PageRouting:
+  - Navigation to SignIn (pass)
+  - Navigation to HomePage (pass)
 
 ### User Feedback Summary: (Survey of potential users & high-fidelity artifacts)
 
