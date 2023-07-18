@@ -40,7 +40,10 @@ The developer guide provides information for developers who wish to understand a
 ### Programming Languages
 This project mainly uses Typescript
 
+## Project Architecture
 
+BLOOPrint uses a Monolithic model involving a back end(Firebase) and a front end(react). In the image below, the flow of information is such that the user uploads information through the react app to firebase, and this information, in the form of a .csv file is retrievable, again, through the react app from firebase.
+![Image](src\Component\Images\simpleprojectmodel.jpg)
 
 ## Project Structure
 
