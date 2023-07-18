@@ -7,7 +7,7 @@
     "preset": "ts-jest",
     "transform": {
       "^.+\\.(ts|tsx)?$": "ts-jest",
-      "^.+\\.(js|jsx)$": "babel-jest"
+      "^.+\\.tsx?$": "babel-jest"
     },
     "testEnvironment": "jsdom",
     "moduleNameMapper": {
@@ -44,6 +44,7 @@
     "react-dropzone": "^14.2.3",
     "react-router-dom": "^6.11.2",
     "reactflow": "^11.7.2",
+    "resize-observer-polyfill": "^1.5.1",
     "ts-node": "^10.9.1",
     "zustand": "^4.3.8"
   },

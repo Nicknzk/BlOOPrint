@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import AuthDetails from "./Component/Auth/AuthDetails";
 import PageRouting from "./Component/NavigationFolder/PageRouting";
 import { useNavigate } from "react-router-dom";
+import "reactflow/dist/style.css";
 
 export default function App() {
   const [authUser, setAuthUser] = useState(false);
