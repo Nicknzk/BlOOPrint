@@ -35,6 +35,7 @@
     "firebase": "^9.22.0",
     "firebase-admin": "^11.9.0",
     "nanoid": "^4.0.2",
+    "optionator": "^0.9.3",
     "papaparse": "^5.4.1",
     "react": "^18.2.0",
     "react-archer": "^4.2.3",
@@ -46,6 +47,7 @@
     "reactflow": "^11.7.2",
     "resize-observer-polyfill": "^1.5.1",
     "ts-node": "^10.9.1",
+    "word-wrap": "^1.2.3",
     "zustand": "^4.3.8"
   },
   "devDependencies": {
