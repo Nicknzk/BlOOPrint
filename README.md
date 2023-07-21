@@ -162,7 +162,7 @@ This project mainly uses Typescript
 ## Project Architecture
 
 BLOOPrint uses a Monolithic model involving a back end(Firebase) and a front end(react). In the image below, the flow of information is such that the user uploads information through the react app to firebase, and this information, in the form of a .csv file is retrievable, again, through the react app from firebase.
-![Image](src\Component\Images\simpleprojectmodel.jpg)
+![Image](/src/Component/Images/simpleprojectmodel.jpg)
 
 ## Project Structure
 
@@ -184,7 +184,7 @@ This folder contains the Home page and landing page displayed in BLOOPrint.
 This folder only contains 1 file responsible for the navigation bar.
 ## UI Layout
 The following diagram displays the flow of the pages within BLOOPrint starting from the top.
-![Image](src\Component\Images\pagelayout.png)
+![Image](/src/Component/Images/pagelayout.png)
 ######powered by BLOOPrint
 
 
