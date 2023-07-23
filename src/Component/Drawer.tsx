@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Drawer, Button } from '@mui/material';
+import { Drawer, Button, Typography } from '@mui/material';
 import { Link } from "react-router-dom";
 
 const PullOutDrawer: React.FC = () => {
@@ -14,11 +14,15 @@ const PullOutDrawer: React.FC = () => {
       <Button onClick={handleToggleDrawer} style={{ backgroundColor: 'white', marginLeft:'100px'}}>
         {open ? 'Close Drawer' : 'Help/Settings'}
       </Button>
-      <Drawer anchor="right" open={open} onClose={handleToggleDrawer} style={{ width: '400px' }}>
+      <Drawer anchor="right" open={open} onClose={handleToggleDrawer}>
         <Link to= "/HomePage">
         <Button>Back to Home</Button>
         </Link>
-        <video src="path_to_video.mp4" controls width="100%" height="auto" />
+        <div style={{ width: '400px', height: '300px', marginTop:"100px" }}>
+        <Typography>Have a look at the features of this app!</Typography>
+  <video src="src\Component\Images\Video.mp4" controls width="100%" height="100%" />
+</div>
+
       </Drawer>
     </div>
   );
