@@ -63,8 +63,6 @@ Searching through entities for methods & properties is tedious and time-consumin
 7. Entity, Methods & Dependency viewing in Table format:
     - Convenient alternative method for viewing entity details on a single page.
 
-## Architecture diagrams
-
 ## Testing Procedures
 
 ### System testing Summary: (Testing of UI component rendering, Click testing (check if the individual component is working), Whole Page testing) 
