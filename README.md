@@ -9,6 +9,7 @@ Website hosted:
 [BLOOPrint Website](https://blooprint-rust.vercel.app/)
 
 Poster:
+
 [BLOOPrint Poster](https://drive.google.com/drive/u/0/folders/1r2BFqu0Q8sp8bSYdGwOHhaLSLxa1ZkPL)
 
 ## Aim
