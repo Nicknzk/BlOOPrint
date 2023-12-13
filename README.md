@@ -8,6 +8,9 @@ Website hosted:
 
 [BLOOPrint Website](https://blooprint-rust.vercel.app/)
 
+Poster:
+[BLOOPrint Poster](https://drive.google.com/drive/u/0/folders/1r2BFqu0Q8sp8bSYdGwOHhaLSLxa1ZkPL)
+
 ## Aim
 
 We hope to make an **Entity Visualization** mind map specially catered to JavaScript Object-Oriented Programming to provide future programmers with an app to efficiently plan out and keep track of their implementations.
