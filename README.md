@@ -10,7 +10,7 @@ Website hosted:
 
 ## Aim
 
-We hope to make an **Entity Visualization** mind map specially catered to Java Object-Oriented Programming to provide future programmers with an app to efficiently plan out and keep track of their implementations.
+We hope to make an **Entity Visualization** mind map specially catered to JavaScript Object-Oriented Programming to provide future programmers with an app to efficiently plan out and keep track of their implementations.
 
 ## Scope
 
